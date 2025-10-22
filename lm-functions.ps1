@@ -13,7 +13,7 @@
     PS> .\lm-functions.ps1
 
 .NOTES
-    Version 1.4
+    Version 1.6
 
 .LINK
     https://github.com/ryan-gillan_nttltd/LM-snippets/blob/main/lm-functions.ps1
@@ -63,7 +63,10 @@ function Show-Dead {
         return
     }
     Write-Host "Checking for dead devices on: ntt.company = $Company"
-    Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) -and systemProperties -eq $($('{"name":"system.hoststatus","value":"dead"}' | ConvertTo-Json))"
+    $TotalCI = Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) "
+    $Dead    = Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) -and systemProperties -eq $($('{"name":"system.hoststatus","value":"dead"}' | ConvertTo-Json))"
+	Write-Host "Total: $($TotalCI.count) Dead: $($Dead.count)" -ForegroundColor Red
+	$Dead
 }
 #RUN: Show-Dead CHED or Show-Dead APA |select name,displayName,preferredCollectorGroupName,description,disableAlerting,link,hostStatus | Export-Csv temp.csv
 #------------------------
@@ -166,6 +169,7 @@ function Show-Country-folders  {
             Name          = $subGroup.Name
             FullPath      = $subGroup.FullPath
             NumberOfHosts = $subGroup.numOfHosts
+            #groupStatus   = $subGroup.groupStatus
         }
     }
 
@@ -173,6 +177,52 @@ function Show-Country-folders  {
 }
 #RUN: Show-Country-folders -fullPath 'NTT-AU'
 #------------------------
+function Show-Country-folders_plus_DEAD {
+    param (
+        [string]$fullPath
+    )
+
+    if (-not $fullPath) {
+        Write-Host "Example: Show-Country-folders -fullPath 'NTT-AU'" -ForegroundColor Yellow
+        return
+    }
+
+    $group = Get-LMDeviceGroup -Filter "fullPath -eq '$fullPath'"
+    $subGroups = $group.subGroups | Sort-Object Name
+
+    $result = @()
+
+    foreach ($subGroup in $subGroups) {
+        $FullPath = $subGroup.FullPath
+        $NumberOfHosts = $subGroup.numOfHosts
+
+        $filter = 'systemProperties -eq "{\"name\":\"system.staticgroups\",\"value\":\"' + $FullPath + '/All\"}" -and hostStatus -eq "dead"'
+        $DEADCount = Get-LMDevice -Filter $filter | Measure-Object | Select-Object -ExpandProperty Count
+
+        $DEADPercentage = if ($NumberOfHosts -gt 0) {
+            [math]::Round(($DEADCount / $NumberOfHosts) * 100, 0)
+        } else {
+            0
+        }
+
+        $result += [PSCustomObject]@{
+            FullPath        = $FullPath
+            NumberOfHosts   = $NumberOfHosts
+            DEADCount       = $DEADCount
+            DEADPercentage  = "$DEADPercentage %"
+        }
+    }
+
+    return $result
+}
+
+# Example usage:
+#Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+
+# Example usage:
+#RUN: Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+
+#---------------------------------
 
 function Show-GroupTree {
     param (
@@ -201,58 +251,106 @@ function Show-GroupTree {
 #RUN: Show-GroupTree 4615
 
 #---------------------------------
-function Get-GroupDetails {
+function Show-Country-folders_plus_DEAD {
     param (
-        [int]$Parentid
+        [string]$fullPath
     )
 
-    # Get the full path of the parent group
-    $ParentGroup = Get-LMDeviceGroup -id $Parentid
-    $ParentFullPath = $ParentGroup.fullPath
+    if (-not $fullPath) {
+        Write-Host "Example: Show-Country-folders -fullPath 'NTT-AU'" -ForegroundColor Yellow
+        return
+    }
 
-    # Function to display group details with indentation
-    function Display-GroupDetails {
-        param (
-            [string]$Indent,
-            [object]$Group
-        )
-        $GroupDetails = Get-LMDeviceGroup -id $Group.id | select name, fullPath, subGroups
-        $GroupDetails | ForEach-Object {
-            [PSCustomObject]@{
-                Name     = "$Indent$($_.name)"
-                FullPath = $_.fullPath
-            }
-            if ($_.subGroups) {
-                foreach ($subGroup in $_.subGroups) {
-                    Display-GroupDetails -Indent "$Indent    " -Group $subGroup
-                }
-            }
+    $group = Get-LMDeviceGroup -Filter "fullPath -eq '$fullPath'"
+    $subGroups = $group.subGroups | Sort-Object Name
+
+    $result = @()
+
+    foreach ($subGroup in $subGroups) {
+        $FullPath = $subGroup.FullPath
+        $NumberOfHosts = $subGroup.numOfHosts
+
+        $filter = 'systemProperties -eq "{\"name\":\"system.staticgroups\",\"value\":\"' + $FullPath + '/All\"}" -and hostStatus -eq "dead"'
+        $DEADCount = Get-LMDevice -Filter $filter | Measure-Object | Select-Object -ExpandProperty Count
+
+        $DEADPercentage = if ($NumberOfHosts -gt 0) {
+            [math]::Round(($DEADCount / $NumberOfHosts) * 100, 0)
+        } else {
+            0
+        }
+
+        $result += [PSCustomObject]@{
+            FullPath        = $FullPath
+            NumberOfHosts   = $NumberOfHosts
+            DEADCount       = $DEADCount
+            DEADPercentage  = "$DEADPercentage %"
         }
     }
 
-    # Collect all group details in a list
-    $GroupList = @()
-
-    # Display the parent group details
-    $GroupList += [PSCustomObject]@{
-        Name     = $ParentGroup.name
-        FullPath = $ParentFullPath
-    }
-
-    # Get all subgroups of the parent group
-    $SubGroups = Get-LMDeviceGroup -id $Parentid | select -expandProperty subGroups
-
-    # Iterate through each subgroup and collect relevant information with indentation
-    foreach ($group in $SubGroups) {
-        $GroupList += Display-GroupDetails -Indent "    " -Group $group
-    }
-
-    # Output the group details to Format-Table
-    #$GroupList | Format-Table -Property Name, FullPath
-    $GroupList | Format-SpectreTable -Property Name, FullPath -title "Folder tree for: $ParentFullPath"
+    $result | Format-SpectreTable
 }
 
+# Example usage:
+#Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+
+
 #RUN: Get-GroupDetails -Parentid 4615
+
+
+#------------------------
+function Show-Country-folders_plus_DEAD_v2 {
+    param (
+        [string]$fullPath,
+        [string]$EmailTo,
+        [string]$EmailSubject = "Country Folder DEAD Report",
+        [string]$EmailBody = "Please find attached the DEAD report for the specified country folder.",
+        [string]$ExportPath = "$env:TEMP\CountryFolder_DEAD_Report.csv"
+    )
+
+    if (-not $fullPath) {
+        Write-Host "Example: Show-Country-folders_plus_DEAD_v2 -fullPath 'NTT-AU' -EmailTo 'ryan.gillan@nttdata.com'" -ForegroundColor Yellow
+        return
+    }
+
+    $group = Get-LMDeviceGroup -Filter "fullPath -eq '$fullPath'"
+    $subGroups = $group.subGroups | Sort-Object Name
+
+    $result = @()
+
+    foreach ($subGroup in $subGroups) {
+        $FullPath = $subGroup.FullPath
+        $NumberOfHosts = $subGroup.numOfHosts
+
+        $filter = 'systemProperties -eq "{\"name\":\"system.staticgroups\",\"value\":\"' + $FullPath + '/All\"}" -and hostStatus -eq "dead"'
+        $DEADCount = Get-LMDevice -Filter $filter | Measure-Object | Select-Object -ExpandProperty Count
+
+        $DEADPercentage = if ($NumberOfHosts -gt 0) {
+            [math]::Round(($DEADCount / $NumberOfHosts) * 100, 0)
+        } else {
+            0
+        }
+
+        $result += [PSCustomObject]@{
+            FullPath        = $FullPath
+            NumberOfHosts   = $NumberOfHosts
+            DEADCount       = $DEADCount
+            DEADPercentage  = "$DEADPercentage %"
+        }
+    }
+
+    $result | Format-SpectreTable
+
+    # Export to CSV
+    $result | Export-Csv -Path $ExportPath -NoTypeInformation
+
+    # Send email if EmailTo is provided
+    if ($EmailTo) {
+        Send-Email -To $EmailTo -Subject $EmailSubject -Body $EmailBody -Attachment $ExportPath
+    }
+}
+
+#RUN: Show-Country-folders_plus_DEAD_v2 -fullPath 'NTT-AU' -EmailTo 'ryan.gillan@nttdata.com'
+
 
 #------------------------
 function Get-GroupDetails_to_csv {
@@ -467,7 +565,7 @@ function Show-Netflow {
     [String]$Company = $args[0]
     # checks for variable else shows example.
     if (-not $Company['']) {
-        Write-Host "Example usage: Show-Dead_On_Collector 33" -ForegroundColor Yellow
+        Write-Host "Example usage: Show-Netflow 33" -ForegroundColor Yellow
         return
     }
     Write-Host "Show Netflow enabled devices on: ntt.company = $Company"
@@ -497,6 +595,49 @@ function Show-Dead_On_Collector {
 }
 Set-Alias -Name sdh -Value Show-Dead_On_Collector
 #RUN: Show-Dead_On_Collector 33
+
+#------------------------
+function Show-DisabledAlertsOnCollector {
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$CollectorId
+    )
+
+    try {
+        # Get collector details
+        $collector = Get-LMCollector -Id $CollectorId
+        if (-not $collector) {
+            Write-Host "Collector with ID '$CollectorId' not found." -ForegroundColor Red
+            return
+        }
+
+        $hostCount = $collector.numberOfHosts
+
+        # Get devices with alerting disabled
+        $disabledAlerts = Get-LMDevice -Filter "currentCollectorId -eq $CollectorId -and disableAlerting -eq 'True'" |
+            Select-Object displayName, hostStatus, disableAlerting |
+            Where-Object { $_.disableAlerting -eq "True" }
+
+        # Output results
+        Write-Host "`nCollector ID: $CollectorId" -ForegroundColor Cyan
+        Write-Host "Number of Hosts: $hostCount" -ForegroundColor Cyan
+        Write-Host "Devices with Alerting Disabled:" -ForegroundColor Yellow
+
+        if ($disabledAlerts.Count -eq 0) {
+            Write-Host "No devices with alerting disabled found on this collector." -ForegroundColor Green
+        } else {
+            $disabledAlerts | Format-Table displayName, hostStatus, disableAlerting
+        }
+    }
+    catch {
+        Write-Host "An error occurred: $_" -ForegroundColor Red
+    }
+}
+
+
+#RUN: Show-Disabled_Alerts_On_Resources_on_Collector 33
+
+
 #------------------------
 function Show-MissingSSID {
     param (
@@ -866,6 +1007,69 @@ function Find-Service {
 
 #RUN: Find-Service -searchTerm "yourSearchTerm
 
+
+#------------------------
+function Find-Report {
+    [CmdletBinding()]
+    param (
+        [ValidateSet("Alert", "SLA", "trends", "threshold", "inventory", "metric", "CPU", "Interface", "Website", "Netflow")]
+        [string]$Type,
+
+        [ValidateSet("HTML", "PDF", "CSV")]
+        [string]$output,
+
+        [string]$HostsVal,
+        [string]$LastModifyUserName,
+        [string]$Name,
+        [string]$Description
+    )
+
+    $reports = Get-LMReport | Select-Object id, name, description, type, schedule, lastmodifyUserName
+
+    if (-not $PSBoundParameters.Keys.Count) {
+        Write-Host "Example usage:" -ForegroundColor Yellow
+        Write-Host "Find-Report -Type 'Alert' -Name 'CPU' -output 'CSV'" -ForegroundColor Yellow
+        return $reports
+    }
+
+    if ($Type) {
+        $reports = $reports | Where-Object { $_.type -eq $Type }
+    }
+
+    if ($LastModifyUserName) {
+        $reports = $reports | Where-Object { $_.lastmodifyUserName -like "*$LastModifyUserName*" }
+    }
+
+    if ($Name) {
+        $reports = $reports | Where-Object { $_.name -like "*$Name*" }
+    }
+
+    if ($Description) {
+        $reports = $reports | Where-Object { $_.description -like "*$Description*" }
+    }
+
+    if ($HostsVal) {
+        $reports = $reports | Where-Object { $_.description -like "*$HostsVal*" -or $_.name -like "*$HostsVal*" }
+    }
+
+    if ($output) {
+        switch ($output) {
+            "HTML" { $reports | ConvertTo-Html | Out-String }
+            "PDF"  { Write-Warning "PDF export not supported directly in PowerShell. Consider exporting to CSV and converting externally." }
+            "CSV"  { $reports | Export-Csv -Path "LMReports.csv" -NoTypeInformation; Write-Output "Exported to LMReports.csv" }
+        }
+    } else {
+        return $reports
+    }
+}
+
+
+#RUN: Find-Report -Type 'Alert' -Name 'CPU' -output 'CSV'
+#     Find-Report -Type '"<Alert|SLA|trends|threshold|inventory|metric|CPU|Interface|Website|Netflow>"'
+#     Find-Report --LastModifyUserName 'ryan'
+#     Find-Report -Name 'CPU|whatever'
+#     Find-Report -output 'CSV|HTML|PDF'
+
 #------------------------
 # Print-FolderTree_2_csv 
 function Print-FolderTree_2_csv {
@@ -1220,24 +1424,6 @@ function Show-GroupDeviceCounts {
 
 #------------------------
 function Show-DeviceData {
-<#
-.SYNOPSIS
-    Shows the count of Datasource and Instances for a single device.
-
-.DESCRIPTION
-    This function retrieves and displays the count of Datasource and Instances for a specified device.
-
-.PARAMETER displayName
-    The display name of the device to query.
-
-.INPUTS
-    displayName - The display name of the device.
-
-.EXAMPLE
-    Show-DeviceData -displayName 'SAMPLE'
-
-.NOTES
-#>    
     param (
         [string]$displayName
     )
@@ -1248,50 +1434,57 @@ function Show-DeviceData {
     }
 
     try {
-        # Get the device based on the display name
         $device = Get-LMDevice -displayName $displayName
         if (-not $device) {
             Write-Host "Device not found." -ForegroundColor Red
             return
         }
 
-        # Get the data sources for the device
         $DataSources = Get-LMDeviceDatasourceList -id $device.id | select dataSourceName, instanceNumber
-
-        # Count the number of unique data source names
         $Count_of_dataSourceName = ($DataSources | group dataSourceName).Count
-
-        # Sum the instance numbers
         $Count_of_instanceNumber = ($DataSources | measure instanceNumber -Sum).Sum
 
-        # Get the custom property 'ntt.class'
-        $nttClass                  = $device.CustomProperties | Where-Object { $_.Name -eq 'ntt.class' }
-		$CustomWMI                 = $device.CustomProperties | Where-Object { $_.Name -eq 'wmi.user' }
-		$Categories                = $device.CustomProperties | Where-Object { $_.Name -eq 'system.categories' }
+        $nttClass                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'ntt.class' }
+        $CustomWMI                 = $device.CustomProperties    | Where-Object { $_.Name -eq 'wmi.user' }
+        $Categories                = $device.CustomProperties    | Where-Object { $_.Name -eq 'system.categories' }
         $inheritedProp_wmi         = $device.inheritedProperties | Where-Object { $_.Name -eq 'wmi.user' }
-        $autoProperties_wmi_state  = $device.autoProperties | Where-Object { $_.Name -eq 'auto.wmi.operational' }
+        $autoProperties_wmi_state  = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.wmi.operational' }
         $inheritedProp_snmp        = $device.inheritedProperties | Where-Object { $_.Name -eq 'snmp.community' }
-        $autoProperties_snmp_state = $device.autoProperties | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }
+        $autoProperties_snmp_state = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }
 
-        # Determine inherited properties and their values
         $inheritedProperty_wmi = if ($inheritedProp_wmi) { "TRUE" } else { "N/A" }
         $inheritedProperty_snmp = if ($inheritedProp_snmp) { "TRUE" } else { "N/A" }
 
-        # Output the results
+        # Export inherited WMI properties to CSV if applicable
+        if ($inheritedProperty_wmi -eq "TRUE") {
+            $wmiInherited = Get-LMDeviceProperty -Id $device.id | Where-Object { $_.name -like '*wmi.user*' }
+            #$wmiInherited.inheritList | Select-Object value, fullpath | Export-Csv -Path "$displayName`_WMI_Inherited.csv" -NoTypeInformation
+            $inheritedProp_wmi_fullpath = $wmiInherited.inheritList | Select-Object fullpath
+        }
+
+        # Export inherited SNMP properties to CSV if applicable
+        if ($inheritedProperty_snmp -eq "TRUE") {
+            $snmpInherited = Get-LMDeviceProperty -Id $device.id | Where-Object { $_.name -like '*snmp*' }
+            #$snmpInherited.inheritList | Select-Object value, fullpath | Export-Csv -Path "$displayName`_SNMP_Inherited.csv" -NoTypeInformation
+            $inheritedProperty_snmp_fullpath = $snmpInherited.inheritList | Select-Object fullpath
+        }
+
         [PSCustomObject]@{
-            DisplayName               = $displayName
-            DeviceID                  = $device.id
-            DataSourceCount           = $Count_of_dataSourceName
-            InstanceNumberSum         = $Count_of_instanceNumber
-            NTTClass                  = $nttClass.Value
-            CustomWMI                 = $CustomWMI.Value
-            inheritedProperty_wmi     = $inheritedProperty_wmi
-            inheritedProp_wmi         = $inheritedProp_wmi.Value
-            autoProperties_wmi_state  = $autoProperties_wmi_state.Value
-            inheritedProperty_snmp    = $inheritedProperty_snmp
-            inheritedProp_snmp        = $inheritedProp_snmp.Value
-            autoProperties_snmp_state = $autoProperties_snmp_state.Value
-            Categories                = $Categories.Value
+            DisplayName                      = $displayName
+            DeviceID                         = $device.id
+            DataSourceCount                  = $Count_of_dataSourceName
+            InstanceNumberSum                = $Count_of_instanceNumber
+            NTTClass                         = $nttClass.Value
+            CustomWMI                        = $CustomWMI.Value
+            inheritedProperty_wmi            = $inheritedProperty_wmi
+            inheritedProp_wmi                = $inheritedProp_wmi.Value
+            inheritedProp_wmi_fullpath       = $inheritedProp_wmi_fullpath.fullpath
+            autoProperties_wmi_state         = $autoProperties_wmi_state.Value
+            inheritedProperty_snmp           = $inheritedProperty_snmp
+            inheritedProp_snmp               = $inheritedProp_snmp.Value
+            autoProperties_snmp_state        = $autoProperties_snmp_state.Value
+            inheritedProperty_snmp_fullpath  = $inheritedProperty_snmp_fullpath.fullpath
+            Categories                       = $Categories.Value
         }
     } catch {
         Write-Host "An error occurred: $_" -ForegroundColor Red
@@ -1369,8 +1562,279 @@ function Show-DeviceData_group {
 
 #RUN: Show-DeviceData_group -groupId 2122 -csvFileName "DeviceData.csv"
 
+#------------------------
+function Show-ERI {
+    param (
+        [string]$DisplayName
+    )
+
+    if (-not $DisplayName) {
+        Write-Host "Example usage:" -ForegroundColor Yellow
+        Write-Host "Show-ERI -DisplayName 'nw-backup'" -ForegroundColor Yellow
+        return
+    }
+
+    $items = Get-LMDevice -DisplayName $DisplayName
+
+    foreach ($item in $items) {
+        $autoProperties     = $item | Select-Object -ExpandProperty autoProperties
+        $custProperties     = $item | Select-Object -ExpandProperty customProperties
+        $predefResourceType = ($autoProperties | Where-Object { $_.Name -eq 'predef.externalResourceID' }).Value
+        $inboundERI         = ($custProperties | Where-Object { $_.Name -eq 'manual.inbound.externalResourceID' }).Value
+        $outboundERI        = ($custProperties | Where-Object { $_.Name -eq 'manual.outbound.externalResourceID' }).Value
+
+        [PSCustomObject]@{
+            DisplayName        = $item.DisplayName
+            DeviceName         = $item.Name
+            InboundERI         = $inboundERI
+            OutboundERI        = $outboundERI
+            PredefResourceType = $predefResourceType
+        }
+    }
+}
+# RUN: Show-ERI -DisplayName 'nw-backup
+#------------------------
+function Set-ERI {
+    param (
+        [Parameter(Mandatory=$false)][string]$DisplayName,
+        [Parameter(Mandatory=$false)][string]$INERI,
+        [Parameter(Mandatory=$false)][string]$OUTERI
+)
 
 
+    if (-not $DisplayName -or -not $INERI -or -not $OutERI) {
+        Write-Host "Example: Set-ERI -DisplayName 'MyDevice01' -INERI 'local:mac,remote:mac' -OUTERI 'local:mac,remote:mac'" -ForegroundColor Yellow
+        return
+    }
+
+    $device = Get-LMDevice -DisplayName $DisplayName
+
+    if (-not $device) {
+        Write-Error "Device with display name '$DisplayName' not found."
+        return
+    }
+
+    $device | Set-LMDevice -Properties @{ 'manual.inbound.externalResourceID' = $INERI } | Out-Null
+    $device | Set-LMDevice -Properties @{ 'manual.outbound.externalResourceID' = $OUTERI } | Out-Null
+}
+
+# RUN: Set-ERI -DisplayName 'MyDevice01' -INERI 'abc-123-xyz'
+
+
+#------------------------
+<#
+.SYNOPSIS
+    LogicMonitor audit devices in a group for key fields.
+
+.DESCRIPTION
+    LogicMonitor audit devices in a group for key fields.
+	Output to a csv with the order set in $propertyOrder
+
+
+.EXAMPLE
+    PS> pwsh -File "Export-LMDeviceAudit -FullPath "ESV/All" -OutputPath "C:\Reports\ESV_Audit.csv"
+
+.NOTES
+    Version 1.0
+
+#>
+function Export-LMDeviceAudit {
+    [CmdletBinding()]
+    param (
+        [string]$FullPath,
+        [string]$OutputPath
+    )
+
+    if (-not $FullPath -or -not $OutputPath) {
+        Write-Host "`nExample usage:" -ForegroundColor Yellow
+        Write-Host 'Export-LMDeviceAudit -FullPath "ESV/All" -OutputPath "C:\Reports\ESV_Audit.csv"' -ForegroundColor Yellow
+        return
+    }
+
+    # Get a list of devices in the specified device group
+    $groupId = (Get-LMDeviceGroup -filter "fullPath -eq '$FullPath'").id
+    Write-Host "GroupId is: $($groupId)"
+
+    $devices = Get-LMDeviceGroupDevices -Id $groupId
+    Write-Host "Device count is: $($devices.count)"
+
+    $outputData = @{}
+
+    foreach ($item in $devices) {
+        $systemProperties = $item | Select-Object -ExpandProperty systemProperties
+        $autoProperties   = $item | Select-Object -ExpandProperty autoProperties
+        $customProperties = $item | Select-Object -ExpandProperty customProperties
+
+        $sysoid        = ($systemProperties | Where-Object { $_.Name -eq 'system.sysoid' }).Value
+        $sysinfo       = ($systemProperties | Where-Object { $_.Name -eq 'system.sysinfo' }).Value
+        $hoststatus    = ($systemProperties | Where-Object { $_.Name -eq 'system.hoststatus' }).Value
+        $wmiResp       = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.wmi.responding' }).Value
+        $wmiExc        = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.wmi.exception' }).Value
+        $snmpOperExc   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.snmp.exception' }).Value
+        $NTTsnmpRes    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.snmp.responding' }).Value
+        $MonLevel      = ($customProperties | Where-Object { $_.Name -eq 'ntt.monitoring.level' }).Value
+        $nttclass      = ($customProperties | Where-Object { $_.Name -eq 'ntt.class' }).Value
+        $nttcompany    = ($customProperties | Where-Object { $_.Name -eq 'ntt.company' }).Value
+        $nttasatypeapp = ($customProperties | Where-Object { $_.Name -eq 'ntt.asa.type.app' }).Value
+        $wmiuser       = ($customProperties | Where-Object { $_.Name -eq 'wmi.user' }).Value
+        $snmpuser      = ($customProperties | Where-Object { $_.Name -eq 'snmp.security' }).Value
+        $location      = ($customProperties | Where-Object { $_.Name -eq 'location' }).Value
+        $locationState = ($customProperties | Where-Object { $_.Name -eq 'location.state' }).Value
+        $snmpversion   = ($customProperties | Where-Object { $_.Name -eq 'snmp.version' }).Value
+
+        $fullMonitoring = (
+            ($wmiResp -ne $null -and $wmiResp.Contains("true")) -or
+            ($NTTsnmpRes -ne $null -and $NTTsnmpRes.Contains("true"))
+        )
+
+        $deviceData = @{
+            'ntt.class'            = $nttclass
+            'ntt.company'          = $nttcompany
+            'ntt.asa.type.app'     = $nttasatypeapp
+            'Location'             = $location
+            'State '               = $locationState
+            'sysoid'               = $sysoid
+            'sysinfo'              = $sysinfo
+            'hoststatus'           = $hoststatus
+            'snmp.security'        = $snmpuser
+            'snmp.responding'      = $NTTsnmpRes
+            'snmp.exception'       = $snmpOperExc
+            'snmp.version '        = $snmpversion
+            'wmi.user'             = $wmiuser
+            'wmi.responding'       = $wmiResp
+            'wmi.exception'        = $wmiExc
+            'monitoring.level'     = $MonLevel
+            'fullMonitoring'       = $fullMonitoring
+        }
+
+        $outputData[$item.displayName] = $deviceData
+    }
+
+    $propertyOrder = @(
+        'ntt.class',
+        'ntt.company',
+        'ntt.asa.type.app',
+        'Location',
+        'State ',
+        'sysoid',
+        'sysinfo',
+        'hoststatus',
+        'snmp.security',
+        'snmp.responding',
+        'snmp.exception',
+        'snmp.version ',
+        'wmi.user',
+        'wmi.responding',
+        'wmi.exception',
+        'monitoring.level',
+        'fullMonitoring'
+    )
+
+    $csvData = @()
+    foreach ($deviceName in $outputData.Keys) {
+        $row = [PSCustomObject]@{
+            DisplayName = $deviceName
+        }
+        foreach ($propertyName in $propertyOrder) {
+            $row | Add-Member -MemberType NoteProperty -Name $propertyName -Value $outputData[$deviceName][$propertyName]
+        }
+        $csvData += $row
+    }
+
+    $csvData | Export-Csv -Path $OutputPath -NoTypeInformation
+    Write-Host "Export complete: $OutputPath"
+}
+
+#RUN: 'Export-LMDeviceAudit -FullPath "ESV/All" -OutputPath "C:\Reports\ESV_Audit.csv"'
+#------------------------
+
+function Export-CPUInstanceCounts {
+	 <#
+    .SYNOPSIS
+        Shows the count of Datasource and Instances on devices in a group filtered to CPU|Processor
+
+    .DESCRIPTION
+        Shows the count of Datasource and Instances on devices in a group filtered to CPU|Processor
+
+    .PARAMETER groupId
+        The ID of the device group to query.
+
+    .PARAMETER csvFileName
+        The name of the CSV file to write the results to.
+
+    .INPUTS
+        groupId - The ID of the device group.
+        OutputFile - The name of the CSV file.
+
+    .EXAMPLE
+        Export-CPUInstanceCounts -GroupId 9766 -OutputFile 'CPU_InstanceCounts.csv'
+
+    .NOTES
+    #>
+    param (
+        [int]$GroupId,
+        [string]$OutputFile
+    )
+
+    if (-not $GroupId -or -not $OutputFile) {
+        Write-Host "Example usage:" -ForegroundColor Yellow
+        Write-Host "Export-CPUInstanceCounts -GroupId 9766 -OutputFile 'CPU_InstanceCounts.csv'" -ForegroundColor Yellow
+        return
+    }
+
+    try {
+        # Get all devices in the group
+        $Devices = Get-LMDeviceGroupDevices -Id $GroupId
+    } catch {
+        Write-Host "Failed to retrieve devices for GroupId $GroupId. Error: $_" -ForegroundColor Red
+        return
+    }
+
+    $OutputRows = @()
+    $TotalDevices = $Devices.Count
+    $CurrentIndex = 0
+
+    foreach ($Device in $Devices) {
+        $CurrentIndex++
+        Write-Progress -Activity "Processing Devices" -Status "Device: $($Device.displayName)" -PercentComplete (($CurrentIndex / $TotalDevices) * 100)
+
+        try {
+            $DataSourceFull = Get-LMDeviceDatasourceList -id $Device.id
+        } catch {
+            Write-Host "Failed to get datasources for device $($Device.displayName). Error: $_" -ForegroundColor Red
+            continue
+        }
+
+        $DataSourcesCPU = $DataSourceFull | Where-Object {
+            $_.dataSourceName -match "CPU|Processor" -or $_.dataSourceDisplayName -match "CPU|Processor"
+        }
+
+        $DeviceRow = [PSCustomObject]@{
+            Device = $Device.displayName
+        }
+
+        foreach ($ds in $DataSourcesCPU) {
+            try {
+                $Instances = Get-LMDeviceDatasourceInstance -DatasourceId $ds.datasourceId -DeviceId $Device.id
+                $DeviceRow | Add-Member -MemberType NoteProperty -Name $ds.dataSourceName -Value $Instances.Count
+            } catch {
+                Write-Host "Failed to get instances for datasource $($ds.dataSourceName) on device $($Device.displayName). Error: $_" -ForegroundColor Red
+                $DeviceRow | Add-Member -MemberType NoteProperty -Name $ds.dataSourceName -Value "Error"
+            }
+        }
+
+        $OutputRows += $DeviceRow
+    }
+
+    try {
+        $OutputRows | Export-Csv -Path $OutputFile -NoTypeInformation
+        Write-Host "Export complete: $OutputFile" -ForegroundColor Green
+    } catch {
+        Write-Host "Failed to export CSV to $OutputFile. Error: $_" -ForegroundColor Red
+    }
+}
+
+# RUN: Export-CPUInstanceCounts -GroupId 9766 -OutputFile 'CPU_InstanceCounts.csv'
 #------------------------
 function Magic8Ball {
     $responses = @(
@@ -1401,6 +1865,78 @@ function Magic8Ball {
     return $responses[$randomIndex] | Format-SpectreTable -Title "I have read your mind and answered below."
 }
 #RUN: Magic8Ball
+#------------------------
+function RockPaperScissors {
+    $responses = @(
+        "Rock",
+        "Paper",
+        "Scissors"
+    )
+
+    $randomIndex = Get-Random -Minimum 0 -Maximum $responses.Length
+    return $responses[$randomIndex] | Format-SpectreTable -Title "Can you even play this alone?"
+}
+#RUN: RockPaperScissors
+#------------------------
+function quotes {
+    $responses = @(
+        "To walk out on a limb, I must trust the tree, the wind, and myself.",
+        "I am unburdened, i know I cannot change the event of pass",
+        "Tomorrow is a mountain built with the rocks of today",
+        "I am patient. Observation is the key to victory.",
+        "I seek peace of mind. Anger dulls my senses.",
+        "I will be courageous. Fly forward like a dragonfly.",
+        "Fearing the rainstorm will not prevent the flood.",
+        "I am an ember, fanned by the flames of purpose."
+    )
+
+    $randomIndex = Get-Random -Minimum 0 -Maximum $responses.Length
+    return $responses[$randomIndex] | Format-SpectreTable -Title "My helpful quotes."
+}
+#RUN: quotes
+#------------------------
+function jokes {
+    $responses = @(
+        "Why did the network admin cross the road?`nTo check if the other side had better uptime.",
+        "Why do network monitoring tools never get invited to parties?`nBecause they always bring up dropped connections.",
+        "How many network engineers does it take to change a light bulb?`nNone. That’s a hardware issue—they just monitor the darkness.",
+        "What’s a network admin’s favorite game?`nPacket capture the flag.",
+        "I tried to start a band called: 1024 Mbps.`nBut we couldn’t get a gig.",
+        "Why don’t network engineers play hide and seek?`nBecause good luck hiding when they’ve got traceroute.",
+        "What’s a network admin’s favorite pickup line?`nYou auto-negotiated your way right into my heart.",
+        "Why was the network cable always calm?`nBecause it knew how to stay grounded.",
+        "My network went down for five minutes.`nI had to talk to my family. They seem like nice people.",
+        "Why did the DHCP server get promoted?`nBecause it always knew how to assign responsibility.",
+        "Why did the SNMP trap go to therapy?`nIt couldn’t handle all the alerts anymore."
+    )
+
+    $randomIndex = Get-Random -Minimum 0 -Maximum $responses.Length
+    return $responses[$randomIndex] | Format-SpectreTable -Title "An IT monitoring joke"
+}
+
+
+#------------------------
+function movies {
+    $responses = @(
+        "I am a leaf on the wind",
+        "May the Force be with you",
+        "Tomorrow is a mountain built with the rocks of today",
+        "There's no place like home",
+        "I'm gonna make him an offer he can't refuse",
+        "You're gonna need a bigger boat",
+		"I picked the wrong week to stop sniffing glue",
+		"These are not the droids you are looking for",
+        "Toto, I've a feeling we're not in Kasas anymore.",
+        "Hello. My name is Inigo Montoya. You killed my father. Prepare to die..",
+        "Nobody puts Baby in a corner",
+        "All work and no play makes Jack a dull boy",
+        "All right, Mr DeMille, I'm ready for my close-up"
+    )
+
+    $randomIndex = Get-Random -Minimum 0 -Maximum $responses.Length
+    return $responses[$randomIndex] | Format-SpectreTable -Title "My helpful movie quotes."
+}
+#RUN: movies
 
 #------------------------
 function Show-ABCG {
@@ -1471,6 +2007,113 @@ $filter = "customProperties -eq $($('{"name":"ntt.site.id","value":"' + $siteId 
 #RUN: Show_device_by_siteid -siteId '5740'
 
 #------------------------
+function Export-DeviceGroupAudit {
+    param (
+        [int]$GroupId,
+        [string]$OutputPath = "Audit_Group_for_DS_and_Instances.csv"
+    )
+
+    if (-not $PSBoundParameters.ContainsKey('GroupId')) {
+        Write-Host "Example usage: Export-DeviceGroupAudit -GroupId 4791 -OutputPath 'C:\Reports\GroupAudit.csv'" -ForegroundColor Yellow
+        return
+    }
+
+    $devices = Get-LMDeviceGroupDevices -Id $GroupId
+    $outputData = @{}
+    $totalDevices = $devices.Count
+    $currentDevice = 0
+
+    foreach ($item in $devices) {
+        $currentDevice++
+        $percentComplete = ($currentDevice / $totalDevices) * 100
+        Write-Progress -Activity "Processing Devices" -Status "$currentDevice of $totalDevices complete" -PercentComplete $percentComplete
+
+        $systemProperties = $item | Select-Object -ExpandProperty systemProperties
+        $autoProperties   = $item | Select-Object -ExpandProperty autoProperties
+        $customProperties = $item | Select-Object -ExpandProperty customProperties
+
+        $deviceData = @{
+            'sysoid'             = ($systemProperties | Where-Object { $_.Name -eq 'system.sysoid' }).Value
+            'sysinfo'            = ($systemProperties | Where-Object { $_.Name -eq 'system.sysinfo' }).Value
+            'hoststatus'         = ($systemProperties | Where-Object { $_.Name -eq 'system.hoststatus' }).Value
+            'isCollector'        = ($systemProperties | Where-Object { $_.Name -eq 'system.collector' }).Value
+            'model'              = ($autoProperties   | Where-Object { $_.Name -eq 'auto.endpoint.model' }).Value
+            'wmi.operational'    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.wmi.operational' }).Value
+            'snmp.operational'   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }).Value
+            'PredefResourceType' = ($autoProperties   | Where-Object { $_.Name -eq 'predef.externalResourceType' }).Value
+            'ntt.class'          = ($customProperties | Where-Object { $_.Name -eq 'ntt.class' }).Value
+            'ntt.class.report'   = ($customProperties | Where-Object { $_.Name -eq 'ntt.class.report' }).Value
+            'monitoring.level'   = ($customProperties | Where-Object { $_.Name -eq 'ntt.monitoring.level' }).Value
+            'system.categories'  = ($customProperties | Where-Object { $_.Name -eq 'system.categories' }).Value
+        }
+
+        $datasources = Get-LMDeviceDatasourceList -id $item.id |
+            Select-Object dataSourceName, instanceNumber |
+            Where-Object { $_.instanceNumber -gt 0 -and $_.dataSourceName -notlike "*LogicMonitor_Collector*" } |
+            Sort-Object dataSourceName
+
+        foreach ($ds in $datasources) {
+            $deviceData[$ds.dataSourceName] = $ds.instanceNumber
+        }
+
+        $outputData[$item.displayName] = $deviceData
+    }
+
+    $csvData = @()
+    foreach ($deviceName in $outputData.Keys) {
+        $row = [PSCustomObject]@{ DisplayName = $deviceName }
+        foreach ($propertyName in $outputData[$deviceName].Keys) {
+            $row | Add-Member -MemberType NoteProperty -Name $propertyName -Value $outputData[$deviceName][$propertyName]
+        }
+        $csvData += $row
+    }
+
+    $csvData | Export-Csv -Path $OutputPath -NoTypeInformation
+}
+
+#RUN: Export-DeviceGroupAudit -GroupId 4791 -OutputPath 'C:\Reports\GroupAudit.csv'
+
+
+#------------------------
+function Show-AP_Instances_on_WLC {
+    param (
+        [string]$DeviceNameFilter = "*virtual*",
+        [string]$OutputPath = $("Woolies_AP_" + (Get-Date -Format "ddMMyyyy") + ".csv")
+    )
+
+    $Devices = Get-LMDevice -DisplayName $DeviceNameFilter
+    $Results = @()
+
+    foreach ($Device in $Devices) {
+        $DataSource = Get-LMDeviceDatasourceList -id $Device.id | Where-Object { $_.dataSourceName -eq "NTT_PingCiscoAP-" }
+        if ($DataSource) {
+            $Instances = Get-LMDeviceDatasourceInstance -DatasourceId $DataSource.datasourceId -DeviceId $Device.id
+            foreach ($i in $Instances) {
+                if ($i.stopMonitoring -eq $true -or $i.disableAlerting -eq $true) {
+                    $Results += [PSCustomObject]@{
+                        DeviceName        = $Device.displayName
+                        Name              = $i.Name
+                        groupName         = $i.groupName
+                        deviceDisplayName = $i.deviceDisplayName
+                        wildValue         = $i.wildValue
+                        sdtStatus         = $i.sdtStatus
+                        disableAlerting   = $i.disableAlerting
+                        stopMonitoring    = $i.stopMonitoring
+                        Id                = $i.id
+                    }
+                }
+            }
+        }
+    }
+
+    $Results | Export-Csv -NoTypeInformation -Path $OutputPath
+    Write-Host "Results exported to $OutputPath"
+}
+
+#RUN: Show-AP_Instances_on_WLC
+#RUN: Show-AP_Instances_on_WLC -DeviceNameFilter "*virtual*" -OutputPath "Custom_AP_Report.csv"
+#RUN: Show-AP_Instances_on_WLC -DeviceNameFilter "*mist*" -OutputPath "Custom_AP_Report.csv"
+#------------------------
 function Search-KeywordInFiles {
     param (
         [string]$Keyword,
@@ -1539,6 +2182,51 @@ function Send-Email {
 
 
 #------------------------
+function Get-LmAlertbytype {
+    param (
+        [int]$DaysBack = 1,
+        [string]$InstanceFilter = "Juniper_Mist_AP_Health",
+        [string]$ExportPath = ""
+    )
+
+    # Define start and end dates
+    $startDate = (Get-Date).AddDays(-$DaysBack)
+    $endDate = Get-Date
+
+    # Get alerts using date range, type, and severity filter
+    $LMServiceAlerts = Get-LMAlert -ClearedAlerts $true -Type dataSourceAlert -StartDate $startDate -EndDate $endDate -Severity Critical | Where-Object {
+        $_.instanceName -eq $InstanceFilter
+    }
+
+    # Return selected properties with converted epoch times
+    $filteredAlerts = foreach ($alert in $LMServiceAlerts) {
+        [PSCustomObject]@{
+            resourceId        = $alert.resourceId
+            startDateTime     = ([System.DateTimeOffset]::FromUnixTimeSeconds($alert.startEpoch)).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
+            endDateTime       = ([System.DateTimeOffset]::FromUnixTimeSeconds($alert.endEpoch)).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")
+            startEpoch        = $alert.startEpoch
+            endEpoch          = $alert.endEpoch
+            type              = $alert.type
+            internalId        = $alert.internalId
+            monitorObjectName = $alert.monitorObjectName
+            dataPointName     = $alert.dataPointName
+            instanceName      = $alert.instanceName
+        }
+    }
+
+    # Export to CSV if path is provided
+    if ($ExportPath -ne "") {
+        $filteredAlerts | Export-Csv -Path $ExportPath -NoTypeInformation
+    }
+
+    return $filteredAlerts
+}
+# Get alerts from the last 2 days for instances equalto: "Juniper_Mist_AP_Health"
+#RUN: Get-LmAlertbytype -DaysBack 2 -InstanceFilter "Juniper_Mist_AP_Health"
+
+
+# Export results to CSV
+#Get-LmAlertbytype -DaysBack 2 -InstanceFilter "Juniper_Mist_AP_Health" -ExportPath "MistHealthAlerts.csv"
 #------------------------
 #------------------------
 #------------------------
@@ -1565,6 +2253,9 @@ $menu = @(
     [pscustomobject]@{Name="Show-Menu"; Overview="Show this menu"; Example="Show-Menu -data `$menu -filter '<.|Collector|devices>'"},
     [pscustomobject]@{Name="Show-random"; Overview="Show a random person"; Example="Show-random"},
     [pscustomobject]@{Name="Magic8Ball"; Overview="Runs a Magic-8-Ball"; Example="Magic8Ball"},
+    [pscustomobject]@{Name="RockPaperScissors"; Overview="Runs a Rock Paper Scissors game"; Example="RockPaperScissors"},
+    [pscustomobject]@{Name="Quotes"; Overview="Provides helpful Quotes from Assasins Creed."; Example="Quotes"},
+    [pscustomobject]@{Name="Movies"; Overview="Provides helpful Quotes from Movies."; Example="Movies"},
     [pscustomobject]@{Name="Search-KeywordInFiles"; Overview="Search like grep."; Example="Search-KeywordInFiles -Keyword 'yourKeyword' -Path 'C:\your\path'"},
 	[pscustomobject]@{Name="Send-Email"; Overview="Sends email thru Outlook."; Example="Send-Email -To 'ryan.gillan@nttdata.com' -subject 'Subject' -Body 'Body' -Attachment 'C:\temp\services\WOW_services.csv'"},
 	
@@ -1576,9 +2267,11 @@ $menu = @(
     [pscustomobject]@{Name="Show-Collectors"; Overview="Show Collectors on a company"; Example="Show-Collectors"},
     [pscustomobject]@{Name="Show-folders"; Overview="Show LM root folders"; Example="Show-folders"},
     [pscustomobject]@{Name="Show-Country-folders"; Overview="Show Country folders and host count"; Example="Show-Country-folders -fullPath 'NTT-AU'"},
+    [pscustomobject]@{Name="Show-Country-folders_plus_DEAD"; Overview="Show Country folders, host and dead count"; Example="Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'"},
+    [pscustomobject]@{Name="Show-Country-Show-Country-folders_plus_DEAD"; Overview="Show Country folders, host and dead count. Email output"; Example="Show-Country-folders_plus_DEAD_v2 -fullPath 'NTT-AU' -EmailTo 'ryan.gillan@nttdata.com'"},
     [pscustomobject]@{Name="Show-GroupTree"; Overview="Show folders in a tree"; Example="Show-GroupTree '5000'"},
     [pscustomobject]@{Name="Print-FolderTree_2_csv"; Overview="Print-FolderTree_2_csv"; Example="Print-FolderTree_2_csv -id 11234 -OutputFile 'Australia_Folders.csv' "},
-    [pscustomobject]@{Name="Print-FolderTree_2_csv_flatstructure"; Overview="Print-FolderTree_2_csv without indents"; Example="Print-FolderTree_2_csv_flatstructure -id 11234 -OutputFile 'Australia_Folders_flat.csv' "},
+    [pscustomobject]@{Name="Print-FolderTree_2_csv_flatstructure"; Overview="Print-FolderTree_2_csv without indents. Shows folder,path and appliesto"; Example="Print-FolderTree_2_csv_flatstructure -id 11234 -OutputFile 'Australia_Folders_flat.csv' "},
     [pscustomobject]@{Name="Show-Roles"; Overview="Show roles on the portal"; Example="Show-Roles "},
     [pscustomobject]@{Name="Show-Users"; Overview="Show users on the portal"; Example="Show-Users "},
     [pscustomobject]@{Name="Show-DeviceOnCollector"; Overview="Show Devices running on Collector 'XX'"; Example="Show-DeviceOnCollector -collector '<collectorId>'"},
@@ -1589,20 +2282,30 @@ $menu = @(
     [pscustomobject]@{Name="Show-SDT"; Overview="Show-SDT"; Example="Show-SDT 'CHED'"},
     [pscustomobject]@{Name="Show-Netflow"; Overview="Show-Netflow"; Example="Show-Netflow 'CHED'"},
     [pscustomobject]@{Name="Show-Dead_On_Collector"; Overview="Show Dead devices On a Collector"; Example="Show-Dead_On_Collector '333'"},
+    [pscustomobject]@{Name="Show-DisabledAlertsOnCollector"; Overview="Show Disabled Alerts On Resources on a Collector"; Example="Show-DisabledAlertsOnCollector '333'"},
     [pscustomobject]@{Name="Show-MissingSSID"; Overview="Show CI wil Missing SSID"; Example="Show-MissingSSID -id 'YourGroupID'"},
     [pscustomobject]@{Name="Show-MissingCompany"; Overview="Show CI wil Missing ntt.company"; Example="Show-MissingCompany -id 'YourGroupID'"},
     [pscustomobject]@{Name="Show_Stale_Devices"; Overview="Show Stale Devices as a filter on lastDataTime"; Example="Show_Stale_Devices -days '30'"},
     [pscustomobject]@{Name="Show_LMServices"; Overview="Show Service Devices"; Example="Show_LMServices"},
     [pscustomobject]@{Name="Show_LMServices_2_csv"; Overview="Show Service Devices and dump to a csv in current dir."; Example="Show_LMServices_2_csv"},
     [pscustomobject]@{Name="Show_LMServicesGroups"; Overview="Show Service group folders"; Example="Show_LMServicesGroups"},
+    [pscustomobject]@{Name="Find-Report"; Overview="Find a report"; Example="Find-Report --LastModifyUserName 'ryan'"},
     [pscustomobject]@{Name="Find-Service"; Overview="Find a service with a name"; Example="Find-Service -searchTerm 'yourSearchTerm'"},
     [pscustomobject]@{Name="Show-ClassRouterInTree"; Overview="Show Class Router In Tree output."; Example="Show-ClassRouterInTree -ParentId '12399' -OutputCsvPath 'output.csv'"},
     [pscustomobject]@{Name="Show-GroupDeviceCounts"; Overview="Show Resources Instance Counts for a group."; Example="Show-GroupDeviceCounts -GroupId '1234' -OutputFileName 'output.csv'"},
     [pscustomobject]@{Name="Show-DeviceData"; Overview="Show Device DataSource and Instance Count."; Example="Show-DeviceData -displayName '1234'"},
     [pscustomobject]@{Name="Show-DeviceData_group"; Overview="Show Device DataSource and Instance Count for a group."; Example="Show-DeviceData_group -groupId 2122 -csvFileName 'DeviceData.csv'"},
+    [pscustomobject]@{Name="Show-ERI"; Overview="Show the ERI on a device."; Example="Show-ERI -DisplayName 'nw-backup'"},
+    [pscustomobject]@{Name="Set-ERI"; Overview="Set the ERI on a device."; Example="Set-ERI -DisplayName 'MyDevice01' -INERI 'abc-123-xyz'"},
+    [pscustomobject]@{Name="Export-LMDeviceAudit"; Overview="Inventory report"; Example="Export-LMDeviceAudit -FullPath 'ESV/All' -OutputPath 'C:\Reports\ESV_Audit.csv'"},
+    [pscustomobject]@{Name="Show-AP_Instances_on_WLC"; Overview="Cisco AP Inventory report for WOW etc"; Example="Show-AP_Instances_on_WLC'"},
+    [pscustomobject]@{Name="Get-LmAlertbytype"; Overview="Show alerts filtering by instance name"; Example="Get-LmAlertbytype -DaysBack 2 -InstanceFilter 'Juniper_Mist_AP_Health'"},
+	
+    [pscustomobject]@{Name="Export-CPUInstanceCounts"; Overview="Show Device DataSource and Instance Count for a group filtered on CPU|PRocessor."; Example="Export-CPUInstanceCounts -GroupId 9766 -OutputFile 'CPU_InstanceCounts.csv'"},
     [pscustomobject]@{Name="Show-ABCG"; Overview="Show ABCG."; Example="Show-ABCG or Show-ABCG -filter 'KPMG'"},
     [pscustomobject]@{Name="Update-ABCG"; Overview="Update devices to use ABCG."; Example="Update-ABCG -CollectorGroupName 'KPMG Collector Group' -TargetCollectorGroupId '52'"},
     [pscustomobject]@{Name="Show_device_by_siteid -siteId '5740'"; Overview="Search for devices with siteid."; Example="Show_device_by_siteid -siteId '5740'"},
+    [pscustomobject]@{Name="Export-DeviceGroupAudit"; Overview="Export Resource, DataSources and the Instance counts."; Example="Export-DeviceGroupAudit -GroupId 4791 -OutputPath 'C:\Reports\GroupAudit.csv'"},
     
     [PSCustomObject]@{Name = "__"; Overview = "__";Example="__" }, # Blank line
     [pscustomobject]@{Name="Get-CurrentDate"; Overview="Get the current date"; Example="Get-CurrentDate"},
