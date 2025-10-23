@@ -62,7 +62,8 @@ function Export-LMAlertSettings {
     
 
 .LINK
-    https://github.com/AUrhino/LogicMonitor/blob/main/Export-DeviceGroupAudit.ps1
+    https://github.com/AUrhino/LogicMonitor/blob/main/Export-LMAlertSettingsBulk.ps1
+
 #>
 
     [CmdletBinding()]
