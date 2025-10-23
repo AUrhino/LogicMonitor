@@ -1,0 +1,117 @@
+# Get the alerts set on the folder ESV for DatasourceName: SNMP_Network_Interfaces with dataPointName InUtilizationPercent or OutUtilizationPercent
+function Export-LMAlertSettings {
+<#
+.SYNOPSIS
+    Exports LogicMonitor alert settings for a specified folder, datasource and datapoints.
+
+.DESCRIPTION
+    Retrieves alert settings from LogicMonitor for a given folder and datasource.
+    Filters by specified datapoint names or exports all datapoints if "ALL" is provided.
+    Allows selecting specific columns to export using the ExportItem parameter.
+
+.PARAMETER FolderName
+    The name of the LogicMonitor folder (device group).
+
+.PARAMETER DatasourceName
+    The name of the datasource (e.g., SNMP_Network_Interfaces).
+
+.PARAMETER DataPointNames
+    Array of datapoint names to filter (e.g., InUtilizationPercent, OutUtilizationPercent).
+    Use "ALL" to export all datapoints without filtering.
+
+.PARAMETER OutputPath
+    Path to the CSV file where results will be exported. Default: Output.csv.
+    Can be a full path eg. c:\reports\output.csv
+
+.PARAMETER ExportItem
+    Array of column names to include in the export.
+    If not specified, ALL properties will be exported.
+    Example columns: disableAlerting, alertExpr, dataPointName, globalAlertExpr,
+                     collectionInterval, alertTransitionInterval, alertClearTransitionInterval,
+                     alertForNoData, globalAlertForNoData, dataPointDescription.
+
+.EXAMPLE
+    The following will export Datasource: SNMP_Network_Interfaces 
+    for specific DataPoints: InUtilizationPercent\OutUtilizationPercent
+
+    Export-LMAlertSettings -FolderName "ESV" -DatasourceName "SNMP_Network_Interfaces" `
+        -DataPointNames @("InUtilizationPercent","OutUtilizationPercent") `
+        -OutputPath "Output.csv"
+
+.EXAMPLE
+    The following will export Datasource: SNMP_Network_Interfaces for specific DataPoints: ALL
+    This will only show the listed items to the export.
+
+    Export-LMAlertSettings -FolderName "ESV" -DatasourceName "SNMP_Network_Interfaces" `
+        -DataPointNames @("ALL") `
+        -ExportItem @("disableAlerting","alertExpr","dataPointName","globalAlertExpr",
+                      "collectionInterval","alertTransitionInterval","alertClearTransitionInterval",
+                      "alertForNoData","globalAlertForNoData","dataPointDescription") `
+        -OutputPath "Output.csv"
+
+.EXAMPLE
+    Export-LMAlertSettingsBulk -FolderName "ESV" `
+        -DatasourceNames @("HostStatus","BGP-","Cisco_CPU_SNMP") `
+        -DataPointNames @("ALL") `
+        -OutputDirectory "C:\Reports" `
+        -ExportItem @("disableAlerting","alertExpr","dataPointName","globalAlertExpr",
+                  "collectionInterval","alertTransitionInterval","alertClearTransitionInterval",
+                  "alertForNoData","globalAlertForNoData","dataPointDescription")
+
+#>
+    [CmdletBinding()]
+    param (
+        [string]$FolderName,
+        [string]$DatasourceName,
+        [string[]]$DataPointNames,
+        [string]$OutputPath = "Output.csv",
+        [string[]]$ExportItem = @()
+    )
+
+    # If no parameters provided, show examples and exit
+    if (-not $FolderName -or -not $DatasourceName -or -not $DataPointNames) {
+        Write-Host "Example usage:" -ForegroundColor Yellow
+        Write-Host 'Export-LMAlertSettings -FolderName "ESV" -DatasourceName "SNMP_Network_Interfaces" -DataPointNames @("InUtilizationPercent","OutUtilizationPercent") -OutputPath "Output.csv"' -ForegroundColor Yellow
+        Write-Host 'Run the following for more details: Get-Help Get-Process -Examples' -ForegroundColor Yellow
+        Write-Host 'Get-Help Export-LMAlertSettings -Examples' -ForegroundColor Yellow
+        return
+    }
+
+    try {
+        $DS = Get-LMDeviceGroupDatasourceAlertSetting -Name $FolderName -DatasourceName $DatasourceName
+        if (-not $DS) {
+            Write-Host "No alert settings found for folder '$FolderName' and datasource '$DatasourceName'." -ForegroundColor Red
+            return
+        }
+
+        # Filter datapoints unless ALL is specified
+        if ($DataPointNames -contains "ALL") {
+            $FilteredDS = $DS
+        } else {
+            $FilteredDS = $DS | Where-Object { $_.dataPointName -and ($_.dataPointName -in $DataPointNames) }
+        }
+
+        if (-not $FilteredDS -or $FilteredDS.Count -eq 0) {
+            Write-Host "No matching datapoints found in alert settings." -ForegroundColor Yellow
+            return
+        }
+
+        # Validate ExportItem columns
+        if ($ExportItem.Count -gt 0) {
+            $validProps = ($FilteredDS | Get-Member -MemberType NoteProperty).Name
+            $invalidProps = $ExportItem | Where-Object { $_ -notin $validProps }
+            if ($invalidProps.Count -gt 0) {
+                Write-Host "Warning: Invalid columns detected: $($invalidProps -join ', ')" -ForegroundColor Yellow
+                Write-Host "Valid columns are: $($validProps -join ', ')" -ForegroundColor Cyan
+            }
+            $FilteredDS | Select-Object -Property $ExportItem | Export-Csv -Path $OutputPath -NoTypeInformation
+        } else {
+            $FilteredDS | Export-Csv -Path $OutputPath -NoTypeInformation
+        }
+
+        Write-Host "Exported alert settings to $OutputPath" -ForegroundColor Green
+    }
+    catch {
+        Write-Host "Error retrieving alert settings: $_" -ForegroundColor Red
+    }
+}
