@@ -21,6 +21,7 @@
     Based on Audit_LMDatasoruces_for_a_group.ps1
 
 .LINK
+    https://github.com/AUrhino/LogicMonitor/blob/main/Export-DeviceGroupAudit.ps1
 
 #>
 function Export-DeviceGroupAudit {
