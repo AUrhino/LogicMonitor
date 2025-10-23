@@ -58,7 +58,13 @@ function Export-LMAlertSettings {
                   "collectionInterval","alertTransitionInterval","alertClearTransitionInterval",
                   "alertForNoData","globalAlertForNoData","dataPointDescription")
 
+.NOTES
+    
+
+.LINK
+    https://github.com/AUrhino/LogicMonitor/blob/main/Export-DeviceGroupAudit.ps1
 #>
+
     [CmdletBinding()]
     param (
         [string]$FolderName,
