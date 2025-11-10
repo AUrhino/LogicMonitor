@@ -100,9 +100,6 @@ function Export-DeviceGroupAudit {
             'wmi.operational'    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.wmi.operational' }).Value
             'snmp.operational'   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }).Value
             'PredefResourceType' = ($autoProperties   | Where-Object { $_.Name -eq 'predef.externalResourceType' }).Value
-            'ntt.class'          = ($customProperties | Where-Object { $_.Name -eq 'ntt.class' }).Value
-            'ntt.class.report'   = ($customProperties | Where-Object { $_.Name -eq 'ntt.class.report' }).Value
-            'monitoring.level'   = ($customProperties | Where-Object { $_.Name -eq 'ntt.monitoring.level' }).Value
             'system.categories'  = ($customProperties | Where-Object { $_.Name -eq 'system.categories' }).Value
         }
 
