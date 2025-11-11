@@ -1,0 +1,136 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA"
+    }
+  ],
+  "name": "NTT-AU Collector heartbeat",
+  "description": "NTT-AU Collector heartbeat",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 11,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Collector Heartbeat",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 100,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "SuccessRate",
+              "instanceName": {
+                "isGlob": false,
+                "value": "LogicMonitor_Collector_Heartbeat"
+              },
+              "dataSourceFullName": "Collector Heartbeat (LogicMonitor_Collector_Heartbeat)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "",
+                "type": "line",
+                "option": "default"
+              },
+              "name": "SuccessRate",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "NTT-AU/NTT Internal/GSOA/99 Admin views/Collectors"
+              }
+            }
+          ],
+          "verticalLabel": "",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 11,
+        "row": 1,
+        "sizey": 6
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Collector Heartbeat_fail",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "FailureRate",
+              "instanceName": {
+                "isGlob": false,
+                "value": "LogicMonitor_Collector_Heartbeat"
+              },
+              "dataSourceFullName": "Collector Heartbeat (LogicMonitor_Collector_Heartbeat)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "",
+                "type": "line",
+                "option": "default"
+              },
+              "name": "FailureRate",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "NTT-AU/NTT Internal/GSOA/99 Admin views/Collectors"
+              }
+            }
+          ],
+          "verticalLabel": "",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}

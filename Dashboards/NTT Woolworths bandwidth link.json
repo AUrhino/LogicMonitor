@@ -1,0 +1,850 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [],
+  "name": "NTT Woolworths bandwidth link",
+  "description": "Woolworths BW links:\n\nOnly showing:\nd:TS_EXT_RT_PRI\nd:TS_EXT_RT-SEC\n\nAnd any Interfaces with WOW",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 5,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_SEC-Network Interfaces-GigabitEthernet0/0/1 [ID:2]  (OUTSIDE CLIENT FACING INTERFACE)-Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InOctets*8",
+              "display": {
+                "color": "silver",
+                "legend": "Inbound (95th Percentile) : Number of inbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "InBps"
+            },
+            {
+              "rpn": "percent(InBps,95)",
+              "display": {
+                "color": "silver",
+                "legend": "Inbound (95th Percentile) : Number of inbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "In95"
+            },
+            {
+              "rpn": "OutOctets*8",
+              "display": {
+                "color": "green",
+                "legend": "Outbound (95th Percentile) : Number of outbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "OutBps"
+            },
+            {
+              "rpn": "percent(OutBps,95)",
+              "display": {
+                "color": "green",
+                "legend": "Outbound (95th Percentile) : Number of outbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Out95"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "GigabitEthernet0/0/1 [ID:2]"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "GigabitEthernet0/0/1 [ID:2]"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_PRI-Network Interfaces-GigabitEthernet0/0/1 [ID:2]  OUTSIDE CLIENT FACING INTERFACE -Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InOctets*8",
+              "display": {
+                "color": "silver",
+                "legend": "Inbound (95th Percentile) : Number of inbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "InBps"
+            },
+            {
+              "rpn": "percent(InBps,95)",
+              "display": {
+                "color": "silver",
+                "legend": "Inbound (95th Percentile) : Number of inbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "In95"
+            },
+            {
+              "rpn": "OutOctets*8",
+              "display": {
+                "color": "green",
+                "legend": "Outbound (95th Percentile) : Number of outbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "OutBps"
+            },
+            {
+              "rpn": "percent(OutBps,95)",
+              "display": {
+                "color": "green",
+                "legend": "Outbound (95th Percentile) : Number of outbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Out95"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "GigabitEthernet0/0/1 [ID:2]"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "GigabitEthernet0/0/1 [ID:2]"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "BW- TS_EXT_RT_WOW_PRI-Network Interfaces- Top 10 Interfaces by Inbound Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InOctets*8",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE## - ##DSIDESCRIPTION##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Ingress"
+            }
+          ],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_PRI-Network Interfaces-@default-Top 10 Interfaces by Outbound Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "OutOctets*8",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE## - ##DSIDESCRIPTION##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Egress"
+            }
+          ],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutOctets",
+              "aggregateFunction": "sum",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 5,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_SEC-Network Interfaces-@default-Top 10 Interfaces by Inbound Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InOctets*8",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE## - ##DSIDESCRIPTION##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Ingress"
+            }
+          ],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InOctets",
+              "aggregateFunction": "sum",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 5,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "BW - TS_EXT_RT_WOW_SEC-Network Interfaces-Top 10 Interfaces by Outbound Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "OutOctets*8",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE## - ##DSIDESCRIPTION##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Egress"
+            }
+          ],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 11,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_PRI-Cisco CPU-@default-Top 10 by CPU Busy Percentage - 1 min",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "CPU1min",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Cisco CPU (Cisco_CPU_Usage)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "CPU1min",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 11,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_SEC-Cisco CPU-@default-Top 10 by CPU Busy Percentage - 1 min",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "CPU1min",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Cisco CPU (Cisco_CPU_Usage)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "CPU1min",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 9,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CPU",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": ""
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 15,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_PRI-Cisco SLA ICMP Echo-30 AU-WOW_PRIMARY-Round Trip Time",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "RTTTime",
+              "instanceName": {
+                "isGlob": false,
+                "value": "30"
+              },
+              "dataSourceFullName": "Cisco SLA ICMP Echo- (CiscoSLA_ICMPEcho-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "navy",
+                "legend": "RTT",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "RTTTime",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "milliseconds",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 11,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_PRI-Cisco SLA ICMP Echo-30 AU-WOW_PRIMARY-Latest RTT Status Code",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": 38,
+          "dataPoints": [
+            {
+              "dataPointName": "LatestRttStatus",
+              "instanceName": {
+                "isGlob": false,
+                "value": "30"
+              },
+              "dataSourceFullName": "Cisco SLA ICMP Echo- (CiscoSLA_ICMPEcho-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "silver",
+                "legend": "Latest Status Code",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "LatestRttStatus",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "status code (1=ok)",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 15,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_WOW_PRI-Cisco SLA ICMP Echo-30 AU-WOW_PRIMARY-Timeout Status",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Timeout",
+              "instanceName": {
+                "isGlob": false,
+                "value": "30"
+              },
+              "dataSourceFullName": "Cisco SLA ICMP Echo- (CiscoSLA_ICMPEcho-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "gray",
+                "legend": "Timeout",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Timeout",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_WOW_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "1=timeout, 2=success",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}

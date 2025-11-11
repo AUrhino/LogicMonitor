@@ -1,0 +1,413 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/KPMG/All"
+    },
+    {
+      "name": "defaultWebsiteGroup",
+      "value": "*"
+    }
+  ],
+  "name": "RIM2LM KPMG",
+  "description": "RIM2LM Dashboard - WIP\nTODO: Add Windows",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 13,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {
+          "isShowAll": false,
+          "showFilter": false,
+          "columns": [
+            {
+              "visible": false,
+              "columnLabel": "Severity",
+              "columnKey": "alert-severity"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Began",
+              "columnSize": 220,
+              "columnKey": "alert-began"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Resource/Website",
+              "columnSize": 120,
+              "columnKey": "alert-device"
+            },
+            {
+              "visible": true,
+              "columnLabel": "LogicModule",
+              "columnSize": 111,
+              "columnKey": "alert-datasource"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Instance",
+              "columnSize": 76,
+              "columnKey": "alert-datasource-instance"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Datapoint",
+              "columnSize": 160,
+              "columnKey": "alert-datapoint"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Value",
+              "columnSize": 1055,
+              "columnKey": "alert-value"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Static Threshold",
+              "columnKey": "alert-static-threshold"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dynamic Threshold",
+              "columnKey": "alert-dynamic-threshold"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Group",
+              "columnKey": "alert-group"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Notes",
+              "columnKey": "alert-notes"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged By",
+              "columnKey": "alert-acked-by"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged On",
+              "columnKey": "alert-acked-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Cleared On",
+              "columnKey": "alert-cleared-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "In SDT",
+              "columnKey": "alert-in-sdt"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Alert Rule",
+              "columnKey": "alert-rule-name"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Escalation Chain",
+              "columnKey": "alert-escalation-chain"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Instance Description",
+              "columnKey": "alert-datasource-instance-description"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Full Path",
+              "columnKey": "alert-full-path"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Routing State",
+              "columnKey": "alert-routing-state"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependency Role",
+              "columnKey": "alert-dependency-role"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependent Alerts",
+              "columnKey": "alert-dependent-alerts"
+            }
+          ],
+          "playSound": {
+            "criticalAlertAudioFileName": "",
+            "errorAlertAudioFileName": "",
+            "warningAlertAudioFileName": "",
+            "shouldPlay": false
+          },
+          "fontsize": "normal-font",
+          "sort": "-startEpoch"
+        },
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Alerts",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "filters": {
+          "severity": "critical",
+          "sdted": "all",
+          "chain": "",
+          "instance": "",
+          "anomaly": "all",
+          "dataPoint": "",
+          "rule": "",
+          "acked": "no",
+          "dependencyRoutingState": "",
+          "dependencyRole": "",
+          "host": "",
+          "keyword": "",
+          "dataSource": "",
+          "cleared": "no",
+          "group": "%23%23defaultResourceGroup%23%23*"
+        },
+        "type": "alert",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Monitoring states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Overview",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 9,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Summary",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "pieChart",
+        "timescale": "day",
+        "pieChartInfo": {
+          "maxSlicesCanBeShown": 10,
+          "virtualDataPoints": [],
+          "showLabelsAndLinesOnPC": true,
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"##defaultResourceGroup##\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "hideZeroPercentSlices": false,
+          "groupRemainingAsOthers": false,
+          "pieChartItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "color": "AUTO",
+              "legend": "Health_Normal_ping"
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "color": "AUTO",
+              "legend": "Health_NOT_Normal_ping"
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "color": "AUTO",
+              "legend": "SNMP_Operational"
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "color": "AUTO",
+              "legend": "SNMP_not_operational"
+            }
+          ],
+          "title": "Summary"
+        },
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}

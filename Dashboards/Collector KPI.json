@@ -1,0 +1,206 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA/Collectors"
+    }
+  ],
+  "name": "Collector KPI",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "nul-pwc-2-Collector Data Collecting Tasks-batchscript-Collection Times",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "MaxExecuteTime",
+              "instanceName": {
+                "isGlob": false,
+                "value": "batchscript"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "olive",
+                "legend": "Maximum",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "MaxExecuteTime",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nul-pwc-2"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "TimePerAllCollection",
+              "instanceName": {
+                "isGlob": false,
+                "value": "batchscript"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "black",
+                "legend": "All Tasks",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "TimePerAllExecution",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nul-pwc-2"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "TimePerFailureCollection",
+              "instanceName": {
+                "isGlob": false,
+                "value": "batchscript"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "red",
+                "legend": "Failure",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "TimePerFailureExecution",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nul-pwc-2"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "TimePerSuccessfulCollection",
+              "instanceName": {
+                "isGlob": false,
+                "value": "batchscript"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "blue",
+                "legend": "Successful",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "TimePerSuccessfulCollection",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nul-pwc-2"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "milliseconds",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 8
+      },
+      "config": {
+        "displaySettings": {
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": null,
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "TimePerFailureCollection",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": null,
+        "sortOrder": "descending",
+        "name": "batchscript",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "timescale": "day"
+      }
+    }
+  ],
+  "version": 2
+}

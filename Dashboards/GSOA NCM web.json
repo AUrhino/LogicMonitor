@@ -1,0 +1,53 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [],
+  "name": "GSOA NCM web",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {},
+      "config": {
+        "displaySettings": {},
+        "geoInfo": "overall",
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "websiteOverview",
+        "version": 2,
+        "graph": "overallStatus",
+        "websiteName": "aucdlncmapp03",
+        "websiteId": 499,
+        "isSupportCustomProperty": false,
+        "name": "ncmapp Overall overallStatus",
+        "theme": "newBorderGray",
+        "interval": 5,
+        "timescale": "1day"
+      }
+    },
+    {
+      "position": {},
+      "config": {
+        "displaySettings": {},
+        "geoInfo": "overall",
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "websiteOverview",
+        "version": 2,
+        "graph": "performance",
+        "websiteName": "aucdlncmapp03",
+        "websiteId": 499,
+        "isSupportCustomProperty": false,
+        "name": "NCM App Overall-performance",
+        "theme": "newBorderGray",
+        "interval": 5,
+        "timescale": "1day"
+      }
+    }
+  ],
+  "version": 2
+}

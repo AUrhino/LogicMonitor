@@ -1,0 +1,2367 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceName",
+      "value": "*nonprod"
+    },
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-DBS/University of Sydney/UOS AWS PaaS Account/DB Instances"
+    }
+  ],
+  "name": "AWS RDS (SQL Server)",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 42,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {
+          "isShowAll": false,
+          "showFilter": false,
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "Severity",
+              "isVisibleByDefault": true,
+              "columnKey": "alert-severity"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Began",
+              "columnKey": "alert-began"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Resource/Website",
+              "columnKey": "alert-device"
+            },
+            {
+              "visible": true,
+              "columnLabel": "LogicModule",
+              "columnKey": "alert-datasource"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Instance",
+              "columnKey": "alert-datasource-instance"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Datapoint",
+              "columnKey": "alert-datapoint"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Value",
+              "columnKey": "alert-value"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Effective Thresholds",
+              "columnKey": "alert-thresholds"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Group",
+              "columnKey": "alert-group"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Notes",
+              "columnKey": "alert-notes"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged By",
+              "columnKey": "alert-acked-by"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged On",
+              "columnKey": "alert-acked-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Cleared On",
+              "columnKey": "alert-cleared-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "In SDT",
+              "columnKey": "alert-in-sdt"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Alert Rule",
+              "columnKey": "alert-rule-name"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Escalation Chain",
+              "columnKey": "alert-escalation-chain"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Instance Description",
+              "columnKey": "alert-datasource-instance-description"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Full Path",
+              "columnKey": "alert-full-path"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Routing State",
+              "columnKey": "alert-routing-state"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependency Role",
+              "columnKey": "alert-dependency-role"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependent Alerts",
+              "columnKey": "alert-dependent-alerts"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Alert Grouping Criteria",
+              "columnKey": "alert-grouping-criteria"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Log Metadata",
+              "columnKey": "alert-log-metadata"
+            }
+          ],
+          "playSound": {},
+          "fontsize": "normal-font",
+          "sort": "-startEpoch"
+        },
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "RDS Instance Alerts",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "filters": {
+          "severity": "critical,error",
+          "sdted": "all",
+          "chain": "",
+          "instance": "",
+          "anomaly": "all",
+          "dataPoint": "",
+          "rule": "",
+          "acked": "all",
+          "dependencyRoutingState": "",
+          "dependencyRole": "",
+          "host": "%23%23defaultResourceName%23%23",
+          "keyword": "",
+          "dataSource": "",
+          "cleared": "no",
+          "group": "%23%23defaultResourceGroup%23%23%2FRDS*"
+        },
+        "type": "alert",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 325,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            CPU Utilization\n            \n        ",
+              "columnSize": 191,
+              "columnKey": "0"
+            }
+          ],
+          "propertyColumns": [],
+          "pageSize": "5",
+          "columnsV4": [
+            {
+              "maxValue": 100,
+              "index": 0,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "CPUUtilization",
+              "displayType": "percent",
+              "minValue": 0,
+              "unitLabel": "",
+              "position": 0,
+              "id": "undefined_0",
+              "colorThresholds": [
+                {
+                  "level": 2,
+                  "threshold": 80,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 95,
+                  "relation": ">"
+                }
+              ],
+              "columnName": "CPU Utilization"
+            }
+          ]
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "CPUUtilization",
+            "displayType": "percent",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 80,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 95,
+                "relation": ">"
+              }
+            ],
+            "columnName": "CPU Utilization",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "ARIMA"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": 25,
+        "dataSourceFullName": "RDS (AWS_RDS)",
+        "sortOrder": "descending",
+        "name": "RDS Instance CPU Utilization",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "ackChecked": true,
+        "displaySettings": {
+          "showTypeIcon": true,
+          "displayAs": "table"
+        },
+        "displayWarnAlert": false,
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "noc",
+        "version": 2,
+        "displayErrorAlert": true,
+        "isSupportCustomProperty": false,
+        "displayColumn": 4,
+        "name": "RDS Instances",
+        "displayCriticalAlert": true,
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "sortBy": "name",
+        "timescale": "day",
+        "sdtChecked": true,
+        "items": [
+          {
+            "dataPointName": "*",
+            "instanceName": "*",
+            "name": "##RESOURCENAME##",
+            "dataSourceDisplayName": "*",
+            "groupBy": "device",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##/DB Instances*",
+            "deviceDisplayName": "*"
+          }
+        ]
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 15,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by Available Storage Space (Trend)",
+        "description": "",
+        "theme": "newBorderDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "FreeStorageSpace",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##DATASOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "FreeStorageSpace",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "",
+          "aggregate": false,
+          "desc": false,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 15,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by BinLog Disk Usage (Trend)",
+        "description": "",
+        "theme": "newBorderDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "BinLogDiskUsage",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "BinLogDiskUsage",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "connections",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 15,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by Database Connections (Trend)",
+        "description": "",
+        "theme": "newBorderDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "DatabaseConnections",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "DatabaseConnections",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "connections",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 8,
+        "row": 4,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by Disk Queue (Trend)",
+        "description": "",
+        "theme": "newBorderDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "DiskQueueDepth",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "DiskQueueDepth",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "operations",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by Free Memory (Trend)",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "FreeableMemory",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "FreeableMemory",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "bytes",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1024,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by Received Network Throughput (Trend)",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "NetworkReceivebps",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "NetworkReceivebps",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "bits per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top RDS Instances by Transmitted Network Throughput (Trend)",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "NetworkTransmitbps",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "RDS (AWS_RDS)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "NetworkTransmitbps",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "bits per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "2days",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 23,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Buffer Cache Hit Ratio (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "BufferCacheHitRatio",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "BufferCacheHitRatio",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "ratio",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 19,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Deadlocks (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Deadlocks",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "Deadlocks",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 19,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Full Table Scans (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "FullScans",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "FullScans",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 19,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Index Searches (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "IndexSearches",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "IndexSearches",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 23,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Latch Wait Time (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "LatchWaitTime",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "LatchWaitTime",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "ms",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 23,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Lock Timeouts (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "LockTimeouts",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "LockTimeouts",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 27,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Lock Wait Time (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "LockWaitTime",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "LockWaitTime",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "ms",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 11,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top SQL Servers by SQL Transactions (Trend)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Transactions",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##RESOURCENAME##_##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Transactions",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "per second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 4,
+        "sizey": 3
+      },
+      "config": {
+        "ackChecked": true,
+        "displaySettings": {
+          "showTypeIcon": false,
+          "displayAs": "table"
+        },
+        "displayWarnAlert": false,
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "noc",
+        "version": 2,
+        "displayErrorAlert": true,
+        "isSupportCustomProperty": false,
+        "displayColumn": 2,
+        "name": "SQL Database Health",
+        "displayCriticalAlert": true,
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "sortBy": "alertSeverity",
+        "timescale": "day",
+        "sdtChecked": true,
+        "items": [
+          {
+            "dataPointName": "*",
+            "instanceName": "*",
+            "name": "##INSTANCE## - ##RESOURCENAME##",
+            "dataSourceDisplayName": "SQL Server Databases",
+            "groupBy": "instance",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "##defaultResourceName##"
+          }
+        ]
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 8,
+        "row": 11,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 232,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Connections\n            \n        ",
+              "columnSize": 115,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Batch Requests\n            \n        ",
+              "columnSize": 117,
+              "columnKey": "1"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Deadlocks\n            \n        ",
+              "columnSize": 100,
+              "columnKey": "2"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Full Scans\n            \n        ",
+              "columnSize": 91,
+              "columnKey": "3"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Index Searches\n            \n        ",
+              "columnSize": 102,
+              "columnKey": "4"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Page Life Expectancy\n            \n        ",
+              "columnSize": 150,
+              "columnKey": "5"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Work Files\n            \n        ",
+              "columnSize": 83,
+              "columnKey": "6"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Work Tables\n            \n        ",
+              "columnSize": 132,
+              "columnKey": "7"
+            }
+          ],
+          "pageSize": "10"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "Connections",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " connections",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Connections",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "BatchReq",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " requests",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Batch Requests",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Deadlocks",
+            "displayType": "colorBar",
+            "minValue": -2,
+            "unitLabel": " deadlocks",
+            "maxValue": -1,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Deadlocks",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "FullScans",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " scans",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Full Scans",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "IndexSearches",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " searches",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Index Searches",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "PageLifeExpectancy",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " seconds",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Page Life Expectancy",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "WorkFiles",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " files",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Work Files",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "WorkTables",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " tables",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Work Tables",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": 10,
+        "dataSourceFullName": "SQL Server Global Performance (Microsoft_SQLServer_GlobalPerformance)",
+        "sortOrder": "descending",
+        "name": "SQL Server Global Statistics",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 27,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top 10 SQL Backup Age",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "databaselastBackupAge",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Backup Age (Microsoft_SQLServer_BackupAge)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##_Full",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "Full",
+              "aggregateFunction": "AVERAGE",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "differentialLastBackupAge",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Backup Age (Microsoft_SQLServer_BackupAge)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##_Differential",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "Differential",
+              "aggregateFunction": "AVERAGE",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "logLastBackupAge",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server Backup Age (Microsoft_SQLServer_BackupAge)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##_Log",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "LogAge",
+              "aggregateFunction": "AVERAGE",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "hours",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 35,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {
+          "propertyColumns": [],
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "Name",
+              "columnSize": 300,
+              "columnKey": "name"
+            },
+            {
+              "visible": true,
+              "columnLabel": "failed_login",
+              "columnSize": 150,
+              "columnKey": "failed_login"
+            }
+          ],
+          "pageSize": "25",
+          "columnsV4": [
+            {
+              "rpn": "",
+              "dataPointName": "failed_login",
+              "displayType": "raw",
+              "unitLabel": "",
+              "index": 0,
+              "id": "Failed logins_0",
+              "position": 0,
+              "colorThresholds": [],
+              "propertiesOptions": "1",
+              "columnName": "Failed logins",
+              "enableForecast": false,
+              "roundingDecimal": 0
+            },
+            {
+              "maxValue": 10,
+              "index": 1,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 0,
+              "rpn": "",
+              "dataPointName": "errors_severity_19to21",
+              "displayType": "colorBar",
+              "minValue": 0,
+              "unitLabel": "",
+              "id": "undefined_1",
+              "position": 1,
+              "colorThresholds": [
+                {
+                  "level": 4,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 0,
+                  "relation": ">"
+                },
+                {
+                  "level": 2,
+                  "threshold": 0,
+                  "relation": "<"
+                }
+              ],
+              "columnName": "Severity 19-21"
+            },
+            {
+              "maxValue": 10,
+              "index": 2,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 0,
+              "rpn": "",
+              "dataPointName": "errors_severity_22to25",
+              "displayType": "colorBar",
+              "minValue": 0,
+              "unitLabel": "",
+              "id": "undefined_2",
+              "position": 2,
+              "colorThresholds": [
+                {
+                  "level": 4,
+                  "threshold": 0,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 0,
+                  "relation": "<"
+                },
+                {
+                  "level": 2,
+                  "threshold": 0,
+                  "relation": "<"
+                }
+              ],
+              "columnName": "Severity 22-25"
+            },
+            {
+              "rpn": "",
+              "dataPointName": "error_9002",
+              "displayType": "raw",
+              "unitLabel": "",
+              "index": 3,
+              "id": "Error 9002_3",
+              "position": 3,
+              "colorThresholds": [],
+              "propertiesOptions": "1",
+              "columnName": "Error 9002",
+              "enableForecast": false,
+              "roundingDecimal": 0
+            },
+            {
+              "rpn": "",
+              "dataPointName": "error_40552",
+              "displayType": "raw",
+              "unitLabel": "",
+              "index": 4,
+              "id": "Error 40552_4",
+              "position": 4,
+              "colorThresholds": [],
+              "propertiesOptions": "1",
+              "columnName": "Error 40552",
+              "enableForecast": false,
+              "roundingDecimal": 0
+            }
+          ]
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "failed_login",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Failed logins",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          },
+          {
+            "rpn": "",
+            "dataPointName": "errors_severity_19to21",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 10,
+            "colorThresholds": [
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": "<"
+              }
+            ],
+            "columnName": "Severity 19-21",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          },
+          {
+            "rpn": "",
+            "dataPointName": "errors_severity_22to25",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 10,
+            "colorThresholds": [
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": "<"
+              },
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": "<"
+              }
+            ],
+            "columnName": "Severity 22-25",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          },
+          {
+            "rpn": "",
+            "dataPointName": "error_9002",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Error 9002",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          },
+          {
+            "rpn": "",
+            "dataPointName": "error_40552",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Error 40552",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "ARIMA"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": 10,
+        "dataSourceFullName": "SQL Server System Event Counters (NTT_MSSQL_SystemEventCounters)",
+        "sortOrder": "descending",
+        "name": "SQL System Events (Real-time)",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 27,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Failed Logins",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "failed_login",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "SQL Server System Event Counters (NTT_MSSQL_SystemEventCounters)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "",
+                "type": "line",
+                "option": "default"
+              },
+              "name": "FailedLogin",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "",
+          "aggregate": true,
+          "desc": false,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 31,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {
+          "propertyColumns": [],
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "Name",
+              "columnSize": 293,
+              "columnKey": "name"
+            },
+            {
+              "visible": true,
+              "columnLabel": "PriorityScore",
+              "columnSize": 61,
+              "columnKey": "PriorityScore"
+            },
+            {
+              "visible": true,
+              "columnLabel": "avg_fragmentation_in_percent",
+              "columnSize": 172,
+              "columnKey": "avg_fragmentation_in_percent"
+            },
+            {
+              "visible": true,
+              "columnLabel": "page_count",
+              "columnSize": 179,
+              "columnKey": "page_count"
+            },
+            {
+              "visible": true,
+              "columnLabel": "stats_age_days",
+              "columnSize": 150,
+              "columnKey": "stats_age_days"
+            }
+          ],
+          "pageSize": "25",
+          "columnsV4": [
+            {
+              "maxValue": 100,
+              "index": 0,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 0,
+              "rpn": "",
+              "dataPointName": "PriorityScore",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": "",
+              "id": "PriorityScore_0",
+              "position": 0,
+              "colorThresholds": [],
+              "columnName": "PriorityScore"
+            },
+            {
+              "maxValue": 100,
+              "index": 1,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "rpn": "",
+              "dataPointName": "avg_fragmentation_in_percent",
+              "minValue": 0,
+              "displayType": "percent",
+              "unitLabel": "",
+              "id": "undefined_1",
+              "position": 1,
+              "colorThresholds": [
+                {
+                  "level": 4,
+                  "threshold": 0,
+                  "relation": "<"
+                },
+                {
+                  "level": 3,
+                  "threshold": 90,
+                  "relation": ">"
+                },
+                {
+                  "level": 2,
+                  "threshold": 30,
+                  "relation": ">"
+                }
+              ],
+              "columnName": "avg_fragmentation_in_percent"
+            },
+            {
+              "maxValue": 10000,
+              "index": 2,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "rpn": "",
+              "dataPointName": "page_count",
+              "minValue": 0,
+              "displayType": "colorBar",
+              "unitLabel": "",
+              "id": "undefined_2",
+              "position": 2,
+              "colorThresholds": [
+                {
+                  "level": 4,
+                  "threshold": 0,
+                  "relation": "<"
+                },
+                {
+                  "level": 3,
+                  "threshold": 0,
+                  "relation": "<"
+                },
+                {
+                  "level": 2,
+                  "threshold": 1000,
+                  "relation": ">"
+                }
+              ],
+              "columnName": "page_count"
+            },
+            {
+              "maxValue": 100,
+              "index": 3,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "rpn": "",
+              "dataPointName": "stats_age_days",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": " day(s)",
+              "id": "undefined_3",
+              "position": 3,
+              "colorThresholds": [],
+              "columnName": "stats_age_days"
+            }
+          ]
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "PriorityScore",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "PriorityScore",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          },
+          {
+            "rpn": "",
+            "dataPointName": "avg_fragmentation_in_percent",
+            "displayType": "percent",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": "<"
+              },
+              {
+                "level": 3,
+                "threshold": 90,
+                "relation": ">"
+              },
+              {
+                "level": 2,
+                "threshold": 30,
+                "relation": ">"
+              }
+            ],
+            "columnName": "avg_fragmentation_in_percent",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "page_count",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 10000,
+            "colorThresholds": [
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": "<"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": "<"
+              },
+              {
+                "level": 2,
+                "threshold": 1000,
+                "relation": ">"
+              }
+            ],
+            "columnName": "page_count",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "stats_age_days",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " day(s)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "stats_age_days",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "ARIMA"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##INSTANCE## (##RESOURCENAME##)",
+            "deviceDisplayName": "##defaultResourceName##",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": 10,
+        "dataSourceFullName": "SQL Index Fragmentation (NTT_MSSQL_IndexFragmentation)",
+        "sortOrder": "descending",
+        "name": "SQL Index Fragmentation (Real-time)",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 3,
+        "row": 39,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {},
+        "legend": "Space Used",
+        "maxValue": 100,
+        "dataPoint": {
+          "rpn": "",
+          "dataPointName": "percentMaxdataFileSize",
+          "instanceName": "*tempdb*",
+          "dataSourceFullName": "SQL Server Databases Storage (Microsoft_SQLServer_DatabaseStorage)",
+          "dataSeries": "average",
+          "aggregateFunction": "AVERAGE",
+          "deviceGroupFullPath": "##defaultResourceGroup##",
+          "deviceDisplayName": "##defaultResourceName##"
+        },
+        "supportCustomProperty": false,
+        "description": "",
+        "displayUnit": "",
+        "type": "gauge",
+        "version": 2,
+        "minValue": 0,
+        "displayType": 0,
+        "isSupportCustomProperty": false,
+        "peakTimeRange": "30days",
+        "showPeak": false,
+        "name": "Average TEMPDB Size",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "timescale": "1day",
+        "colorThresholds": [
+          {
+            "level": 4,
+            "threshold": 99,
+            "relation": ">"
+          },
+          {
+            "level": 3,
+            "threshold": 90,
+            "relation": ">"
+          },
+          {
+            "level": 2,
+            "threshold": 80,
+            "relation": ">"
+          }
+        ]
+      }
+    },
+    {
+      "position": {
+        "col": 4,
+        "sizex": 5,
+        "row": 39,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {
+          "propertyColumns": [],
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "Name",
+              "columnSize": 243,
+              "columnKey": "name"
+            },
+            {
+              "visible": true,
+              "columnLabel": "percentMaxdataFileSize",
+              "columnSize": 150,
+              "columnKey": "percentMaxdataFileSize"
+            },
+            {
+              "visible": true,
+              "columnLabel": "percentMaxlogFileSize",
+              "columnSize": 150,
+              "columnKey": "percentMaxlogFileSize"
+            }
+          ],
+          "pageSize": "25",
+          "columnsV4": [
+            {
+              "maxValue": 100,
+              "index": 0,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "rpn": "",
+              "dataPointName": "percentMaxdataFileSize",
+              "minValue": 0,
+              "displayType": "percent",
+              "unitLabel": "",
+              "id": "Max data File Size_0",
+              "position": 0,
+              "colorThresholds": [
+                {
+                  "level": 4,
+                  "threshold": 99,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 90,
+                  "relation": ">"
+                },
+                {
+                  "level": 2,
+                  "threshold": 80,
+                  "relation": ">"
+                }
+              ],
+              "columnName": "Max data File Size"
+            },
+            {
+              "maxValue": 100,
+              "index": 1,
+              "propertiesOptions": "1",
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "rpn": "",
+              "dataPointName": "percentMaxlogFileSize",
+              "minValue": 0,
+              "displayType": "percent",
+              "unitLabel": "",
+              "id": "Max log File Size_1",
+              "position": 1,
+              "colorThresholds": [
+                {
+                  "level": 4,
+                  "threshold": 99,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 90,
+                  "relation": ">"
+                },
+                {
+                  "level": 2,
+                  "threshold": 80,
+                  "relation": ">"
+                }
+              ],
+              "columnName": "Max log File Size"
+            }
+          ]
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "percentMaxdataFileSize",
+            "displayType": "percent",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 4,
+                "threshold": 99,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 90,
+                "relation": ">"
+              },
+              {
+                "level": 2,
+                "threshold": 80,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Max data File Size",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "percentMaxlogFileSize",
+            "displayType": "percent",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 4,
+                "threshold": 99,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 90,
+                "relation": ">"
+              },
+              {
+                "level": 2,
+                "threshold": 80,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Max log File Size",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "ARIMA"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*tempdb",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "##defaultResourceName##",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": 10,
+        "dataSourceFullName": "SQL Server Databases Storage (Microsoft_SQLServer_DatabaseStorage)",
+        "sortOrder": "descending",
+        "name": "TEMPDB File Size",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "timescale": "day"
+      }
+    }
+  ],
+  "version": 2
+}

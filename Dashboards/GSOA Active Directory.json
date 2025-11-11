@@ -1,0 +1,409 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "ADResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA/GSOA 2/GSOA core/Domain controllers"
+    },
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA/All"
+    },
+    {
+      "name": "defaultResourceName",
+      "value": "nw-dc-*"
+    }
+  ],
+  "name": "GSOA Active Directory",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {
+          "isShowAll": false,
+          "showFilter": false,
+          "columns": [
+            {
+              "visible": false,
+              "columnLabel": "Severity",
+              "columnKey": "alert-severity"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Began",
+              "columnKey": "alert-began"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Resource/Website",
+              "columnKey": "alert-device"
+            },
+            {
+              "visible": true,
+              "columnLabel": "LogicModule",
+              "columnKey": "alert-datasource"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Instance",
+              "columnKey": "alert-datasource-instance"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Datapoint",
+              "columnKey": "alert-datapoint"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Value",
+              "columnKey": "alert-value"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Effective Thresholds",
+              "columnKey": "alert-thresholds"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Group",
+              "columnKey": "alert-group"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Notes",
+              "columnKey": "alert-notes"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged By",
+              "columnKey": "alert-acked-by"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged On",
+              "columnKey": "alert-acked-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Cleared On",
+              "columnKey": "alert-cleared-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "In SDT",
+              "columnKey": "alert-in-sdt"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Alert Rule",
+              "columnKey": "alert-rule-name"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Escalation Chain",
+              "columnKey": "alert-escalation-chain"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Instance Description",
+              "columnKey": "alert-datasource-instance-description"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Full Path",
+              "columnKey": "alert-full-path"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Routing State",
+              "columnKey": "alert-routing-state"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependency Role",
+              "columnKey": "alert-dependency-role"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependent Alerts",
+              "columnKey": "alert-dependent-alerts"
+            }
+          ],
+          "playSound": {},
+          "fontsize": "normal-font",
+          "sort": "-startEpoch"
+        },
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Active Directory Alerts",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "filters": {
+          "severity": "",
+          "sdted": "all",
+          "chain": "",
+          "instance": "",
+          "anomaly": "all",
+          "dataPoint": "",
+          "rule": "",
+          "acked": "all",
+          "dependencyRoutingState": "",
+          "dependencyRole": "",
+          "host": "%23%23defaultResourceName%23%23",
+          "keyword": "",
+          "dataSource": "Active%20Directory,DNS%20Server-",
+          "cleared": "no",
+          "group": "%23%23defaultResourceGroup%23%23*"
+        },
+        "type": "alert",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Domain Controllers",
+              "appliesTo": "hasCategory(\"MicrosoftDomainController\") && join(system.groups,\",\") =~ \"##defaultResourceGroup##\""
+            },
+            {
+              "name": "DHCP Servers",
+              "appliesTo": "hasCategory(\"Windows_DHCP\") && join(system.groups,\",\") =~ \"##defaultResourceGroup##\""
+            },
+            {
+              "name": "DNS Servers",
+              "appliesTo": "hasCategory(\"Windows_DNS\") && join(system.groups,\",\") =~ \"##defaultResourceGroup##\""
+            },
+            {
+              "name": "Domain Members",
+              "appliesTo": "system.domain"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Domain Members",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "Domain Members",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Domain Controllers",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "Domain Controllers",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "DHCP Servers",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "DHCP Servers",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "DNS Servers",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "DNS Servers",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Active Directory Domain Resources",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Domain Controller OS Versions",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "pieChart",
+        "timescale": "day",
+        "pieChartInfo": {
+          "maxSlicesCanBeShown": 25,
+          "virtualDataPoints": [],
+          "showLabelsAndLinesOnPC": true,
+          "counters": [
+            {
+              "name": "windows2003",
+              "appliesTo": "isWindows() && join(system.groups,\",\") =~ \"##defaultResourceGroup##\" && ( system.sysinfo =~ \"2003\" || (system.sysinfo =~ \"5.2\" && system.sysinfo =~ \"3790\") )"
+            },
+            {
+              "name": "windows2008",
+              "appliesTo": "isWindows() && join(system.groups,\",\") =~ \"##defaultResourceGroup##\" && ( system.sysinfo =~ \"2008\" || (system.sysinfo =~ \"5.\" ) )"
+            },
+            {
+              "name": "windows2012",
+              "appliesTo": "isWindows() && join(system.groups,\",\") =~ \"##defaultResourceGroup##\"\n&& (\nsystem.sysinfo =~ \"2012\" || (system.sysinfo =~ \"6.2\" && system.sysinfo =~ \"9200\")\n)"
+            },
+            {
+              "name": "windows2016",
+              "appliesTo": "isWindows() && join(system.groups,\",\") =~ \"##defaultResourceGroup##\"\n&& (\nsystem.sysinfo =~ \"2016\" || (system.sysinfo =~ \"6.2\" && system.sysinfo =~ \"14393\")\n)"
+            },
+            {
+              "name": "windows2019",
+              "appliesTo": "isWindows() && join(system.groups,\",\") =~ \"##defaultResourceGroup##\"\n&& (\nsystem.sysinfo =~ \"2019\"\n)"
+            },
+            {
+              "name": "windows10",
+              "appliesTo": "isWindows() && system.sysinfo =~ \"Windows 10\" && join(system.groups,\",\") =~ \"##defaultResourceGroup##\""
+            },
+            {
+              "name": "windows7",
+              "appliesTo": "isWindows() && system.sysinfo =~ \"Windows 7\" && join(system.groups,\",\") =~ \"##defaultResourceGroup##\""
+            },
+            {
+              "name": "windowsXP",
+              "appliesTo": "isWindows() && system.sysinfo =~ \"Windows XP\" && join(system.groups,\",\") =~ \"##defaultResourceGroup##\""
+            }
+          ],
+          "dataPoints": [],
+          "hideZeroPercentSlices": true,
+          "groupRemainingAsOthers": false,
+          "pieChartItems": [
+            {
+              "dataPointName": "windowsXP",
+              "color": "Auto",
+              "legend": "Windows XP"
+            },
+            {
+              "dataPointName": "windows2019",
+              "color": "Auto",
+              "legend": "Windows Server 2019"
+            },
+            {
+              "dataPointName": "windows2003",
+              "color": "Auto",
+              "legend": "Windows Server 2003"
+            },
+            {
+              "dataPointName": "windows2008",
+              "color": "Auto",
+              "legend": "Windows Server 2008"
+            },
+            {
+              "dataPointName": "windows2012",
+              "color": "Auto",
+              "legend": "Windows Server 2012"
+            },
+            {
+              "dataPointName": "windows2016",
+              "color": "Auto",
+              "legend": "Windows Server 2016"
+            },
+            {
+              "dataPointName": "windows10",
+              "color": "Auto",
+              "legend": "Windows 10"
+            },
+            {
+              "dataPointName": "windows7",
+              "color": "Auto",
+              "legend": "Windows 7"
+            }
+          ],
+          "title": "Domain Controller OS Versions"
+        },
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 5,
+        "sizey": 2
+      },
+      "config": {
+        "ackChecked": true,
+        "displaySettings": {
+          "showTypeIcon": true,
+          "displayAs": "table"
+        },
+        "displayWarnAlert": true,
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "noc",
+        "version": 2,
+        "displayErrorAlert": true,
+        "isSupportCustomProperty": false,
+        "displayColumn": 7,
+        "name": "Active Directory Domain Controller Alert Status",
+        "displayCriticalAlert": true,
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "sortBy": "alertSeverity",
+        "timescale": "day",
+        "sdtChecked": true,
+        "items": [
+          {
+            "dataPointName": "*",
+            "instanceName": "*",
+            "name": "##RESOURCENAME##",
+            "dataSourceDisplayName": "Active Directory-",
+            "groupBy": "device",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "##defaultResourceName##"
+          }
+        ]
+      }
+    }
+  ],
+  "version": 2
+}

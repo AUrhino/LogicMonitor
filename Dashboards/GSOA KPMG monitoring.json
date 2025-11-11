@@ -1,0 +1,739 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [],
+  "name": "GSOA KPMG monitoring",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "AUM1ASR02-Network Interfaces-GigabitEthernet0/0/3 [ID:6] --- WAN Link - Megaport link-Throughput",
+        "description": "This is the KPMG link at the customer side. Has Megaport",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InOctets*8",
+              "display": {
+                "color": "silver",
+                "legend": "Inbound (95th Percentile) : Number of inbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "InBps"
+            },
+            {
+              "rpn": "percent(InBps,95)",
+              "display": {
+                "color": "silver",
+                "legend": "Inbound (95th Percentile) : Number of inbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "In95"
+            },
+            {
+              "rpn": "OutOctets*8",
+              "display": {
+                "color": "green",
+                "legend": "Outbound (95th Percentile) : Number of outbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "OutBps"
+            },
+            {
+              "rpn": "percent(OutBps,95)",
+              "display": {
+                "color": "green",
+                "legend": "Outbound (95th Percentile) : Number of outbound bits/sec.",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Out95"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "GigabitEthernet0/0/3 [ID:6]"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1ASR02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "GigabitEthernet0/0/3 [ID:6]"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1ASR02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 8,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "nw-lm-kpmg-1-Collector Data Collecting Tasks-@default-Top 10 Collection Tasks by Successful Task Execution",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "SuccessRate",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "SuccessRate",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nw-lm-kpmg-1"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "tasks/sec",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 8,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "nw-lm-kpmg-1-Collector Data Collecting Tasks-@default-Top 10 Collection Tasks by Tasks Awaiting Available Thread",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "UnavailableScheduleTaskRate",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "UnavailableScheduleTaskRate",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nw-lm-kpmg-1"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "tasks/sec",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 5,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "nw-lm-kpmg-1-Collector Status-Hosts Monitored",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "HostCount",
+              "instanceName": {
+                "isGlob": false,
+                "value": "LogicMonitor_Collector_GlobalStats"
+              },
+              "dataSourceFullName": "Collector Status (LogicMonitor_Collector_GlobalStats)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "orange",
+                "legend": "Hosts",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "HostCount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nw-lm-kpmg-1"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "count",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "AUM1ASR02-Ping-Ping Round-Trip Time",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "average",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "green",
+                "legend": "Avg. RTT",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "average",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1ASR02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "maxrtt",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "red",
+                "legend": "Max RTT",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "maxrtt",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1ASR02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "minrtt",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "blue",
+                "legend": "Min RTT",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "minrtt",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1ASR02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "milliseconds",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "AUM1ASR02-Ping-Ping Loss Percent",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "PingLossPercent",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "orange",
+                "legend": "Ping Loss Percent",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "PingLossPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1ASR02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 12,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer overveiw",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": "<p>KPMG Connection overview:<br />\nAUM1ASR02&lt;==&gt;megaport&lt;==&gt;NTT</p>"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 8,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "nw-lm-kpmg-1-Collector Data Collecting Tasks-@default-Top 10 Collection Tasks by Queue Depth",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "TasksCountInQueue",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Collector Data Collecting Tasks (LogicMonitor_Collector_DataCollectingTasks)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "TasksCountInQueue",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "nw-lm-kpmg-1"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "count",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {},
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "AUM1N5K02-Ping-Ping Round-Trip Time",
+        "description": "Polls every 3 min - will show ping status",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "average",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "green",
+                "legend": "Avg. RTT",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "average",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1N5K02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "maxrtt",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "red",
+                "legend": "Max RTT",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "maxrtt",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1N5K02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "minrtt",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Ping"
+              },
+              "dataSourceFullName": "Ping",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "blue",
+                "legend": "Min RTT",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "minrtt",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1N5K02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "milliseconds",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {},
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "AUM1N5K02-Cisco CPU-Nexus 5672UP Supervisor in Fixed Module-1 [Index:22]-CPU Busy",
+        "description": "Polls every 3 min - will show snmp status",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "CPU1min",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Nexus 5672UP Supervisor in Fixed Module-1 [Index:22]"
+              },
+              "dataSourceFullName": "Cisco CPU (Cisco_CPU_Usage)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "orange2",
+                "legend": "CPU (1 min)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "CPU1min",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1N5K02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "CPU5min",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Nexus 5672UP Supervisor in Fixed Module-1 [Index:22]"
+              },
+              "dataSourceFullName": "Cisco CPU (Cisco_CPU_Usage)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "green",
+                "legend": "CPU (5 min)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "CPU5min",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "AUM1N5K02"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}

@@ -1,0 +1,145 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal - Shared tier/All devices"
+    }
+  ],
+  "name": "ITO ASA Failover Status",
+  "description": "ASA firewall status walking .1.3.6.1.4.1.9.9.147.1.2.1.1.1.3\nCurrent failover status.\n\nStatus Codes:\n1=Other,\n2=Up,\n3=Down,\n4=Error,\n5=Over-Temperature,\n6=Busy,\n7=No Media,\n8=Backup,\n9=Active,\n10=Standby",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 8
+      },
+      "config": {
+        "ackChecked": true,
+        "displaySettings": {
+          "showTypeIcon": true,
+          "displayAs": "table"
+        },
+        "displayWarnAlert": true,
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "noc",
+        "version": 2,
+        "displayErrorAlert": true,
+        "isSupportCustomProperty": false,
+        "displayColumn": 1,
+        "name": "ASA Failover NOC Status",
+        "displayCriticalAlert": true,
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "sortBy": "alertSeverity",
+        "timescale": "day",
+        "sdtChecked": true,
+        "items": [
+          {
+            "dataPointName": "StatusAlert",
+            "instanceName": "Cisco_ASA_Failover-Primary unit \\(this device\\)",
+            "name": "##RESOURCENAME##",
+            "dataSourceDisplayName": "Cisco ASA Failover",
+            "groupBy": "device",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "*"
+          }
+        ]
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 8,
+        "row": 1,
+        "sizey": 8
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 380,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Status\n            \n        ",
+              "columnSize": 811,
+              "columnKey": "0"
+            }
+          ],
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "Status",
+            "displayType": "colorBar",
+            "minValue": -10000,
+            "unitLabel": "  (9:Active/10:Standby)",
+            "maxValue": 10,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 9,
+                "relation": "!="
+              },
+              {
+                "level": 3,
+                "threshold": 9,
+                "relation": "!="
+              },
+              {
+                "level": 4,
+                "threshold": 9,
+                "relation": "!="
+              }
+            ],
+            "columnName": "Status",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "Current failover status codes:\n        1=Other,\n        2=Up,\n        3=Down,\n        4=Error,\n        5=Over-Temperature,\n        6=Busy,\n        7=No Media,\n        8=Backup,\n        9=Active,\n        10=Standby",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "Cisco_ASA_Failover-Primary unit (this device)",
+            "label": "##RESOURCENAME##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Cisco ASA Failover (Cisco_ASA_Failover)",
+        "sortOrder": "descending",
+        "name": "ASA Failover Status",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    }
+  ],
+  "version": 2
+}

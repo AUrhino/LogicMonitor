@@ -1,0 +1,375 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA/All"
+    },
+    {
+      "name": "defaultResourceName",
+      "value": "*"
+    }
+  ],
+  "name": "GSOA Minimal Monitoring",
+  "description": "Devices that have ended up in 'Minimal Monitoring' dynamic group\nDisplays devices not properly identified (typically due to incorrect SNMP community strings, WMI credentials, etc).\nie. system.sysinfo==\"\" && system.sysoid==\"\" && isDevice()",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 456,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Ping Loss\n            \n        ",
+              "columnSize": 128,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Minimum RTT\n            \n        ",
+              "columnSize": 111,
+              "columnKey": "1"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Average RTT\n            \n        ",
+              "columnSize": 115,
+              "columnKey": "2"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Maximum RTT\n            \n        ",
+              "columnSize": 114,
+              "columnKey": "3"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Sent\n            \n        ",
+              "columnSize": 113,
+              "columnKey": "4"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Received\n            \n        ",
+              "columnSize": 167,
+              "columnKey": "5"
+            }
+          ],
+          "propertyColumns": [],
+          "pageSize": "20",
+          "columnsV4": [
+            {
+              "maxValue": 100,
+              "index": 0,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "PingLossPercent",
+              "displayType": "percent",
+              "minValue": 0,
+              "unitLabel": "",
+              "position": 0,
+              "id": "undefined_0",
+              "colorThresholds": [
+                {
+                  "level": 2,
+                  "threshold": 20,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 70,
+                  "relation": ">"
+                },
+                {
+                  "level": 4,
+                  "threshold": 90,
+                  "relation": ">"
+                }
+              ],
+              "columnName": "Ping Loss"
+            },
+            {
+              "maxValue": 100,
+              "index": 1,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "minrtt",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": " ms.",
+              "position": 1,
+              "id": "undefined_1",
+              "colorThresholds": [],
+              "columnName": "Minimum RTT"
+            },
+            {
+              "maxValue": 100,
+              "index": 2,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "average",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": " ms.",
+              "position": 2,
+              "id": "undefined_2",
+              "colorThresholds": [],
+              "columnName": "Average RTT"
+            },
+            {
+              "maxValue": 100,
+              "index": 3,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "maxrtt",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": " ms.",
+              "position": 3,
+              "id": "undefined_3",
+              "colorThresholds": [],
+              "columnName": "Maximum RTT"
+            },
+            {
+              "maxValue": 100,
+              "index": 4,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "sentpkts",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": " packets",
+              "position": 4,
+              "id": "undefined_4",
+              "colorThresholds": [],
+              "columnName": "Sent"
+            },
+            {
+              "maxValue": 100,
+              "index": 5,
+              "enableForecast": false,
+              "roundingDecimal": 2,
+              "propertiesOptions": "1",
+              "rpn": "",
+              "dataPointName": "recvdpkts",
+              "displayType": "raw",
+              "minValue": 0,
+              "unitLabel": " packets",
+              "position": 5,
+              "id": "undefined_5",
+              "colorThresholds": [],
+              "columnName": "Received"
+            }
+          ]
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "PingLossPercent",
+            "displayType": "percent",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 20,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 70,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 90,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Ping Loss",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "minrtt",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " ms.",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Minimum RTT",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "average",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " ms.",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Average RTT",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "maxrtt",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " ms.",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Maximum RTT",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "sentpkts",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " packets",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Sent",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "recvdpkts",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": " packets",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Received",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "ARIMA"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##",
+            "deviceDisplayName": "##defaultResourceName##",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Ping",
+        "sortOrder": "descending",
+        "name": "Resources in Minimal Monitoring",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 4,
+        "sizey": 3
+      },
+      "config": {
+        "ackChecked": true,
+        "displaySettings": {
+          "showTypeIcon": true,
+          "displayAs": "list"
+        },
+        "displayWarnAlert": true,
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "noc",
+        "version": 2,
+        "displayErrorAlert": true,
+        "isSupportCustomProperty": false,
+        "displayColumn": 1,
+        "name": "Resources in Minimal Monitoring",
+        "displayCriticalAlert": true,
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "sortBy": "alertSeverity",
+        "timescale": "day",
+        "sdtChecked": true,
+        "items": [
+          {
+            "dataPointName": "*",
+            "instanceName": "*",
+            "name": "##RESOURCENAME##",
+            "dataSourceDisplayName": "*",
+            "groupBy": "device",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "##defaultResourceName##"
+          }
+        ]
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 7,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "What's \"Minimal Monitoring\"",
+        "description": "",
+        "theme": "newBorderDarkBlue",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": "<p><span style=\"font-size:16.8px;\">&quot;Minimal Monitoring&quot; is a Dynamic Group (provisioned in new LogicMonitor accounts) that automatically populates with devices that LogicMonitor can&#39;t communicate with - ie missing credentials, a firewall is blocking something, etc.</span></p>"
+      }
+    }
+  ],
+  "version": 2
+}

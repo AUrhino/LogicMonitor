@@ -1,0 +1,676 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-ICT/SDWAN/WHSmith"
+    }
+  ],
+  "name": "_Template_SDWAN_Dashboard",
+  "description": "Once cloned - define tokens:\n\n##defaultResourceGroup## - the path to the location of the resource group - for monitored SDWAN vManage device",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 6,
+        "sizex": 7,
+        "row": 10,
+        "sizey": 6
+      },
+      "config": {
+        "displaySettings": {
+          "isShowAll": false,
+          "showFilter": false,
+          "columns": [
+            {
+              "visible": false,
+              "columnLabel": "Severity",
+              "columnKey": "alert-severity"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Began",
+              "columnSize": 142,
+              "columnKey": "alert-began"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Resource/Website",
+              "columnKey": "alert-device"
+            },
+            {
+              "visible": true,
+              "columnLabel": "LogicModule",
+              "columnSize": 87,
+              "columnKey": "alert-datasource"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Instance",
+              "columnSize": 199,
+              "columnKey": "alert-datasource-instance"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Datapoint",
+              "columnSize": 87,
+              "columnKey": "alert-datapoint"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Value",
+              "columnSize": 56,
+              "columnKey": "alert-value"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Effective Thresholds",
+              "columnSize": 139,
+              "columnKey": "alert-thresholds"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Group",
+              "columnKey": "alert-group"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Notes",
+              "columnKey": "alert-notes"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged By",
+              "columnKey": "alert-acked-by"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged On",
+              "columnKey": "alert-acked-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Cleared On",
+              "columnKey": "alert-cleared-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "In SDT",
+              "columnKey": "alert-in-sdt"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Alert Rule",
+              "columnKey": "alert-rule-name"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Escalation Chain",
+              "columnKey": "alert-escalation-chain"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Instance Description",
+              "columnKey": "alert-datasource-instance-description"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Full Path",
+              "columnKey": "alert-full-path"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Routing State",
+              "columnKey": "alert-routing-state"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependency Role",
+              "columnKey": "alert-dependency-role"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependent Alerts",
+              "columnKey": "alert-dependent-alerts"
+            }
+          ],
+          "playSound": {
+            "criticalAlertAudioFileName": "",
+            "errorAlertAudioFileName": "",
+            "warningAlertAudioFileName": "",
+            "shouldPlay": false
+          },
+          "fontsize": "normal-font",
+          "sort": "monitorObjectName"
+        },
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "All Alerts (##defaultResourceGroup##)",
+        "description": "",
+        "theme": "newSolidGray",
+        "interval": 1,
+        "filters": {
+          "severity": "",
+          "sdted": "all",
+          "chain": "",
+          "instance": "",
+          "anomaly": "all",
+          "dataPoint": "",
+          "rule": "",
+          "acked": "all",
+          "dependencyRoutingState": "",
+          "dependencyRole": "",
+          "host": "",
+          "keyword": "",
+          "dataSource": "",
+          "cleared": "all",
+          "group": "%23%23defaultResourceGroup%23%23*"
+        },
+        "type": "alert",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 4,
+        "sizey": 6
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 225,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            latency\n            \n        ",
+              "columnSize": 83,
+              "columnKey": "0"
+            }
+          ],
+          "pageSize": "10"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "mean_latency",
+            "displayType": "colorBar",
+            "minValue": 1,
+            "unitLabel": "ms",
+            "maxValue": 10000,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 100,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 150,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 200,
+                "relation": ">"
+              }
+            ],
+            "columnName": "latency",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Decommissioned Tunnels Info",
+        "sortOrder": "descending",
+        "name": "Latency: Top10 (Real Time)",
+        "theme": "newBorderGray",
+        "interval": 1,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 4,
+        "sizey": 6
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 310,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            loss\n            \n        ",
+              "columnSize": 109,
+              "columnKey": "0"
+            }
+          ],
+          "pageSize": "10"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "loss",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "%",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 2,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 5,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 10,
+                "relation": ">"
+              }
+            ],
+            "columnName": "loss",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Decommissioned Tunnels Info",
+        "sortOrder": "descending",
+        "name": "Packet Loss: Top10 (Real Time)",
+        "theme": "newBorderGray",
+        "interval": 1,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 5,
+        "row": 10,
+        "sizey": 6
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 363,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            RSSI\n            \n        ",
+              "columnSize": 82,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            SNR\n            \n        ",
+              "columnSize": 85,
+              "columnKey": "1"
+            }
+          ],
+          "pageSize": "10"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "rssi",
+            "displayType": "colorBar",
+            "minValue": -120,
+            "unitLabel": "",
+            "maxValue": -50,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": -70,
+                "relation": "<"
+              },
+              {
+                "level": 3,
+                "threshold": -86,
+                "relation": "<"
+              },
+              {
+                "level": 4,
+                "threshold": -100,
+                "relation": "<"
+              }
+            ],
+            "columnName": "RSSI",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          },
+          {
+            "rpn": "",
+            "dataPointName": "snr",
+            "displayType": "colorBar",
+            "minValue": -10,
+            "unitLabel": "",
+            "maxValue": 50,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 12.5,
+                "relation": "<="
+              },
+              {
+                "level": 3,
+                "threshold": 10,
+                "relation": "<="
+              },
+              {
+                "level": 4,
+                "threshold": 7,
+                "relation": "<"
+              }
+            ],
+            "columnName": "SNR",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Cellular Signal Info",
+        "sortOrder": "descending",
+        "name": "The worst cellular signal chart: Top10 (Real Time)",
+        "theme": "newBorderGray",
+        "interval": 1,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 4,
+        "sizex": 5,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "status",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "status",
+            "enableForecast": false,
+            "roundingDecimal": 0
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Cisco vManage: Unreachable Devices (NTT_Cisco_vManage_Unreachable_Device_List)",
+        "sortOrder": "descending",
+        "name": "Unreachable vEdges",
+        "theme": "newBorderGray",
+        "interval": 1,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 3,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "vedgeTotalCount - vedgeReachableCount",
+              "name": "Unreachable"
+            }
+          ],
+          "counters": [],
+          "dataPoints": [
+            {
+              "dataPointName": null,
+              "instanceName": "*",
+              "dataSourceFullName": null,
+              "name": "vedgeTotalCount",
+              "aggregateFunction": "AVERAGE",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": null,
+              "instanceName": "*",
+              "dataSourceFullName": null,
+              "name": "vedgeReachableCount",
+              "aggregateFunction": "AVERAGE",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            }
+          ],
+          "bigNumberItems": [
+            {
+              "dataPointName": "vedgeTotalCount",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "Total",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "vedgeReachableCount",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "Reachable",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Unreachable",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "Unreachable",
+              "colorThresholds": [
+                {
+                  "level": 2,
+                  "threshold": 0,
+                  "relation": ">"
+                },
+                {
+                  "level": 3,
+                  "threshold": 0,
+                  "relation": ">"
+                },
+                {
+                  "level": 4,
+                  "threshold": 0,
+                  "relation": ">"
+                }
+              ],
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "vEdges reachability",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 10,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 3
+      },
+      "config": {
+        "ackChecked": true,
+        "displaySettings": {
+          "showTypeIcon": true,
+          "displayAs": "table"
+        },
+        "displayWarnAlert": true,
+        "supportCustomProperty": false,
+        "description": "",
+        "type": "noc",
+        "version": 2,
+        "displayErrorAlert": true,
+        "isSupportCustomProperty": false,
+        "displayColumn": 1,
+        "name": "vManager availability",
+        "displayCriticalAlert": true,
+        "theme": "newSolidGray",
+        "interval": 1,
+        "sortBy": "alertSeverity",
+        "timescale": "day",
+        "sdtChecked": true,
+        "items": [
+          {
+            "dataPointName": "Days",
+            "instanceName": "SSLCerts-443",
+            "name": "SSL Certificate Expire",
+            "dataSourceDisplayName": "SSL Certificate Expiration",
+            "groupBy": "deviceGroup",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "*"
+          },
+          {
+            "dataPointName": "PingLossPercent",
+            "instanceName": "*",
+            "name": "Ping availability",
+            "dataSourceDisplayName": "Ping",
+            "groupBy": "deviceGroup",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "*"
+          },
+          {
+            "dataPointName": "Status",
+            "instanceName": "HTTPS-443",
+            "name": "HTTPS check",
+            "dataSourceDisplayName": "HTTPS-",
+            "groupBy": "deviceGroup",
+            "type": "device",
+            "deviceGroupFullPath": "##defaultResourceGroup##",
+            "deviceDisplayName": "*"
+          }
+        ]
+      }
+    }
+  ],
+  "version": 2
+}

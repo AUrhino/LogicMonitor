@@ -1,0 +1,981 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA/All"
+    }
+  ],
+  "name": "Cisco IOS Device Config Backup - GSOA",
+  "description": "Uses Common Config Backup sources\nCisco IOS Device Config Backup - GSOA",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 9
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 228,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            status\n            \n        ",
+              "columnSize": 312,
+              "columnKey": "0"
+            }
+          ],
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "status",
+            "displayType": "colorBar",
+            "minValue": -100000,
+            "unitLabel": "   (0=Success)",
+            "maxValue": 100,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              }
+            ],
+            "columnName": "status",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "*",
+            "label": "##RESOURCENAME##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "SSH status (SSHJ) (NTT_SSH_Check_New)",
+        "sortOrder": "descending",
+        "name": "Config Faults due to SSH Not Working",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 6,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "Iventory_Result+ Running_Config_Result+ Startup_config_Result+ Version_Result",
+              "name": "Total_Failed_Configs"
+            }
+          ],
+          "counters": [],
+          "dataPoints": [
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show inventory",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Iventory_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show running-config",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Running_Config_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show startup-config",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Startup_config_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show version",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Version_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            }
+          ],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Failed_Configs",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "Covers Version, Inventory, Startup and Running Config",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Devices with Failed Config Instances",
+        "description": "",
+        "theme": "solidPurple",
+        "interval": 3,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 6,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "Inventory_Result+ Running_Config_Result+ Startup_config_Result+ Version_Result",
+              "name": "Total_Failed_Configs"
+            }
+          ],
+          "counters": [],
+          "dataPoints": [
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show inventory",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Inventory_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show running-config",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Running_Config_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show startup-config",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Startup_config_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            },
+            {
+              "dataPointName": "Result",
+              "instanceName": "LogicMonitor_ConfigSource_Metrics-show version",
+              "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+              "name": "Version_Result",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            }
+          ],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Running_Config_Result",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "Failed Running Config Count",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Startup_config_Result",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "Failed Startup Config Count",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Version_Result",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "Failed Version Config Count",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Inventory_Result",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "Failed Inventory Config Count",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Failed Config Instance Count",
+        "description": "",
+        "theme": "solidPurple",
+        "interval": 3,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 26,
+        "sizey": 8
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 455,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            StatAge\n            \n        ",
+              "columnSize": 172,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Duration\n            \n        ",
+              "columnSize": 148,
+              "columnKey": "1"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Size\n            \n        ",
+              "columnSize": 140,
+              "columnKey": "2"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)\n            \n        ",
+              "columnSize": 357,
+              "columnKey": "3"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Result\n            \n        ",
+              "columnSize": 863,
+              "columnKey": "4"
+            }
+          ],
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "StatAge",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "   (mins)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "StatAge",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Duration",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "  (ms)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Duration",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Size",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "   (Bytes)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Size",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Type",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Result",
+            "displayType": "colorBar",
+            "minValue": -10000,
+            "unitLabel": "",
+            "maxValue": 1,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Result",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "LogicMonitor_ConfigSource_Metrics-show inventory",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+        "sortOrder": "descending",
+        "name": "Inventory Details Backup",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 18,
+        "sizey": 8
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 455,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            StatAge\n            \n        ",
+              "columnSize": 172,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Duration\n            \n        ",
+              "columnSize": 148,
+              "columnKey": "1"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Size\n            \n        ",
+              "columnSize": 140,
+              "columnKey": "2"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)\n            \n        ",
+              "columnSize": 357,
+              "columnKey": "3"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Result\n            \n        ",
+              "columnSize": 863,
+              "columnKey": "4"
+            }
+          ],
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "StatAge",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "   (mins)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "StatAge",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Duration",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "  (ms)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Duration",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Size",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "   (Bytes)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Size",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Type",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Result",
+            "displayType": "colorBar",
+            "minValue": -10000,
+            "unitLabel": "",
+            "maxValue": 1,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Result",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "This table shows the current age of backup for each device for Running Config for the device",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "LogicMonitor_ConfigSource_Metrics-show running-config",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+        "sortOrder": "descending",
+        "name": "Running Config Backup Stat",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 10,
+        "sizey": 8
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 455,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            StatAge\n            \n        ",
+              "columnSize": 172,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Duration\n            \n        ",
+              "columnSize": 148,
+              "columnKey": "1"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Size\n            \n        ",
+              "columnSize": 140,
+              "columnKey": "2"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)\n            \n        ",
+              "columnSize": 357,
+              "columnKey": "3"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Result\n            \n        ",
+              "columnSize": 863,
+              "columnKey": "4"
+            }
+          ],
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "StatAge",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "   (mins)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "StatAge",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Duration",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "  (ms)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Duration",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Size",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "   (Bytes)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Size",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Type",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Result",
+            "displayType": "colorBar",
+            "minValue": -10000,
+            "unitLabel": "",
+            "maxValue": 1,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Result",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "This table shows the current age of backup for each device for Start Config for the device",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "LogicMonitor_ConfigSource_Metrics-show startup-config",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+        "sortOrder": "descending",
+        "name": "Start Config Backup Stat",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 8,
+        "row": 1,
+        "sizey": 5
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Device_Count",
+              "appliesTo": "join(system.groups,\",\") =~ \"NTT-AU/Price Waterhouse Coopers/Config Backup/Cisco IOS\""
+            },
+            {
+              "name": "Total_devices_with_ssh_faults",
+              "appliesTo": "join(system.groups,\",\") =~ \"##defaultResourceGroup##\" and auto.config.type.exec != \"1\""
+            },
+            {
+              "name": "Total_devices_with_config_not_configured",
+              "appliesTo": "join(system.groups,\",\") =~ \"##defaultResourceGroup##\" and auto.config.port && (!auto.config.type.exec && !auto.config.type.interactive)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Device_Count",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "Total Device Count",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Total_devices_with_ssh_faults",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "Device Count with Config Issues due to SSH Faults",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Total_devices_with_config_not_configured",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "Total Devices with No Config Configured",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Total Devices Breakdown",
+        "description": "",
+        "theme": "solidPurple",
+        "interval": 3,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 34,
+        "sizey": 8
+      },
+      "config": {
+        "displaySettings": {
+          "columns": [
+            {
+              "visible": true,
+              "columnLabel": "\n        Name\n        \n    ",
+              "columnSize": 455,
+              "columnKey": "device-name-1452842526600"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            StatAge\n            \n        ",
+              "columnSize": 172,
+              "columnKey": "0"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Duration\n            \n        ",
+              "columnSize": 148,
+              "columnKey": "1"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Size\n            \n        ",
+              "columnSize": 140,
+              "columnKey": "2"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)\n            \n        ",
+              "columnSize": 357,
+              "columnKey": "3"
+            },
+            {
+              "visible": true,
+              "columnLabel": "\n            Result\n            \n        ",
+              "columnSize": 863,
+              "columnKey": "4"
+            }
+          ],
+          "pageSize": "25"
+        },
+        "columns": [
+          {
+            "rpn": "",
+            "dataPointName": "StatAge",
+            "displayType": "colorBar",
+            "minValue": 0,
+            "unitLabel": "   (mins)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "StatAge",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Duration",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "  (ms)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Duration",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Size",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "   (Bytes)",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Size",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Type",
+            "displayType": "raw",
+            "minValue": 0,
+            "unitLabel": "",
+            "maxValue": 100,
+            "colorThresholds": [],
+            "columnName": "Type (0=SFTP, 1=SCP, 2=EXEC, 3=TELNET, 4=INTERACTIVE)",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          },
+          {
+            "rpn": "",
+            "dataPointName": "Result",
+            "displayType": "colorBar",
+            "minValue": -10000,
+            "unitLabel": "",
+            "maxValue": 1,
+            "colorThresholds": [
+              {
+                "level": 2,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 3,
+                "threshold": 0,
+                "relation": ">"
+              },
+              {
+                "level": 4,
+                "threshold": 0,
+                "relation": ">"
+              }
+            ],
+            "columnName": "Result",
+            "enableForecast": false,
+            "roundingDecimal": 2
+          }
+        ],
+        "supportCustomProperty": false,
+        "description": "",
+        "forecast": {
+          "severity": "warn",
+          "confidence": 70,
+          "timeRange": "Last 30 days",
+          "algorithm": "Linear"
+        },
+        "type": "dynamicTable",
+        "rows": [
+          {
+            "instanceName": "LogicMonitor_ConfigSource_Metrics-show version",
+            "label": "##RESOURCENAME##_##INSTANCE##",
+            "deviceDisplayName": "*",
+            "groupFullPath": "##defaultResourceGroup##"
+          }
+        ],
+        "version": 2,
+        "isSupportCustomProperty": false,
+        "topX": -1,
+        "dataSourceFullName": "Config Metrics (LogicMonitor_ConfigSource_Metrics)",
+        "sortOrder": "descending",
+        "name": "Version Details Backup",
+        "theme": "newSolidDarkBlue",
+        "interval": 3,
+        "timescale": "day"
+      }
+    }
+  ],
+  "version": 2
+}

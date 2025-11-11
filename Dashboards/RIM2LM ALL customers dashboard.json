@@ -1,0 +1,3095 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [],
+  "name": "RIM2LM ALL customers dashboard",
+  "description": "RIM2LM Dashboard",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total Devices",
+              "appliesTo": "ntt.company==\"AU-ANTARES\""
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "ntt.company==\"AU-ANTARES\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "ntt.company==\"AU-ANTARES\" && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [
+            {
+              "dataPointName": "average",
+              "instanceName": "*",
+              "dataSourceFullName": "Ping",
+              "name": "average",
+              "aggregateFunction": "SUM",
+              "deviceGroupFullPath": "##defaultResourceGroup##",
+              "deviceDisplayName": "*"
+            }
+          ],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_Active",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_InActive",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Antares",
+        "description": "IOOF Services Co Pty Ltd - Antares",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 5,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health Normal",
+              "appliesTo": "ntt.company==\"APA\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health NOT Normal",
+              "appliesTo": "ntt.company==\"APA\" && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "PING responding",
+              "appliesTo": "ntt.company==\"APA\" && system.hoststatus=~\"normal\""
+            },
+            {
+              "name": "SNMP Operational",
+              "appliesTo": "ntt.company==\"APA\" && auto.snmp.operational==\"true\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health Normal",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health NOT Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health NOT Normal",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "PING responding",
+              "useCommaSeparators": false,
+              "bottomLabel": "PING responding",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "SNMP Operational",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "APA_monitoring_states",
+        "description": "APA",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 5,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total Devices",
+              "appliesTo": "ntt.company==\"APA\""
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "ntt.company==\"APA\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "ntt.company==\"APA\" && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_Active",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_InActive",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - APA",
+        "description": "APA APT Management Services Pty Ltd",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health Normal",
+              "appliesTo": "ntt.company==\"AU-ANTARES\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health NOT Normal",
+              "appliesTo": "ntt.company==\"AU-ANTARES\" && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "PING responding",
+              "appliesTo": "ntt.company==\"AU-ANTARES\" && system.hoststatus=~\"normal\""
+            },
+            {
+              "name": "SNMP Operational",
+              "appliesTo": "ntt.company==\"AU-ANTARES\" && auto.snmp.operational==\"true\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health Normal",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health NOT Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health NOT Normal",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "PING responding",
+              "useCommaSeparators": false,
+              "bottomLabel": "PING responding",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "SNMP Operational",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Antares_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 13,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total Devices",
+              "appliesTo": "ntt.company==\"AU-BOQ\""
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "ntt.company==\"AU-BOQ\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "ntt.company==\"AU-BOQ\" && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_Active",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_InActive",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Bank of Queensland",
+        "description": "Bank of Queensland",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 13,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health Normal",
+              "appliesTo": "ntt.company==\"AU-BOQ\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health NOT Normal",
+              "appliesTo": "ntt.company==\"AU-BOQ\" && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "PING responding",
+              "appliesTo": "ntt.company==\"AU-BOQ\" && system.hoststatus=~\"normal\""
+            },
+            {
+              "name": "SNMP Operational",
+              "appliesTo": "ntt.company==\"AU-BOQ\" && auto.snmp.operational==\"true\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health Normal",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health NOT Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health NOT Normal",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "PING responding",
+              "useCommaSeparators": false,
+              "bottomLabel": "PING responding",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "SNMP Operational",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Bank of Queensland_monitoring_states",
+        "description": "Bank of Queensland",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 9,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total Devices",
+              "appliesTo": "ntt.company==\"ARABBANK\""
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "ntt.company==\"ARABBANK\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "ntt.company==\"ARABBANK\" && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_Active",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_InActive",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Arab Bank",
+        "description": "Arab Bank Australia Ltd",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 9,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health Normal",
+              "appliesTo": "ntt.company==\"ARABBANK\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health NOT Normal",
+              "appliesTo": "ntt.company==\"ARABBANK\" && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "PING responding",
+              "appliesTo": "ntt.company==\"ARABBANK\" && system.hoststatus=~\"normal\""
+            },
+            {
+              "name": "SNMP Operational",
+              "appliesTo": "ntt.company==\"ARABBANK\" && auto.snmp.operational==\"true\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health Normal",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health NOT Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "Health NOT Normal",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "PING responding",
+              "useCommaSeparators": false,
+              "bottomLabel": "PING responding",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "SNMP Operational",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "ARABBANK_monitoring_states",
+        "description": "Arab Bank Australia Ltd",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 21,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Calvary",
+        "description": "Little Company of Mary",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 21,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health Normal (ping)",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health NOT Normal (ping)",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP not operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Calvary/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health Normal (ping)",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health NOT Normal (ping)",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP not operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Calvary_monitoring_states",
+        "description": "Little Company of Mary",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 29,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - South West Alliance of Rural Health",
+        "description": "Little Company of Mary",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 25,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health Normal (ping)",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health NOT Normal (ping)",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP not operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/South West Alliance of Rural Health/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health Normal (ping)",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health NOT Normal (ping)",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP not operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "South West Alliance of Rural Health_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 17,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\""
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\" && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_Active",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Status_InActive",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Bank of Queensland INTERNAL",
+        "description": "Bank of Queensland INTERNAL",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 17,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\" && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\" && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "PING_responding",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\" && system.hoststatus=~\"normal\""
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "ntt.company==\"AU-BOQ-INT\" && auto.snmp.operational==\"true\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "PING_responding",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Bank of Queensland INTERNAL_monitoring_states",
+        "description": "Bank of Queensland INTERNAL",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 33,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - CBA",
+        "description": "Commonwealth Bank of Australia Enterprise IT Finance",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 29,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CBA/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CBA_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 37,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - CenITex - DHHS",
+        "description": "CenITex - DHHS",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 33,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CenITex - DHHS/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CenITex-DHHS_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 41,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - CHED",
+        "description": "CHED",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 37,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/CHED/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CHED_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 45,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Cover-More Insurance Services",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 41,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Cover-More Insurance Services/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Cover-More Insurance Services_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 49,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - DCS",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 45,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/DCS/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "DCS Insurance Services_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 61,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Eastern Health",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 57,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Eastern Health/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Eastern Health_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 73,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Flight Centre",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 69,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Flight Centre_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 77,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Flight Centre INTERNAL",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 73,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Flight Centre INTERNAL/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Flight Centre INTERNAL_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 81,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Greenstone Financial Services",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 77,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Greenstone Financial Services/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Greenstone Financial Services_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 85,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - HCF",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 81,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/HCF/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "HCF_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 89,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Heritage Bank",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 85,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Heritage Bank/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Heritage Bank_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 93,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - Host-Plus",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 89,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/Host-Plus/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Host-Plus_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 97,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Total_Devices",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\")"
+            },
+            {
+              "name": "Status_Active",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\") && ntt.monitoring.status==\"Active\""
+            },
+            {
+              "name": "Status_InActive",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\") && ntt.monitoring.status=~\"InActive\""
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Total_Devices",
+              "useCommaSeparators": false,
+              "bottomLabel": "Total Devices",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_Active",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting Active",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Status_InActive",
+              "useCommaSeparators": false,
+              "bottomLabel": "Alerting InActive",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Customer - KPMG",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 93,
+        "sizey": 4
+      },
+      "config": {
+        "bigNumberInfo": {
+          "virtualDataPoints": [],
+          "counters": [
+            {
+              "name": "Health_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\") && system.hoststatus ==\"normal\""
+            },
+            {
+              "name": "Health_NOT_Normal_ping",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\") && !(system.hoststatus ==\"normal\")"
+            },
+            {
+              "name": "SNMP_Operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\") && auto.snmp.operational==\"true\""
+            },
+            {
+              "name": "SNMP_not_operational",
+              "appliesTo": "contains(system.staticgroups,\"NTT-AU/KPMG/All\") && (auto.snmp.operational==\"false\" || !auto.snmp.operational)"
+            }
+          ],
+          "dataPoints": [],
+          "bigNumberItems": [
+            {
+              "dataPointName": "Health_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Reachable (ping)",
+              "rounding": 0,
+              "position": 1,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "Health_NOT_Normal_ping",
+              "useCommaSeparators": false,
+              "bottomLabel": "Unreachable (no ping)",
+              "rounding": 0,
+              "position": 2,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_Operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "Monitoring (SNMP)",
+              "rounding": 0,
+              "position": 3,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            },
+            {
+              "dataPointName": "SNMP_not_operational",
+              "useCommaSeparators": false,
+              "bottomLabel": "No monitoring (no SNMP)",
+              "rounding": 0,
+              "position": 4,
+              "rightLabel": "",
+              "colorThresholds": null,
+              "actions": []
+            }
+          ]
+        },
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "KPMG_monitoring_states",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "bigNumber",
+        "timescale": "day",
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}

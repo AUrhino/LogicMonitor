@@ -1,0 +1,1736 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "defaultResourceGroup",
+      "value": "NTT-AU/NTT Internal/GSOA/Storage"
+    },
+    {
+      "name": "defaultResource",
+      "value": "o-dd"
+    },
+    {
+      "name": "defaultWebsiteGroup",
+      "value": "*"
+    }
+  ],
+  "name": "Dell DataDomain",
+  "description": "NTT-AU/NTT Internal",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 1,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {
+          "isShowAll": false,
+          "showFilter": false,
+          "columns": [
+            {
+              "visible": false,
+              "columnLabel": "Severity",
+              "columnKey": "alert-severity"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Began",
+              "columnKey": "alert-began"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Resource/Website",
+              "columnKey": "alert-device"
+            },
+            {
+              "visible": true,
+              "columnLabel": "LogicModule",
+              "columnKey": "alert-datasource"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Instance",
+              "columnKey": "alert-datasource-instance"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Datapoint",
+              "columnKey": "alert-datapoint"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Value",
+              "columnKey": "alert-value"
+            },
+            {
+              "visible": true,
+              "columnLabel": "Static Threshold",
+              "columnKey": "alert-static-threshold"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dynamic Threshold",
+              "columnKey": "alert-dynamic-threshold"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Group",
+              "columnKey": "alert-group"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Notes",
+              "columnKey": "alert-notes"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged By",
+              "columnKey": "alert-acked-by"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Acknowledged On",
+              "columnKey": "alert-acked-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Cleared On",
+              "columnKey": "alert-cleared-on"
+            },
+            {
+              "visible": false,
+              "columnLabel": "In SDT",
+              "columnKey": "alert-in-sdt"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Alert Rule",
+              "columnKey": "alert-rule-name"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Escalation Chain",
+              "columnKey": "alert-escalation-chain"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Instance Description",
+              "columnKey": "alert-datasource-instance-description"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Full Path",
+              "columnKey": "alert-full-path"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Routing State",
+              "columnKey": "alert-routing-state"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependency Role",
+              "columnKey": "alert-dependency-role"
+            },
+            {
+              "visible": false,
+              "columnLabel": "Dependent Alerts",
+              "columnKey": "alert-dependent-alerts"
+            }
+          ],
+          "playSound": {
+            "criticalAlertAudioFileName": "",
+            "errorAlertAudioFileName": "",
+            "warningAlertAudioFileName": "",
+            "shouldPlay": false
+          },
+          "fontsize": "normal-font",
+          "sort": "-startEpoch"
+        },
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Dell DataDomian alert details",
+        "description": "Dell DataDomian alert details",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "filters": {
+          "severity": "",
+          "sdted": "all",
+          "chain": "",
+          "instance": "",
+          "anomaly": "",
+          "dataPoint": "",
+          "rule": "",
+          "acked": "all",
+          "dependencyRoutingState": "",
+          "dependencyRole": "",
+          "host": "",
+          "keyword": "",
+          "dataSource": "datadomain*",
+          "cleared": "no",
+          "group": "%23%23defaultResourceGroup%23%23*"
+        },
+        "type": "alert",
+        "timescale": "day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 17,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "DataDomain Disk_Activity",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "Busy",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain Disks (DataDomainDisks-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Busy",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "% Busy",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 31,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Fan Status",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "fanStatus",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain Fans (DataDomainFans-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##_Status",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "fanStatus",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1024,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 17,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "File System Compression",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "fileSystemReductionPercent",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain File System Compression (DataDomainFileSystemCompression-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "Total - ##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "fileSystemReductionPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "% saved",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 21,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "File System Compression-Currently Used",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "fileSystemReductionPercent",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Currently Used"
+              },
+              "dataSourceFullName": "DataDomain File System Compression (DataDomainFileSystemCompression-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "fileSystem Percent Reduction",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "fileSystemReductionPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 21,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "File Systems-Index-Usage",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "Size/1024",
+              "display": {
+                "color": "Auto",
+                "legend": "Size",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "SizeBytes"
+            },
+            {
+              "rpn": "Used/1024",
+              "display": {
+                "color": "Auto",
+                "legend": "Used",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "UsedBytes"
+            }
+          ],
+          "minValue": 0,
+          "topX": 25,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Size",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Index"
+              },
+              "dataSourceFullName": "DataDomain File Systems (DataDomainFileSystems-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Size",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            },
+            {
+              "dataPointName": "Used",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Index"
+              },
+              "dataSourceFullName": "DataDomain File Systems (DataDomainFileSystems-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Used",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "TeraBytes",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 17,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "File Systems-/",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "Size/1024",
+              "display": {
+                "color": "Auto",
+                "legend": "Size",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "SizeBytes"
+            },
+            {
+              "rpn": "Used/1024",
+              "display": {
+                "color": "Auto",
+                "legend": "Used",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "UsedBytes"
+            }
+          ],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Size",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain File Systems (DataDomainFileSystems-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Size",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            },
+            {
+              "dataPointName": "Used",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain File Systems (DataDomainFileSystems-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Used",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 21,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "File Systems-/data: pre-comp-Usage",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "Size/1024",
+              "display": {
+                "color": "green",
+                "legend": "Size",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "SizeBytes"
+            },
+            {
+              "rpn": "Used/1024",
+              "display": {
+                "color": "red",
+                "legend": "Used",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "UsedBytes"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Size",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain File Systems (DataDomainFileSystems-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Size",
+              "aggregateFunction": "MAX",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            },
+            {
+              "dataPointName": "Used",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain File Systems (DataDomainFileSystems-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Used",
+              "aggregateFunction": "MAX",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "TeraBytes",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 3,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Global Statistics-CPU load",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "cpuAvgPercentBusy",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "blue",
+                "legend": "CPU",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "cpu0PercentBusy",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 3,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Global Statistics-Disk Busy",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "diskBusyPercent",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "red",
+                "legend": "Busy Percentage",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "diskBusyPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Global Statistics-NFS Processing Time",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "100-nfsRecvPercent-nfsProcPercent-nfsSendPercent",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##_Idle",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "Idle"
+            }
+          ],
+          "minValue": 0,
+          "topX": 25,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "nfsRecvPercent",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "Receive",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "nfsRecvPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "nfsProcPercent",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "Processing",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "nfsProcPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "nfsSendPercent",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "Send",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "nfsSendPercent",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 3,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Global Statistics-Operations",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "cifsOpsPerSec",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "green",
+                "legend": "CIFS",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "cifsOpsPerSec",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "nfsOpsPerSec",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "blue",
+                "legend": "NFS",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "nfsOpsPerSec",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "Operations/Second",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Global Statistics-Throughput",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "diskReadKBytesSec*1024",
+              "display": {
+                "color": "blue",
+                "legend": "Disk Read",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "DiskReadBytes"
+            },
+            {
+              "rpn": "diskWriteKBytesSec*1024",
+              "display": {
+                "color": "red",
+                "legend": "Disk Write",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "diskWriteBytes"
+            },
+            {
+              "rpn": "nvramReadKBytesSecond*1024",
+              "display": {
+                "color": "green",
+                "legend": "NVRAM Read",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "nvramReadbytes"
+            },
+            {
+              "rpn": "nvramWriteKBytesSec*1024",
+              "display": {
+                "color": "teal",
+                "legend": "NVRAM Writes",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "nvramWriteBytes"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "diskReadKBytesSec",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "diskReadKBytesSec",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "diskWriteKBytesSec",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "diskWriteKBytesSec",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "nvramReadKBytesSecond",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "nvramReadKBytesSecond",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            },
+            {
+              "dataPointName": "nvramWriteKBytesSec",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "nvramWriteKBytesSec",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "Bytes/sec",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 9,
+        "sizex": 4,
+        "row": 7,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Global Statistics-fileSystemVirtualSpace",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 25,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "fileSystemVirtualSpace",
+              "instanceName": {
+                "isGlob": false,
+                "value": "DataDomainGlobal"
+              },
+              "dataSourceFullName": "DataDomain Global Statistics (DataDomainGlobal)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "Rate of data being backed up",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "fileSystemVirtualSpace",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "Gigabytes/second",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 42,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "NVRAM Batteries State",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": -2,
+          "topX": 0,
+          "maxValue": 6,
+          "dataPoints": [
+            {
+              "dataPointName": "Status",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain NVRAM Batteries (DataDomainNVRAMBatteries-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "State: ok (0), disabled\t(1), discharged\t(2), softdisabled (3)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "Status",
+              "aggregateFunction": "MAX",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "State",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 31,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Power Module Status",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Status",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Power module 0"
+              },
+              "dataSourceFullName": "DataDomain Power (DataDomainPowerModules-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": "Auto",
+                "legend": "State: 1=ok; 2=failed,3=faulty,4=acnone, 99=unknown",
+                "type": "stack",
+                "option": "custom"
+              },
+              "name": "Status",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "State",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1024,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 5,
+        "sizex": 4,
+        "row": 42,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Temperature Sensors",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "tempValue",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain Temperature Sensors (DataDomainTemp-)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##DSIDESCRIPTION#",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "tempValue",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "Degrees C",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 25,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top 10 File Systems by Percent Storage Utilization",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": 0,
+          "topX": 10,
+          "maxValue": 100,
+          "dataPoints": [
+            {
+              "dataPointName": "PercentUtilized",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "DataDomain: File Systems (DellEMC_DataDomain_FileSystems)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE##",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "PercentUtilized",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "%",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 11,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Uptime",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "Uptime/3600/24",
+              "display": {
+                "color": "blue",
+                "legend": "Days",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "UptimeDays"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "Uptime",
+              "instanceName": {
+                "isGlob": false,
+                "value": "SNMP_Host_Uptime"
+              },
+              "dataSourceFullName": "Uptime (SNMP_Host_Uptime)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "Uptime",
+              "aggregateFunction": "MAX",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##"
+              }
+            }
+          ],
+          "verticalLabel": "days",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 37,
+        "sizey": 3
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Top 10 Interfaces by Outbound Throughput",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "OutOctets*8",
+              "display": {
+                "color": "Auto",
+                "legend": "##INSTANCE## - ##DSIDESCRIPTION##",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "Egress"
+            }
+          ],
+          "minValue": "NaN",
+          "topX": 10,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "dataSourceFullName": "Network Interfaces (SNMP_Network_Interfaces)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutOctets",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "##defaultResourceGroup##*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": false,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 29,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Fan and Power",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": ""
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 15,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "File and Disk",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": ""
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 35,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Network",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": ""
+      }
+    },
+    {
+      "position": {
+        "col": 1,
+        "sizex": 12,
+        "row": 40,
+        "sizey": 2
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "Other items",
+        "description": "",
+        "theme": "newSolidDarkBlue",
+        "interval": 15,
+        "type": "text",
+        "timescale": "day",
+        "version": 2,
+        "content": ""
+      }
+    }
+  ],
+  "version": 2
+}

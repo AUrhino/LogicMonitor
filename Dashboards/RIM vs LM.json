@@ -1,0 +1,273 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [
+    {
+      "name": "rimtag1",
+      "value": "AU-DDAUOPS"
+    },
+    {
+      "name": "rimtag2",
+      "value": "AU-APA"
+    },
+    {
+      "name": "rimtag3",
+      "value": "AU-QSUPER"
+    }
+  ],
+  "name": "RIM vs LM",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 4,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CIs 1 (##rimtag1##)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "HostCount",
+              "instanceName": {
+                "isGlob": false,
+                "value": "LogicMonitor_Collector_GlobalStats"
+              },
+              "dataSourceFullName": "Collector Status (LogicMonitor_Collector_GlobalStats)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "LM - ##rimtag1##_HostCount",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "HostCount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "NTT-AU/NTT Internal/GSOA"
+              }
+            },
+            {
+              "dataPointName": "CICount",
+              "instanceName": {
+                "isGlob": true,
+                "value": "AUCDM_##rimtag1##"
+              },
+              "dataSourceFullName": "NTT GSOA SMARTS domains (NTT_GSOA_SMARTS_domains)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "RIM - ##rimtag1##_CICount",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "CICount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "aucdlsam01.rim.au.gsoa"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "Devices",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "sizex": 4,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CIs 2 (##rimtag2##)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "HostCount",
+              "instanceName": {
+                "isGlob": false,
+                "value": "LogicMonitor_Collector_GlobalStats"
+              },
+              "dataSourceFullName": "Collector Status (LogicMonitor_Collector_GlobalStats)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##rimtag2##_HostCount",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "HostCount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "Collectors/NTT GSOA Collectors/APT Management Services Pty Ltd"
+              }
+            },
+            {
+              "dataPointName": "CICount",
+              "instanceName": {
+                "isGlob": true,
+                "value": "AUCDM_##rimtag2##"
+              },
+              "dataSourceFullName": "NTT GSOA SMARTS domains (NTT_GSOA_SMARTS_domains)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##rimtag2##_CICount",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "CICount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "aucdlsam01.rim.au.gsoa"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "Devices",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "sizex": 4,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "CIs 3 (##rimtag3##)",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [],
+          "minValue": "NaN",
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "HostCount",
+              "instanceName": {
+                "isGlob": false,
+                "value": "LogicMonitor_Collector_GlobalStats"
+              },
+              "dataSourceFullName": "Collector Status (LogicMonitor_Collector_GlobalStats)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##rimtag3##_HostCount",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "HostCount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": true,
+                "value": "*"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": false,
+                "value": "Collectors/Client Collectors/QSuper Collectors"
+              }
+            },
+            {
+              "dataPointName": "CICount",
+              "instanceName": {
+                "isGlob": true,
+                "value": "AUCDM_##rimtag3##"
+              },
+              "dataSourceFullName": "NTT GSOA SMARTS domains (NTT_GSOA_SMARTS_domains)",
+              "consolidateFunction": "average",
+              "display": {
+                "color": "Auto",
+                "legend": "##rimtag3##_CICount",
+                "type": "area",
+                "option": "custom"
+              },
+              "name": "CICount",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "aucdlsam01.rim.au.gsoa"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "Devices",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "VaST"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}

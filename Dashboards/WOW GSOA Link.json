@@ -1,0 +1,223 @@
+{
+  "santabaRelease": 229,
+  "defaultDashboardFilters": {
+    "defaultDashboardFilterDetails": []
+  },
+  "widgetTokens": [],
+  "name": "WOW GSOA Link",
+  "description": "",
+  "overwriteGroupFields": false,
+  "widgetsConfigVersion": 2,
+  "type": "dashboard",
+  "widgets": [
+    {
+      "position": {
+        "col": 1,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT-SEC-Interfaces VLAN (64 bit)-Gi0/1.3171 -- AU-WOW //WAN 50MB EQDC SECONDARY OPTUS EVOLVE CID:-Data Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InMax*8",
+              "display": {
+                "color": "blue",
+                "legend": "In (max)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "InMaxBits"
+            },
+            {
+              "rpn": "OutMax*8",
+              "display": {
+                "color": "green",
+                "legend": "Out (max)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "OutMaxBits"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Gi0/1.3171"
+              },
+              "dataSourceFullName": "Interfaces VLAN (64 bit) (snmp64_If_dot1qvLAN-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InMax",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT-SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Gi0/1.3171"
+              },
+              "dataSourceFullName": "Interfaces VLAN (64 bit) (snmp64_If_dot1qvLAN-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutMax",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT-SEC"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    },
+    {
+      "position": {
+        "col": 7,
+        "sizex": 6,
+        "row": 1,
+        "sizey": 4
+      },
+      "config": {
+        "displaySettings": {},
+        "isSupportCustomProperty": false,
+        "supportCustomProperty": false,
+        "name": "TS_EXT_RT_PRI-Interfaces VLAN (64 bit)-Gi0/1.3170 -- AU-WOW //WAN 50MB ECDC PRIMARY OPTUS EVOLVE CID:-Data Throughput",
+        "description": "",
+        "theme": "newBorderGray",
+        "interval": 3,
+        "graphInfo": {
+          "virtualDataPoints": [
+            {
+              "rpn": "InMax*8",
+              "display": {
+                "color": "blue",
+                "legend": "In (max)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "InMaxBits"
+            },
+            {
+              "rpn": "OutMax*8",
+              "display": {
+                "color": "green",
+                "legend": "Out (max)",
+                "type": "line",
+                "option": "custom"
+              },
+              "name": "OutMaxBits"
+            }
+          ],
+          "minValue": 0,
+          "topX": 0,
+          "maxValue": "NaN",
+          "dataPoints": [
+            {
+              "dataPointName": "InOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Gi0/1.3170"
+              },
+              "dataSourceFullName": "Interfaces VLAN (64 bit) (snmp64_If_dot1qvLAN-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "InMax",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            },
+            {
+              "dataPointName": "OutOctets",
+              "instanceName": {
+                "isGlob": false,
+                "value": "Gi0/1.3170"
+              },
+              "dataSourceFullName": "Interfaces VLAN (64 bit) (snmp64_If_dot1qvLAN-)",
+              "consolidateFunction": "max",
+              "display": {
+                "color": null,
+                "legend": null,
+                "type": "line",
+                "option": "none"
+              },
+              "name": "OutMax",
+              "aggregateFunction": "SUM",
+              "deviceDisplayName": {
+                "isGlob": false,
+                "value": "TS_EXT_RT_PRI"
+              },
+              "deviceGroupFullPath": {
+                "isGlob": true,
+                "value": "*"
+              }
+            }
+          ],
+          "verticalLabel": "bps",
+          "aggregate": true,
+          "desc": true,
+          "scaleUnit": 1000,
+          "globalConsolidateFunction": "default"
+        },
+        "type": "cgraph",
+        "timescale": "1day",
+        "version": 2
+      }
+    }
+  ],
+  "version": 2
+}
