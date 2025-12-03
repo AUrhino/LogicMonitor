@@ -189,6 +189,118 @@ function Show-ABCG {
     Get-LMCollectorGroup -Filter "autoBalance -eq 'True'" | Where-Object { $_.Name -match $filter } | Select-Object ID, Name, Description
 }
 <# ---------------------------------------------------------------------------- #>
+function Set-LMDevicesToABCG {
+<#
+.SYNOPSIS
+    Show LogicMonitor Collectors and Auto Balanced Collector Groups (ABCG)
+
+.DESCRIPTION
+    This function checks devices assigned to collectors within a specified Auto Balanced Collector Group (ABCG).
+    It compares each device's autoBalancedCollectorGroupId with the target ABCG ID and optionally reports or fixes mismatches.
+    Devices listed in the 'host' custom property of the collector group will be excluded from processing.
+
+.EXAMPLE
+    Report only:
+    Set-LMDevicesToABCG -CollectorGroupName "ABCG Name" -Report $true -Fix $false
+
+.EXAMPLE
+    Report and Fix:
+    Set-LMDevicesToABCG -CollectorGroupName "ABCG Name" -Report $true -Fix $true
+#>
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$CollectorGroupName,
+
+        [bool]$Report = $true,
+        [bool]$Fix = $false
+    )
+	#clear varibles
+    $ABCG = ""
+    $ABCGid  = ""
+	$LMCollector =""
+
+    # Get the collector group object
+    $ABCG = Get-LMCollector -Filter "collectorGroupName -eq '$CollectorGroupName'"
+    $ABCGid = $ABCG.collectorGroupId | Select-Object -First 1
+
+    # Extract custom properties
+    $customProperties = $ABCG | Select-Object -ExpandProperty CustomProperties
+    # Check if 'host' property exists
+    $hostProperty = $customProperties | Where-Object { $_.Name -eq 'host' }
+
+    if (-not $hostProperty) {
+        Write-Error "ERROR: The custom property 'host' was not found in Collector group '$CollectorGroupName'."
+        return
+    }
+
+    # Get host values
+    $ABCG_Hosts = $hostProperty.Value
+    Write-Host "Boxes to filter out: $ABCG_Hosts"
+
+    # Convert host list to array
+    $excludedHosts = $ABCG_Hosts -split '\s+'
+
+    # Loop through each collector ID
+    foreach ($LMCollector in $ABCG.id) {
+        $devices = Get-LMDevice -Filter "currentCollectorId -eq $LMCollector" | Where-Object { $_.displayName -notin $excludedHosts }
+
+        $totalDevices = $devices.Count
+        $counter = 1
+
+        foreach ($device in $devices) {
+            Write-Host "Checking: $counter of $($totalDevices): $($device.displayName)" -ForegroundColor Yellow
+            $deviceDetails = Get-LMDevice -DisplayName $device.displayName | Select-Object displayName, autoBalancedCollectorGroupId
+
+            if ($deviceDetails.autoBalancedCollectorGroupId -ne $ABCGid) {
+                if ($Report) {
+                    Write-Output "Mismatch found: $($deviceDetails.displayName)"
+                }
+
+                if ($Fix) {
+                    Write-Output "Fixing: $($deviceDetails.displayName)"
+                    Get-LMDevice -displayname $deviceDetails.displayname | Set-LMDevice -AutoBalancedCollectorGroupId $ABCGid > $null
+                }
+            }
+
+            $counter++
+        }
+    }
+
+    Write-Host "Completed processing for Collector Group '$CollectorGroupName'."  -ForegroundColor Green
+}
+
+# Example usage:
+# Set-LMDevicesToABCG -CollectorGroupName "DC Fyshwick" -Report $true -Fix $false
+<# ---------------------------------------------------------------------------- #>
+function Set-New_Collector {
+<#
+.SYNOPSIS
+    Will change the Collectors on Resources in a group
+
+.DESCRIPTION
+    Will get a list of Resources in a group and change the Collectors in bulk.
+
+.EXAMPLE
+    Set-New_Collector -groupid 6194 -PreferredCollectorId 484
+#>
+    param (
+        [int]$groupid,
+        [int]$PreferredCollectorId
+    )
+
+    if (-not $groupid -or -not $PreferredCollectorId) {
+        Write-Host "Example usage: Set-New_Collector -groupid 6194 -PreferredCollectorId 484" -ForegroundColor Yellow
+        return
+    }
+
+    $devices = Get-LMDeviceGroupDevices -Id $groupid
+    foreach ($item in $devices.id) {
+        Write-Host "Updating device ID: $item"
+        Get-LMDevice -Id $item | Set-LMDevice -PreferredCollectorId $PreferredCollectorId > $null
+    }
+}
+
+<# ---------------------------------------------------------------------------- #>
 function Show-Resoures_in_SDT {
 <#
 .SYNOPSIS
@@ -282,6 +394,123 @@ function Show-UserGroups {
     }
 
     Format-SpectreTable -Title "UserGroups" -Data $table
+}
+
+<# ---------------------------------------------------------------------------- #>
+<#
+.SYNOPSIS
+    Creates a LogicMonitor user with a randomly generated secure password.
+
+.DESCRIPTION
+    This script defines two functions:
+    - Generate-RandomPassword: Generates a secure password with a mix of character types.
+    - Create_LMUser: Creates a LogicMonitor user with specified details and assigns roles and groups.
+      It checks for existing users before creation and formats input values.
+
+.EXAMPLE
+    Create_LMUser -Username "michael.ceola@global.ntt" `
+                  -FirstName "Michael" `
+                  -LastName "Ceola" `
+                  -Email "michael.ceola@global.ntt" `
+                  -RoleName "administrator" `
+                  -GroupName "NTT DATA View Operator" `
+                  -Mobile "0411123123" `
+                  -Ticket "SVR12345"
+#>
+
+function Generate-RandomPassword {
+    $length = 12
+    $upper = [char[]]'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    $lower = [char[]]'abcdefghijklmnopqrstuvwxyz'
+    $digits = [char[]]'0123456789'
+    $special = [char[]]'~!$%^()_-+=\{}[]@#&\|;:,.<>.?/'
+
+    # Ensure at least one of each required character type
+    $passwordChars = @(
+        Get-Random -InputObject $upper
+        Get-Random -InputObject $lower
+        Get-Random -InputObject $digits
+        Get-Random -InputObject $special
+    )
+
+    # Fill the rest of the password with random characters from all sets
+    $allChars = $upper + $lower + $digits + $special
+    $remainingLength = $length - $passwordChars.Count
+    for ($i = 0; $i -lt $remainingLength; $i++) {
+        $passwordChars += Get-Random -InputObject $allChars
+    }
+
+    # Shuffle the characters to avoid predictable patterns
+    $shuffledPassword = ($passwordChars | Sort-Object {Get-Random}) -join ''
+    return $shuffledPassword
+}
+
+function Capitalize-FirstLetter {
+    param ([string]$Text)
+    if ([string]::IsNullOrWhiteSpace($Text)) { return $Text }
+    return ($Text.Substring(0,1).ToUpper() + $Text.Substring(1).ToLower())
+}
+
+function Create_LMUser {
+    param (
+        [string]$Username,
+        [string]$FirstName,
+        [string]$LastName,
+        [string]$Email,
+        [string]$RoleName,
+        [string]$GroupName,
+        [string]$Mobile,
+        [string]$Ticket
+    )
+
+    if (-not $PSBoundParameters['Username']) {
+        Write-Host "Example usage: Create_LMUser -Username <username> -FirstName <firstname> -LastName <lastname> -Email <email> -RoleName <rolename> -GroupName <groupname> -Mobile <mobile> -Ticket <ticket>"
+        return
+    }
+
+    # Format inputs
+    $Username  = $Username.ToLower()
+    $Email     = $Email.ToLower()
+    $FirstName = Capitalize-FirstLetter $FirstName
+    $LastName  = Capitalize-FirstLetter $LastName
+
+    # Check if user already exists
+    $existingUser = Get-LMUser | Select-String -Pattern $Username
+    if ($existingUser) {
+        Write-Host "User '$Username' already exists. Skipping creation." -ForegroundColor Red
+        return
+    }
+
+    $Password = Generate-RandomPassword
+
+    # Create new user with roles
+    New-LMUser -Username $Username `
+               -Password $Password `
+               -FirstName $FirstName `
+               -LastName $LastName `
+               -Email $Email `
+               -Phone $Mobile `
+               -Note $Ticket `
+               -RoleNames @($RoleName) `
+               -UserGroups @($GroupName) `
+               -ForcePasswordChange $true `
+               -Status "active" `
+               -Timezone "Australia/Sydney"
+
+    # Print summary table
+    $table = @(
+        [pscustomobject]@{Name="Username"; Value=$Username},
+        [pscustomobject]@{Name="First Name"; Value=$FirstName},
+        [pscustomobject]@{Name="Last Name"; Value=$LastName},
+        [pscustomobject]@{Name="Email"; Value=$Email},
+        [pscustomobject]@{Name="Role Name"; Value=$RoleName},
+        [pscustomobject]@{Name="Group Name"; Value=$GroupName},
+        [pscustomobject]@{Name="Mobile"; Value=$Mobile},
+        [pscustomobject]@{Name="Ticket"; Value=$Ticket},
+        [pscustomobject]@{Name="Password"; Value=$Password}
+    )
+
+    Format-SpectreTable -Title "Creation Summary" -Data $table
 }
 
 <# ---------------------------------------------------------------------------- #>
@@ -389,6 +618,101 @@ function Show-ERI {
 }
 
 <# ---------------------------------------------------------------------------- #>
+function Get-VSphereGuests {
+    <#
+    .SYNOPSIS
+        Show guest VMs on a vSphere device.
+
+    .DESCRIPTION
+        Captures guest VM details from a vSphere device in LogicMonitor and exports them to CSV in the current path.
+
+    .PARAMETER DeviceName
+        The display name of the vSphere device in LogicMonitor.
+
+    .EXAMPLE
+        Run:
+        Get-VSphereGuests -DeviceName "cbf-vmw-vc-n-01"
+    .EXAMPLE
+        Help:
+        get-help Get-VSphereGuests -full
+
+    .NOTES
+        Version 1.2
+        Written by Ryan Gillan
+    #>
+
+    param (
+        [string]$DeviceName
+    )
+
+    #Requires -Version 7.0
+    #Requires -Modules Logic.Monitor
+
+    if (-not $DeviceName) {
+        Write-Host "`n[!] Please provide a device name." -ForegroundColor Red
+        Write-Host "Example usage:" -ForegroundColor Yellow
+        Write-Host "    Get-VSphereGuests -DeviceName 'cbf-vmw-vc-n-01'" -ForegroundColor Yellow
+        return
+    }
+
+    $Devices = Get-LMDevice -DisplayName $DeviceName
+
+    if (-not $Devices) {
+        Write-Host "Device '$DeviceName' not found in LogicMonitor" -ForegroundColor Red
+        return
+    }
+
+    $Results = @()
+
+    foreach ($Device in $Devices) {
+        $DataSource = Get-LMDeviceDatasourceList -id $Device.id | Where-Object { $_.dataSourceName -eq "VMware_vSphere_VirtualMachineStatus" }
+        if ($DataSource) {
+            $Instances = Get-LMDeviceDatasourceInstance -DatasourceId $DataSource.datasourceId -DeviceId $Device.id
+            foreach ($i in $Instances) {
+                $AutoProps = @{}
+
+                try {
+                    $AutoProps = $i | Select-Object -ExpandProperty autoProperties
+                } catch {
+                    $AutoProps = @{}
+                }
+
+                $obj = [ordered]@{
+                    DeviceName      = $Device.displayName
+                    Name            = $i.Name
+                    groupName       = $i.groupName
+                    description     = $i.description
+                    wildValue       = $i.wildValue
+                    sdtStatus       = $i.sdtStatus
+                    disableAlerting = $i.disableAlerting
+                    stopMonitoring  = $i.stopMonitoring
+                    Id              = $i.id
+                }
+
+                if ($AutoProps) {
+                    foreach ($prop in $AutoProps) {
+                        if ($prop.name -and $prop.value) {
+                            $obj[$prop.name] = $prop.value
+                        }
+                    }
+                }
+
+                $Results += New-Object PSObject -Property $obj
+            }
+        }
+    }
+
+    $timestamp = Get-Date -Format "ddMMyyyy"
+    $filename = "$DeviceName_Vsphere_guests_$timestamp.csv"
+    $Results | Export-Csv -NoTypeInformation -Path $filename
+
+    Write-Host "Export complete: $filename" -ForegroundColor Green
+}
+# Run via:
+# Get-VSphereGuests -DeviceName "cbf-vmw-vc-n-01"
+
+# EOF
+<# ---------------------------------------------------------------------------- #>
 function Find-Report {
 <#
 .SYNOPSIS
@@ -480,6 +804,11 @@ function Set-Properties {
 .EXAMPLE
     Set-Properties -groupID 123 -Properties @{'snmp.priv'='snmppriv';'snmp.privToken'='snmpprivToken';'snmp.auth'='snmpauth';'snmp.authToken'='snmpauthToken';}
 
+.EXAMPLE
+    Set-Properties -groupID 123 -Properties @{'ntt.company'='DEMO';}
+	
+.EXAMPLE
+    Set-Properties -groupID 123 -Properties @{'location'='123 Smith St, NSW, Australia';}
 #>
 
     [CmdletBinding()]
@@ -498,11 +827,13 @@ function Set-Properties {
     }
 
     $devices = Get-LMDeviceGroupDevices -Id $groupID
+	Write-Host "Found: $($devices.count) devices"
 
     foreach ($device in $devices) {
         $deviceDetails = Get-LMDevice -displayName $device.displayName
         if ($deviceDetails) {
-            Set-LMDevice -Id $deviceDetails.Id -Properties $Properties -PropertiesMethod Add
+			Write-Host "Updating device: $($device.displayName)"
+            Set-LMDevice -Id $deviceDetails.Id -Properties $Properties -PropertiesMethod Replace | Out-Null
         } else {
             Write-Warning "Device '$($device.displayName)' not found or could not be retrieved."
         }
@@ -939,6 +1270,7 @@ $menu = @(
     [pscustomobject]@{Name="Show-Netflow"; Overview="Show Resoures with Netflow option enabled"; Example="Show-Netflow"},
     [pscustomobject]@{Name="Show-LMServices"; Overview="Show Services Resoures"; Example="Show-LMServices"},
     [pscustomobject]@{Name="Show-ERI"; Overview="Show the ERI details on an Resource"; Example="Show-ERI -DisplayName 'nw-backup'"},
+    [pscustomobject]@{Name="Get-VSphereGuests"; Overview="Show the guest VM on vsphere"; Example="Get-VSphereGuests -DeviceName 'vcsa'"},
 
 # Set/Change/Find section:
     [PSCustomObject]@{Name = "`n "; Overview = " ";Example=" " }, # Blank line
@@ -952,6 +1284,8 @@ $menu = @(
     [pscustomobject]@{Name="Show-Collectors"; Overview="Show Collectors"; Example="Show-Collectors"},
     [pscustomobject]@{Name="Show-DeadCollectors"; Overview="Show DeadCollectors"; Example="Show-DeadCollectors"},
     [pscustomobject]@{Name="Show-ABCG"; Overview="Show ABCG"; Example="Show-ABCG or Show-ABCG -filter 'KPMG'"},
+	[pscustomobject]@{Name="Set-LMDevicesToABCG"; Overview="Report and/or fix ABCG."; Example="Set-ABCG_on_Resources -CollectorGroupName 'DC Fyshwick' -Report $true -Fix $false"},
+	[pscustomobject]@{Name="Set-New_Collector"; Overview="Change the Collectors for devices in a group"; Example="Set-New_Collector -CollectorGroupName -groupid 123 -PreferredCollectorId 456"},
 
 
 # User/role/group section:

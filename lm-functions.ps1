@@ -178,6 +178,23 @@ function Show-Country-folders  {
 #RUN: Show-Country-folders -fullPath 'NTT-AU'
 #------------------------
 function Show-Country-folders_plus_DEAD {
+<#
+.SYNOPSIS
+    Show the parent folders plus a count of dead devices
+
+.DESCRIPTION
+    Show the parent folders plus a count of dead devices
+
+.PARAMETER fullPath
+    The path to the folder to audit.
+
+.EXAMPLE
+    Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+
+.EXAMPLE
+    Show-Country-folders_plus_DEAD -fullPath 'NTT-AU' | Export-Csv Exported_file.csv
+
+#>
     param (
         [string]$fullPath
     )
@@ -406,40 +423,41 @@ function Get-GroupDetails_to_csv {
 
 #------------------------
 function Get-GroupDetails_with_devicecount {
+    <#
+    .SYNOPSIS
+    Retrieves LogicMonitor device group details including device counts and exports them to a CSV file.
+
+    .DESCRIPTION
+    This function takes a parent group ID, recursively fetches all subgroups, and counts the devices in each group.
+    It outputs the results to a CSV file named 'Australia_folders_with_devicecount.csv'.
+
+    .PARAMETER Parentid
+    The ID of the parent device group in LogicMonitor.
+
+    .EXAMPLE
+    Get-GroupDetails_with_devicecount -Parentid 11232
+
+    This example retrieves all subgroups under the group with ID 11232 and exports their full paths and device counts.
+
+    .NOTES
+    Author: Ryan Gillan
+    Requires: LogicMonitor PowerShell Module
+    #>
+
     param (
         [int]$Parentid
     )
 
-    # Get the full path of the parent group
-    $ParentGroup = Get-LMDeviceGroup -id $Parentid
-    $ParentFullPath = $ParentGroup.fullPath
-
-    # Function to display group details with indentation
-    function Display-GroupDetails {
-        param (
-            [string]$Indent,
-            [object]$Group
-        )
-        $GroupDetails = Get-LMDeviceGroup -id $Group.id | select id, name, fullPath, subGroups
-        $GroupDetails | ForEach-Object {
-            if ($_.fullPath -match '\d') {
-                [PSCustomObject]@{
-                    FullPath    = $_.fullPath
-                    DeviceCount = (Get-LMDeviceGroupDevices -Id $_.id).count
-                }
-            }
-            if ($_.subGroups) {
-                foreach ($subGroup in $_.subGroups) {
-                    Display-GroupDetails -Indent "$Indent    " -Group $subGroup
-                }
-            }
-        }
+    if (-not $PSBoundParameters.ContainsKey('Parentid')) {
+        Write-Host "Example usage:" -ForegroundColor Yellow
+        Write-Host "Get-GroupDetails_with_devicecount -Parentid 11232" -ForegroundColor Yellow
+        return
     }
 
-    # Collect all group details in a list
+    $ParentGroup = Get-LMDeviceGroup -id $Parentid
+    $ParentFullPath = $ParentGroup.fullPath
     $GroupList = @()
 
-    # Display the parent group details if it contains a number
     if ($ParentFullPath -match '\d') {
         $GroupList += [PSCustomObject]@{
             FullPath    = $ParentFullPath
@@ -447,19 +465,43 @@ function Get-GroupDetails_with_devicecount {
         }
     }
 
-    # Get all subgroups of the parent group
     $SubGroups = Get-LMDeviceGroup -id $Parentid | select -expandProperty subGroups
+    $Total = $SubGroups.Count
+    $Counter = 0
 
-    # Iterate through each subgroup and collect relevant information with indentation
+    function Display-GroupDetails {
+        param (
+            [string]$Indent,
+            [object]$Group
+        )
+        $GroupDetails = Get-LMDeviceGroup -id $Group.id | select id, name, fullPath, subGroups
+        $Results = @()
+
+        $GroupDetails | ForEach-Object {
+            if ($_.fullPath -match '\d') {
+                $Results += [PSCustomObject]@{
+                    FullPath    = $_.fullPath
+                    DeviceCount = (Get-LMDeviceGroupDevices -Id $_.id).count
+                }
+            }
+            if ($_.subGroups) {
+                foreach ($subGroup in $_.subGroups) {
+                    $Results += Display-GroupDetails -Indent "$Indent    " -Group $subGroup
+                }
+            }
+        }
+
+        return $Results
+    }
+
     foreach ($group in $SubGroups) {
+        $Counter++
+        Write-Progress -Activity "Processing Groups" -Status "Processing $($group.name)" -PercentComplete (($Counter / $Total) * 100)
         $GroupList += Display-GroupDetails -Indent "    " -Group $group
     }
 
-    # Save the group details to a CSV file
     $GroupList | Select-Object -Property FullPath, DeviceCount | Export-Csv -Path "Australia_folders_with_devicecount.csv" -NoTypeInformation
 }
-
-#RUN: Get-GroupDetails_with_devicecount -Parentid 11232
 
 #------------------------
 
@@ -782,56 +824,121 @@ function Generate-RandomPassword {
 }
 #RUN: Generate-RandomPassword
 #------------------------
-# Create a user
-function Create_LMUser {
-    param (
-    [string]$Username,
-    [string]$FirstName,
-    [string]$LastName,
-    [string]$Email,
-    [string]$RoleName,
-    [string]$Mobile,
-    [string]$Ticket
-)
+<#
+.SYNOPSIS
+    Creates a LogicMonitor user with a randomly generated secure password.
 
-    if (-not $PSBoundParameters['Username']) {
-        Write-Host "Example usage: Create_LMUser -Username <username> -FirstName <firstname> -LastName <lastname> -Email <email> -RoleName <rolename> -Mobile <mobile> -Ticket <Ticket>"
-    return
+.DESCRIPTION
+    This script defines two functions:
+    - Generate-RandomPassword: Generates a secure password with a mix of character types.
+    - Create_LMUser: Creates a LogicMonitor user with specified details and assigns roles and groups.
+      It checks for existing users before creation and formats input values.
+
+.EXAMPLE
+    Create_LMUser -Username "michael.ceola@global.ntt" `
+                  -FirstName "Michael" `
+                  -LastName "Ceola" `
+                  -Email "michael.ceola@global.ntt" `
+                  -RoleName "administrator" `
+                  -GroupName "NTT DATA View Operator" `
+                  -Mobile "0411123123" `
+                  -Ticket "SVR12345"
+#>
+
+function Generate-RandomPassword {
+    $length = 12
+    $upper = [char[]]'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    $lower = [char[]]'abcdefghijklmnopqrstuvwxyz'
+    $digits = [char[]]'0123456789'
+    $special = [char[]]'~!$%^()_-+=\{}[]@#&\|;:,.<>.?/'
+
+    # Ensure at least one of each required character type
+    $passwordChars = @(
+        Get-Random -InputObject $upper
+        Get-Random -InputObject $lower
+        Get-Random -InputObject $digits
+        Get-Random -InputObject $special
+    )
+
+    # Fill the rest of the password with random characters from all sets
+    $allChars = $upper + $lower + $digits + $special
+    $remainingLength = $length - $passwordChars.Count
+    for ($i = 0; $i -lt $remainingLength; $i++) {
+        $passwordChars += Get-Random -InputObject $allChars
     }
 
-    $Username = $Username.ToLower() # Change to lowercase
-    $Email    = $Email.ToLower()    # Change to lowercase
+    # Shuffle the characters to avoid predictable patterns
+    $shuffledPassword = ($passwordChars | Sort-Object {Get-Random}) -join ''
+    return $shuffledPassword
+}
+
+function Capitalize-FirstLetter {
+    param ([string]$Text)
+    if ([string]::IsNullOrWhiteSpace($Text)) { return $Text }
+    return ($Text.Substring(0,1).ToUpper() + $Text.Substring(1).ToLower())
+}
+
+function Create_LMUser {
+    param (
+        [string]$Username,
+        [string]$FirstName,
+        [string]$LastName,
+        [string]$Email,
+        [string]$RoleName,
+        [string]$GroupName,
+        [string]$Mobile,
+        [string]$Ticket
+    )
+
+    if (-not $PSBoundParameters['Username']) {
+        Write-Host "Example usage: Create_LMUser -Username <username> -FirstName <firstname> -LastName <lastname> -Email <email> -RoleName <rolename> -GroupName <groupname> -Mobile <mobile> -Ticket <ticket>"
+        return
+    }
+
+    # Format inputs
+    $Username  = $Username.ToLower()
+    $Email     = $Email.ToLower()
+    $FirstName = Capitalize-FirstLetter $FirstName
+    $LastName  = Capitalize-FirstLetter $LastName
+
+    # Check if user already exists
+    $existingUser = Get-LMUser | Select-String -Pattern $Username
+    if ($existingUser) {
+        Write-Host "User '$Username' already exists. Skipping creation." -ForegroundColor Red
+        return
+    }
+
     $Password = Generate-RandomPassword
 
     # Create new user with roles
     New-LMUser -Username $Username `
-        -Password $Password `
-        -FirstName $FirstName `
-        -LastName $LastName `
-        -Email $Email `
-        -RoleNames @($RoleName) `
-        -ForcePasswordChange $true `
-
-    # Set user phone number
-    Set-LMUser -Username $Username -Phone $Mobile -note $Ticket
+               -Password $Password `
+               -FirstName $FirstName `
+               -LastName $LastName `
+               -Email $Email `
+               -Phone $Mobile `
+               -Note $Ticket `
+               -RoleNames @($RoleName) `
+               -UserGroups @($GroupName) `
+               -ForcePasswordChange $true `
+               -Status "active" `
+               -Timezone "Australia/Sydney"
 
     # Print summary table
     $table = @(
-    [pscustomobject]@{Name="Username"; Value=$Username},
-    [pscustomobject]@{Name="First Name"; Value=$FirstName},
-    [pscustomobject]@{Name="Last Name"; Value=$LastName},
-    [pscustomobject]@{Name="Email"; Value=$Email},
-    [pscustomobject]@{Name="Role Name"; Value=$RoleName},
-    [pscustomobject]@{Name="Mobile"; Value=$Mobile},
-    [pscustomobject]@{Name="Ticket"; Value=$Ticket},
-    [pscustomobject]@{Name="Password"; Value=$Password}
-)
+        [pscustomobject]@{Name="Username"; Value=$Username},
+        [pscustomobject]@{Name="First Name"; Value=$FirstName},
+        [pscustomobject]@{Name="Last Name"; Value=$LastName},
+        [pscustomobject]@{Name="Email"; Value=$Email},
+        [pscustomobject]@{Name="Role Name"; Value=$RoleName},
+        [pscustomobject]@{Name="Group Name"; Value=$GroupName},
+        [pscustomobject]@{Name="Mobile"; Value=$Mobile},
+        [pscustomobject]@{Name="Ticket"; Value=$Ticket},
+        [pscustomobject]@{Name="Password"; Value=$Password}
+    )
 
-    Format-SpectreTable -Title "Creation summary" -Data $table
+    Format-SpectreTable -Title "Creation Summary" -Data $table
 }
-
-#RUN: Create_LMUser -Username michael.ceola@global.ntt -FirstName Michael -LastName Ceola -Email michael.ceola@global.ntt -RoleName administrator -Mobile 0411123123 -Ticket SVR12345
-
 #------------------------
 
 function Set-DeviceMonitoringState_device {
@@ -1582,12 +1689,14 @@ function Show-ERI {
         $predefResourceType = ($autoProperties | Where-Object { $_.Name -eq 'predef.externalResourceID' }).Value
         $inboundERI         = ($custProperties | Where-Object { $_.Name -eq 'manual.inbound.externalResourceID' }).Value
         $outboundERI        = ($custProperties | Where-Object { $_.Name -eq 'manual.outbound.externalResourceID' }).Value
+        $upstreamERI        = ($custProperties | Where-Object { $_.Name -eq 'manual.upstream.deviceid' }).Value
 
         [PSCustomObject]@{
             DisplayName        = $item.DisplayName
             DeviceName         = $item.Name
             InboundERI         = $inboundERI
             OutboundERI        = $outboundERI
+            upstreamERI        = $upstreamERI
             PredefResourceType = $predefResourceType
         }
     }
@@ -1992,6 +2101,89 @@ function Update-ABCG {
 
 #RUN: Update-ABCG -CollectorGroupName 'KPMG Collector Group' -TargetCollectorGroupId 52
 
+#------------------------
+function Set-LMDevicesToABCG {
+<#
+.SYNOPSIS
+    Show LogicMonitor Collectors and Auto Balanced Collector Groups (ABCG)
+
+.DESCRIPTION
+    This function checks devices assigned to collectors within a specified Auto Balanced Collector Group (ABCG).
+    It compares each device's autoBalancedCollectorGroupId with the target ABCG ID and optionally reports or fixes mismatches.
+    Devices listed in the 'host' custom property of the collector group will be excluded from processing.
+
+.EXAMPLE
+    Report only:
+    Set-LMDevicesToABCG -CollectorGroupName "ABCG Name" -Report $true -Fix $false
+
+.EXAMPLE
+    Report and Fix:
+    Set-LMDevicesToABCG -CollectorGroupName "ABCG Name" -Report $true -Fix $true
+#>
+    param (
+        [Parameter(Mandatory = $true)]
+        [string]$CollectorGroupName,
+
+        [bool]$Report = $true,
+        [bool]$Fix = $false
+    )
+	#clear varibles
+    $ABCG = ""
+    $ABCGid  = ""
+	$LMCollector =""
+
+    # Get the collector group object
+    $ABCG = Get-LMCollector -Filter "collectorGroupName -eq '$CollectorGroupName'"
+    $ABCGid = $ABCG.collectorGroupId | Select-Object -First 1
+
+    # Extract custom properties
+    $customProperties = $ABCG | Select-Object -ExpandProperty CustomProperties
+    # Check if 'host' property exists
+    $hostProperty = $customProperties | Where-Object { $_.Name -eq 'host' }
+
+    if (-not $hostProperty) {
+        Write-Error "ERROR: The custom property 'host' was not found in Collector group '$CollectorGroupName'."
+        return
+    }
+
+    # Get host values
+    $ABCG_Hosts = $hostProperty.Value
+    Write-Host "Boxes to filter out: $ABCG_Hosts"
+
+    # Convert host list to array
+    $excludedHosts = $ABCG_Hosts -split '\s+'
+
+    # Loop through each collector ID
+    foreach ($LMCollector in $ABCG.id) {
+        $devices = Get-LMDevice -Filter "currentCollectorId -eq $LMCollector" | Where-Object { $_.displayName -notin $excludedHosts }
+
+        $totalDevices = $devices.Count
+        $counter = 1
+
+        foreach ($device in $devices) {
+            Write-Host "Checking: $counter of $($totalDevices): $($device.displayName)" -ForegroundColor Yellow
+            $deviceDetails = Get-LMDevice -DisplayName $device.displayName | Select-Object displayName, autoBalancedCollectorGroupId
+
+            if ($deviceDetails.autoBalancedCollectorGroupId -ne $ABCGid) {
+                if ($Report) {
+                    Write-Output "Mismatch found: $($deviceDetails.displayName)"
+                }
+
+                if ($Fix) {
+                    Write-Output "Fixing: $($deviceDetails.displayName)"
+                    Get-LMDevice -displayname $deviceDetails.displayname | Set-LMDevice -AutoBalancedCollectorGroupId $ABCGid > $null
+                }
+            }
+
+            $counter++
+        }
+    }
+
+    Write-Host "Completed processing for Collector Group '$CollectorGroupName'."  -ForegroundColor Green
+}
+
+# Example usage:
+# Set-LMDevicesToABCG -CollectorGroupName "DC Fyshwick" -Report $true -Fix $false
 #------------------------
 function Show_device_by_siteid {
     param (
@@ -2404,6 +2596,7 @@ $menu = @(
     [pscustomobject]@{Name="Export-CPUInstanceCounts"; Overview="Show Device DataSource and Instance Count for a group filtered on CPU|PRocessor."; Example="Export-CPUInstanceCounts -GroupId 9766 -OutputFile 'CPU_InstanceCounts.csv'"},
     [pscustomobject]@{Name="Show-ABCG"; Overview="Show ABCG."; Example="Show-ABCG or Show-ABCG -filter 'KPMG'"},
     [pscustomobject]@{Name="Update-ABCG"; Overview="Update devices to use ABCG."; Example="Update-ABCG -CollectorGroupName 'KPMG Collector Group' -TargetCollectorGroupId '52'"},
+    [pscustomobject]@{Name="Set-LMDevicesToABCG"; Overview="Report and/or fix ABCG."; Example="Set-LMDevicesToABCG -CollectorGroupName 'DC Fyshwick' -Report $true -Fix $false"},
     [pscustomobject]@{Name="Show_device_by_siteid -siteId '5740'"; Overview="Search for devices with siteid."; Example="Show_device_by_siteid -siteId '5740'"},
     [pscustomobject]@{Name="Export-DeviceGroupAudit"; Overview="Export Resource, DataSources and the Instance counts."; Example="Export-DeviceGroupAudit -GroupId 4791 -OutputPath 'C:\Reports\GroupAudit.csv'"},
     [pscustomobject]@{Name="Export-LMAlertSettingsBulk"; Overview="Export alerts applied at a group for DataSources."; Example="Get-Help Export-LMAlertSettingsBulk -Examples"},
@@ -2411,7 +2604,7 @@ $menu = @(
     [PSCustomObject]@{Name = "__"; Overview = "__";Example="__" }, # Blank line
     [pscustomobject]@{Name="Get-CurrentDate"; Overview="Get the current date"; Example="Get-CurrentDate"},
     [pscustomobject]@{Name="Get-GroupDetails"; Overview="Get-GroupDetails -Parentid 4615"; Example="Get-GroupDetails -Parentid '4615'"},
-    [pscustomobject]@{Name="Get-GroupDetails_to_csv "; Overview="Get-GroupDetails_to_csv"; Example="Get-GroupDetails -Parentid '4615'"},
+    [pscustomobject]@{Name="Get-GroupDetails_to_csv "; Overview="Get-GroupDetails_to_csv"; Example="Get-GroupDetails_to_csv -Parentid '4615'"},
     [pscustomobject]@{Name="Get-GroupDetails_with_devicecount"; Overview="Get-GroupDetails_with_devicecoun"; Example="Get-GroupDetails_with_devicecount -Parentid '12787'"},
     [pscustomobject]@{Name="Get-SwaggerDetails"; Overview="Get-SwaggerDetails off LM portal"; Example="Get-SwaggerDetails"},
     [PSCustomObject]@{Name = "__"; Overview = "__";Example="__" }, # Blank line    
