@@ -24,7 +24,7 @@ function Export-LMAlertSettingsBulk {
     Columns to include in the export. If not specified, all properties are exported.
 
 .EXAMPLE
-    Export-LMAlertSettingsBulk -FolderName "ESV" `
+    Export-LMAlertSettingsBulk -FolderName "Group123" `
         -DatasourceNames @("HostStatus","BGP-","Cisco_CPU_SNMP") `
         -DataPointNames @("ALL") `
         -OutputDirectory "C:\Reports" `
