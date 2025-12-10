@@ -13,7 +13,7 @@
     PS> .\lm-functions.ps1
 
 .NOTES
-    Version 1.7
+    Version 1.8
 
 .LINK
 	https://github.com/AUrhino/LogicMonitor/blob/main/lm-functions.ps1
@@ -117,7 +117,7 @@ function Show-Collectors {
 #RUN: Show-Collectors
 #------------------------
 function Show-folders {
-    Get-LMDeviceGroup -id $(Get-LMDeviceGroup -Filter "fullPath -eq '/'").id | select -expand subGroups | Where-Object { $_.fullPath -like '*NTT*' } | select id,name,fullPath,numofHosts
+    Get-LMDeviceGroup -id $(Get-LMDeviceGroup -Filter "fullPath -eq '/'").id | select -expand subGroups | Where-Object { $_.fullPath -like '*META*' } | select id,name,fullPath,numofHosts
 }
 #RUN: Show-folders
 #------------------------
@@ -125,12 +125,12 @@ function Show-folders {
 #    [String]$fullPath = $args[0]
 #    # checks for variable else shows example.
 #    if (-not $fullPath['']) {
-#        Write-Host "Example usage: Show-Country-folders NTT-AU" -ForegroundColor Yellow
+#        Write-Host "Example usage: Show-Country-folders META-AU" -ForegroundColor Yellow
 #        return
 #    }
 #    Get-LMDeviceGroup -id $(Get-LMDeviceGroup -Filter "fullPath -eq '$fullPath'").id | select -expand subGroups | select id, name, fullPath,numofHosts
 #}
-##RUN: Show-Country-folders NTT-AU
+##RUN: Show-Country-folders META-AU
 #
 #------------------------
 function Show-Country-folders  {
@@ -139,7 +139,7 @@ function Show-Country-folders  {
     )
 
     if (-not $fullPath) {
-        Write-Host "Example: Show-Country-folders -fullPath 'NTT-AU'" -ForegroundColor Yellow
+        Write-Host "Example: Show-Country-folders -fullPath 'META-AU'" -ForegroundColor Yellow
         return
     }
 
@@ -160,7 +160,7 @@ function Show-Country-folders  {
 
     return $result
 }
-#RUN: Show-Country-folders -fullPath 'NTT-AU'
+#RUN: Show-Country-folders -fullPath 'META-AU'
 #------------------------
 function Show-Country-folders_plus_DEAD {
 <#
@@ -174,10 +174,10 @@ function Show-Country-folders_plus_DEAD {
     The path to the folder to audit.
 
 .EXAMPLE
-    Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+    Show-Country-folders_plus_DEAD -fullPath 'META-AU'
 
 .EXAMPLE
-    Show-Country-folders_plus_DEAD -fullPath 'NTT-AU' | Export-Csv Exported_file.csv
+    Show-Country-folders_plus_DEAD -fullPath 'META-AU' | Export-Csv Exported_file.csv
 
 #>
     param (
@@ -185,7 +185,7 @@ function Show-Country-folders_plus_DEAD {
     )
 
     if (-not $fullPath) {
-        Write-Host "Example: Show-Country-folders -fullPath 'NTT-AU'" -ForegroundColor Yellow
+        Write-Host "Example: Show-Country-folders -fullPath 'META-AU'" -ForegroundColor Yellow
         return
     }
 
@@ -219,10 +219,10 @@ function Show-Country-folders_plus_DEAD {
 }
 
 # Example usage:
-#Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+#Show-Country-folders_plus_DEAD -fullPath 'META-AU'
 
 # Example usage:
-#RUN: Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+#RUN: Show-Country-folders_plus_DEAD -fullPath 'META-AU'
 
 #---------------------------------
 
@@ -259,7 +259,7 @@ function Show-Country-folders_plus_DEAD {
     )
 
     if (-not $fullPath) {
-        Write-Host "Example: Show-Country-folders -fullPath 'NTT-AU'" -ForegroundColor Yellow
+        Write-Host "Example: Show-Country-folders -fullPath 'META-AU'" -ForegroundColor Yellow
         return
     }
 
@@ -293,7 +293,7 @@ function Show-Country-folders_plus_DEAD {
 }
 
 # Example usage:
-#Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'
+#Show-Country-folders_plus_DEAD -fullPath 'META-AU'
 
 
 #RUN: Get-GroupDetails -Parentid 4615
@@ -310,7 +310,7 @@ function Show-Country-folders_plus_DEAD_v2 {
     )
 
     if (-not $fullPath) {
-        Write-Host "Example: Show-Country-folders_plus_DEAD_v2 -fullPath 'NTT-AU' -EmailTo 'ryan.gillan@nttdata.com'" -ForegroundColor Yellow
+        Write-Host "Example: Show-Country-folders_plus_DEAD_v2 -fullPath 'META-AU' -EmailTo 'ryan@MYemail.com'" -ForegroundColor Yellow
         return
     }
 
@@ -351,7 +351,7 @@ function Show-Country-folders_plus_DEAD_v2 {
     }
 }
 
-#RUN: Show-Country-folders_plus_DEAD_v2 -fullPath 'NTT-AU' -EmailTo 'ryan.gillan@nttdata.com'
+#RUN: Show-Country-folders_plus_DEAD_v2 -fullPath 'META-AU' -EmailTo 'ryan@email.com'
 
 
 #------------------------
@@ -550,14 +550,14 @@ function Show-Data {
     [String]$ds = $args[1] #Datasource to query
     # checks for variable else shows example.
     if (-not $CI['']) {
-        Write-Host "Example usage: Show-Data ss-core NTT_SNMP_Status" -ForegroundColor Yellow
+        Write-Host "Example usage: Show-Data ss-core SNMP_Status" -ForegroundColor Yellow
         return
     }
     
     $device = Get-LMDevice -DisplayName $CI
     # Check if the device object is not null
     if ($device) {
-        $ds = Get-LMDeviceInstanceList -Filter ("name -contains 'NTT_SNMP_Status'") -Name $(Get-LMDevice -displayname AU-ADL-TIP-RT-01).name | select name,deviceDisplayName,id
+        $ds = Get-LMDeviceInstanceList -Filter ("name -contains 'SNMP_Status'") -Name $(Get-LMDevice -displayname AU-ADL-TIP-RT-01).name | select name,deviceDisplayName,id
         # Print the data sources
         Get-LMDeviceInstanceData -StartDate (Get-Date).AddHours(-7) -EndDate (Get-Date) -Ids $ds.id -AggregationType "last" -Period 1 | select dataSourceName, dataPoints, values
     } else {
@@ -566,7 +566,7 @@ function Show-Data {
 }
 # Add an alias for the function
 Set-Alias -Name sd -Value Show-Data
-#RUN: Show-Data ss-core NTT_SNMP_Status
+#RUN: Show-Data ss-core SNMP_Status
 #------------------------
 #get-lmdevice -displayname rprdms406 | select displayname,name,hostStatus,sdtStatus
 #-Filter "sdtStatus -contains 'SDT'"
@@ -584,7 +584,7 @@ function Show-SDT {
 Set-Alias -Name ssdt -Value Show-SDT
 #RUN: Show-SDT CHED
 #------------------------
-#$ds = Get-LMDeviceInstanceList -Filter ("name -eq 'NTT_SNMP_Status'") -Name $(Get-LMDevice -displayname AU-ADL-TIP-RT-01).name | select name,deviceDisplayName,id
+#$ds = Get-LMDeviceInstanceList -Filter ("name -eq 'SNMP_Status'") -Name $(Get-LMDevice -displayname AU-ADL-TIP-RT-01).name | select name,deviceDisplayName,id
 #Get-LMDeviceInstanceData -StartDate (Get-Date).AddHours(-7) -EndDate (Get-Date) -Ids $ds.id -AggregationType "last" -Period 1 | select dataSourceName, dataPoints, values
 
 #------------------------
@@ -820,14 +820,14 @@ function Generate-RandomPassword {
       It checks for existing users before creation and formats input values.
 
 .EXAMPLE
-    Create_LMUser -Username "michael.ceola@global.ntt" `
-                  -FirstName "Michael" `
-                  -LastName "Ceola" `
-                  -Email "michael.ceola@global.ntt" `
+    Create_LMUser -Username "Test.User@email.com" `
+                  -FirstName "Test" `
+                  -LastName "Email" `
+                  -Email "Test.user@email.com" `
                   -RoleName "administrator" `
-                  -GroupName "NTT DATA View Operator" `
+                  -GroupName "Operator" `
                   -Mobile "0411123123" `
-                  -Ticket "SVR12345"
+                  -Ticket "123456"
 #>
 
 function Generate-RandomPassword {
@@ -1382,7 +1382,7 @@ function Show-ClassRouterInTree {
 
 #------------------------
 function Get-PortalInfo {
-Get-LMPortalInfo |select nttanzairservicesuat
+Get-LMPortalInfo |select portalname
 
 }
 #RUN: Get-PortalInfo
@@ -1480,7 +1480,7 @@ function Show-GroupDeviceCounts {
                 $Count_of_instanceNumber = ($DataSources | measure instanceNumber -Sum).Sum
                 
                 # Capture the meta.class value from customProperties
-                $nttClass = $device.CustomProperties | Where-Object { $_.Name -eq 'meta.class' }
+                $Class = $device.CustomProperties | Where-Object { $_.Name -eq 'meta.class' }
                 
                 
                 # Create a custom object to store the results
@@ -1488,7 +1488,7 @@ function Show-GroupDeviceCounts {
                     DeviceName = $device.displayName
                     Count_of_dataSourceName = $Count_of_dataSourceName
                     Count_of_instanceNumber = $Count_of_instanceNumber
-                    NTTClass = $nttClass.Value
+                    Class = $Class.Value
                 }
                 
                 # Add the result to the array
@@ -1536,13 +1536,13 @@ function Show-DeviceData {
         $Count_of_dataSourceName = ($DataSources | group dataSourceName).Count
         $Count_of_instanceNumber = ($DataSources | measure instanceNumber -Sum).Sum
 
-        $nttClass                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'meta.class' }
+        $Class                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'meta.class' }
         $CustomWMI                 = $device.CustomProperties    | Where-Object { $_.Name -eq 'wmi.user' }
         $Categories                = $device.CustomProperties    | Where-Object { $_.Name -eq 'system.categories' }
         $inheritedProp_wmi         = $device.inheritedProperties | Where-Object { $_.Name -eq 'wmi.user' }
         $autoProperties_wmi_state  = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.wmi.operational' }
         $inheritedProp_snmp        = $device.inheritedProperties | Where-Object { $_.Name -eq 'snmp.community' }
-        $autoProperties_snmp_state = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }
+        $autoProperties_snmp_state = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.snmp.operational' }
 
         $inheritedProperty_wmi = if ($inheritedProp_wmi) { "TRUE" } else { "N/A" }
         $inheritedProperty_snmp = if ($inheritedProp_snmp) { "TRUE" } else { "N/A" }
@@ -1566,7 +1566,7 @@ function Show-DeviceData {
             DeviceID                         = $device.id
             DataSourceCount                  = $Count_of_dataSourceName
             InstanceNumberSum                = $Count_of_instanceNumber
-            NTTClass                         = $nttClass.Value
+            Class                            = Class.Value
             CustomWMI                        = $CustomWMI.Value
             inheritedProperty_wmi            = $inheritedProperty_wmi
             inheritedProp_wmi                = $inheritedProp_wmi.Value
@@ -1765,11 +1765,11 @@ function Export-LMDeviceAudit {
         $wmiResp       = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.wmi.responding' }).Value
         $wmiExc        = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.wmi.exception' }).Value
         $snmpOperExc   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.snmp.exception' }).Value
-        $NTTsnmpRes    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.snmp.responding' }).Value
+        $anmpRes       = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.snmp.responding' }).Value
         $MonLevel      = ($customProperties | Where-Object { $_.Name -eq 'meta.monitoring.level' }).Value
-        $nttclass      = ($customProperties | Where-Object { $_.Name -eq 'meta.class' }).Value
-        $nttcompany    = ($customProperties | Where-Object { $_.Name -eq 'meta.company' }).Value
-        $nttasatypeapp = ($customProperties | Where-Object { $_.Name -eq 'meta.asa.type.app' }).Value
+        $class         = ($customProperties | Where-Object { $_.Name -eq 'meta.class' }).Value
+        $company       = ($customProperties | Where-Object { $_.Name -eq 'meta.company' }).Value
+        $asatypeapp    = ($customProperties | Where-Object { $_.Name -eq 'meta.asa.type.app' }).Value
         $wmiuser       = ($customProperties | Where-Object { $_.Name -eq 'wmi.user' }).Value
         $snmpuser      = ($customProperties | Where-Object { $_.Name -eq 'snmp.security' }).Value
         $location      = ($customProperties | Where-Object { $_.Name -eq 'location' }).Value
@@ -1778,20 +1778,20 @@ function Export-LMDeviceAudit {
 
         $fullMonitoring = (
             ($wmiResp -ne $null -and $wmiResp.Contains("true")) -or
-            ($NTTsnmpRes -ne $null -and $NTTsnmpRes.Contains("true"))
+            ($snmpRes -ne $null -and $snmpRes.Contains("true"))
         )
 
         $deviceData = @{
-            'meta.class'            = $nttclass
-            'meta.company'          = $nttcompany
-            'meta.asa.type.app'     = $nttasatypeapp
+            'meta.class'            = $class
+            'meta.company'          = $company
+            'meta.asa.type.app'     = $asatypeapp
             'Location'             = $location
             'State '               = $locationState
             'sysoid'               = $sysoid
             'sysinfo'              = $sysinfo
             'hoststatus'           = $hoststatus
             'snmp.security'        = $snmpuser
-            'snmp.responding'      = $NTTsnmpRes
+            'snmp.responding'      = $snmpRes
             'snmp.exception'       = $snmpOperExc
             'snmp.version '        = $snmpversion
             'wmi.user'             = $wmiuser
@@ -2216,7 +2216,7 @@ function Export-DeviceGroupAudit {
             'isCollector'        = ($systemProperties | Where-Object { $_.Name -eq 'system.collector' }).Value
             'model'              = ($autoProperties   | Where-Object { $_.Name -eq 'auto.endpoint.model' }).Value
             'wmi.operational'    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.wmi.operational' }).Value
-            'snmp.operational'   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }).Value
+            'snmp.operational'   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.snmp.operational' }).Value
             'PredefResourceType' = ($autoProperties   | Where-Object { $_.Name -eq 'predef.externalResourceType' }).Value
             'meta.class'          = ($customProperties | Where-Object { $_.Name -eq 'meta.class' }).Value
             'meta.class.report'   = ($customProperties | Where-Object { $_.Name -eq 'meta.class.report' }).Value
@@ -2262,7 +2262,7 @@ function Show-AP_Instances_on_WLC {
     $Results = @()
 
     foreach ($Device in $Devices) {
-        $DataSource = Get-LMDeviceDatasourceList -id $Device.id | Where-Object { $_.dataSourceName -eq "NTT_PingCiscoAP-" }
+        $DataSource = Get-LMDeviceDatasourceList -id $Device.id | Where-Object { $_.dataSourceName -eq "PingCiscoAP-" }
         if ($DataSource) {
             $Instances = Get-LMDeviceDatasourceInstance -DatasourceId $DataSource.datasourceId -DeviceId $Device.id
             foreach ($i in $Instances) {
@@ -2331,7 +2331,7 @@ function Send-Email {
 
     # Check if required parameters are provided
     if (-not $Subject -or -not $Body -or -not $Attachment) {
-        Write-Host "Example usage of Send-Email -To 'ryan.gillan@nttdata.com' -Subject 'Subject' -Body 'Body' -Attachment 'C:\temp\services\WOW_services.csv'" -ForegroundColor Yellow
+        Write-Host "Example usage of Send-Email -To 'ryan@email.com' -Subject 'Subject' -Body 'Body' -Attachment 'C:\temp\LM_services.csv'" -ForegroundColor Yellow
         return
     }
 
@@ -2355,7 +2355,7 @@ function Send-Email {
     [System.Runtime.InteropServices.Marshal]::ReleaseComObject($Outlook) | Out-Null
 }
 
-#RUN: Send-Email -To "ryan.gillan@nttdata.com" -subject "Subject" -Body "Body" -Attachment "C:\temp\services\WOW_services.csv"
+#RUN: Send-Email -To "ryan@email.com" -subject "Subject" -Body "Body" -Attachment "C:\temp\LM_services.csv"
 
 
 #------------------------
@@ -2506,26 +2506,6 @@ function Export-LMAlertSettingsBulk {
 }
 
 #------------------------
-#------------------------
-
-#Write-Host "LM custom functions: -ForegroundColor Yellow
-#Show the functions in this file.
-#Get-Content "C:\Users\rgillan\OneDrive - NTT\Documents\LogicMonitor\lm-functions.ps1" | Where-Object { $_ -match "^function" }
-
-#Show the functions in this file.
-#$functions = Get-Content "C:\Users\rgillan\OneDrive - NTT\Documents\LogicMonitor\lm-functions.ps1" | Where-Object { $_ -match "^function" } | ForEach-Object { $_ -replace "^function\s+|\s*{", "" } | Sort-Object
-# Write-Host "LM custom functions:" -ForegroundColor Yellow
-#foreach ($function in $functions) {
-#    Write-Host $function -ForegroundColor Yellow
-#}
-
-
-#Print messages
-#Write-Host "LM custom functions: `n Show-Dead (Company_name), Show-Devices (Company_name), Dead-Collectors (Company_name), Show-folders, Show-GroupTree, Show-Country-folders, Get-CurrentDate, Show-DataSources, Show-DataSources-full, Show-Data `n )" -ForegroundColor Yellow
-#Write-Host " continued: `n Get-GroupDetails (ID), Show-Collectors, Get-GroupDetails_to_csv,  Show-MissingSSIDPrompt, Generate-RandomPassword" -ForegroundColor Yellow
-
-# TO DO: Add tags and some way to filter on these.
-#         eg Collector.  add a command to show the functions where only contains tag Collector.
 $menu = @(
     [pscustomobject]@{Name="Show-Menu"; Overview="Show this menu"; Example="Show-Menu -data `$menu -filter '<.|Collector|devices>'"},
     [pscustomobject]@{Name="Show-random"; Overview="Show a random person"; Example="Show-random"},
@@ -2534,7 +2514,7 @@ $menu = @(
     [pscustomobject]@{Name="Quotes"; Overview="Provides helpful Quotes from Assasins Creed."; Example="Quotes"},
     [pscustomobject]@{Name="Movies"; Overview="Provides helpful Quotes from Movies."; Example="Movies"},
     [pscustomobject]@{Name="Search-KeywordInFiles"; Overview="Search like grep."; Example="Search-KeywordInFiles -Keyword 'yourKeyword' -Path 'C:\your\path'"},
-	[pscustomobject]@{Name="Send-Email"; Overview="Sends email thru Outlook."; Example="Send-Email -To 'ryan.gillan@nttdata.com' -subject 'Subject' -Body 'Body' -Attachment 'C:\temp\services\WOW_services.csv'"},
+	[pscustomobject]@{Name="Send-Email"; Overview="Sends email thru Outlook."; Example="Send-Email -To 'ryan@email.com' -subject 'Subject' -Body 'Body' -Attachment 'C:\temp\LM_services.csv'"},
 	
     [PSCustomObject]@{Name = "__"; Overview = "__";Example="__" }, # Blank line
     [pscustomobject]@{Name="Show_BackupConfig"; Overview="Show backup configs"; Example="Show_BackupConfig -displayname 'displayname'"},
@@ -2543,9 +2523,9 @@ $menu = @(
     [pscustomobject]@{Name="Show-DeadCollectors"; Overview="Show Dead Collectors on a company"; Example="Show-DeadCollectors"},
     [pscustomobject]@{Name="Show-Collectors"; Overview="Show Collectors on a company"; Example="Show-Collectors"},
     [pscustomobject]@{Name="Show-folders"; Overview="Show LM root folders"; Example="Show-folders"},
-    [pscustomobject]@{Name="Show-Country-folders"; Overview="Show Country folders and host count"; Example="Show-Country-folders -fullPath 'NTT-AU'"},
-    [pscustomobject]@{Name="Show-Country-folders_plus_DEAD"; Overview="Show Country folders, host and dead count"; Example="Show-Country-folders_plus_DEAD -fullPath 'NTT-AU'"},
-    [pscustomobject]@{Name="Show-Country-Show-Country-folders_plus_DEAD"; Overview="Show Country folders, host and dead count. Email output"; Example="Show-Country-folders_plus_DEAD_v2 -fullPath 'NTT-AU' -EmailTo 'ryan.gillan@nttdata.com'"},
+    [pscustomobject]@{Name="Show-Country-folders"; Overview="Show Country folders and host count"; Example="Show-Country-folders -fullPath 'META-AU'"},
+    [pscustomobject]@{Name="Show-Country-folders_plus_DEAD"; Overview="Show Country folders, host and dead count"; Example="Show-Country-folders_plus_DEAD -fullPath 'META-AU'"},
+    [pscustomobject]@{Name="Show-Country-Show-Country-folders_plus_DEAD"; Overview="Show Country folders, host and dead count. Email output"; Example="Show-Country-folders_plus_DEAD_v2 -fullPath 'META-AU' -EmailTo 'ryan@email.com'"},
     [pscustomobject]@{Name="Show-GroupTree"; Overview="Show folders in a tree"; Example="Show-GroupTree '5000'"},
     [pscustomobject]@{Name="Print-FolderTree_2_csv"; Overview="Print-FolderTree_2_csv"; Example="Print-FolderTree_2_csv -id 11234 -OutputFile 'Australia_Folders.csv' "},
     [pscustomobject]@{Name="Print-FolderTree_2_csv_flatstructure"; Overview="Print-FolderTree_2_csv without indents. Shows folder,path and appliesto"; Example="Print-FolderTree_2_csv_flatstructure -id 11234 -OutputFile 'Australia_Folders_flat.csv' "},
@@ -2555,7 +2535,7 @@ $menu = @(
     [pscustomobject]@{Name="Show-Devices_in_group"; Overview="Show-Devices_in_group"; Example="Show-Devices_in_group 'ID'"},
     [pscustomobject]@{Name="Show-DataSources"; Overview="Show-DataSource"; Example="Show-DataSources 'ss-core'"},
     [pscustomobject]@{Name="Show-DataSources-full"; Overview="Show-DataSources-full"; Example="Show-DataSources-full ss-core"},
-    [pscustomobject]@{Name="Show-Data"; Overview="Show-Data"; Example="Show-Data 'ss-core' 'NTT_SNMP_Status'"},
+    [pscustomobject]@{Name="Show-Data"; Overview="Show-Data"; Example="Show-Data 'Switch' 'SNMP_Status'"},
     [pscustomobject]@{Name="Show-SDT"; Overview="Show-SDT"; Example="Show-SDT 'CHED'"},
     [pscustomobject]@{Name="Show-Netflow"; Overview="Show-Netflow"; Example="Show-Netflow 'CHED'"},
     [pscustomobject]@{Name="Show-Dead_On_Collector"; Overview="Show Dead devices On a Collector"; Example="Show-Dead_On_Collector '333'"},
@@ -2612,5 +2592,6 @@ Write-Host "Or using quoted key words: Show-Menu -data `$menu -filter `'Collecto
 
 
 # EOF
+
 
 
