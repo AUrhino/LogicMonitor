@@ -577,8 +577,8 @@ function Show-SDT {
         Write-Host "Example usage: Show-SDT CHED" -ForegroundColor Yellow
         return
     }
-    Write-Host "Checking for devices on: ntt.company = $Company"
-    Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json))" | select displayname,name,hoststatus,sdtStatus | sort displayname
+    Write-Host "Checking for devices on: meta.company = $Company"
+    Get-LMDevice -Filter "customProperties -eq $($('{"name":"meta.company","value":"' + $Company + '"}' | ConvertTo-Json))" | select displayname,name,hoststatus,sdtStatus | sort displayname
 }
 # Add an alias for the function
 Set-Alias -Name ssdt -Value Show-SDT
@@ -595,8 +595,8 @@ function Show-Netflow {
         Write-Host "Example usage: Show-Netflow 33" -ForegroundColor Yellow
         return
     }
-    Write-Host "Show Netflow enabled devices on: ntt.company = $Company"
-    Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) -and systemProperties -eq $('{"name":"system.enablenetflow","value":"true"}' | ConvertTo-Json) "
+    Write-Host "Show Netflow enabled devices on: meta.company = $Company"
+    Get-LMDevice -Filter "customProperties -eq $($('{"name":"meta.company","value":"' + $Company + '"}' | ConvertTo-Json)) -and systemProperties -eq $('{"name":"system.enablenetflow","value":"true"}' | ConvertTo-Json) "
 }
 Set-Alias -Name snf -Value Show-Netflow
 
@@ -679,12 +679,12 @@ function Show-MissingSSID {
 
     # Loop through devices in the listed group
     foreach ($Device in $Devices) {
-        # Check if 'ntt.ci.sys_id' tag is present and its value is not null
-        $currentPropValue = $Device.customproperties.value[$Device.customProperties.name.IndexOf('ntt.ci.sys_id')]
+        # Check if 'meta.ci.sys_id' tag is present and its value is not null
+        $currentPropValue = $Device.customproperties.value[$Device.customProperties.name.IndexOf('meta.ci.sys_id')]
         $isEDCEventPropValue = $Device.inheritedProperties.value[$Device.inheritedProperties.name.IndexOf('isEDCEvent')]
 
         # Check if the custom property exists and the link is not already set
-        if ($currentPropValue -and $Device.customProperties.name.IndexOf('ntt.ci.sys_id') -ne -1) {
+        if ($currentPropValue -and $Device.customProperties.name.IndexOf('meta.ci.sys_id') -ne -1) {
             $currentLink = (Get-LMDevice -displayname $Device.displayName).Link
             if (-not $currentLink) {
                 $Updated++
@@ -694,7 +694,7 @@ function Show-MissingSSID {
             }
         } else {
             $NotUpdated++
-            Write-Host "ERROR: The property of ntt.ci.sys_id is NOT SET on:" $Device.displayname -ForegroundColor RED
+            Write-Host "ERROR: The property of meta.ci.sys_id is NOT SET on:" $Device.displayname -ForegroundColor RED
             $NoSysIdDevices += $Device.displayname
         }
     }
@@ -719,12 +719,12 @@ function Show-MissingCompany {
 
     # Loop through devices in the listed group
     foreach ($Device in $Devices) {
-        # Check if 'ntt.company' tag is present and its value is not null
-        $currentPropValue = $Device.customproperties.value[$Device.customProperties.name.IndexOf('ntt.company')]
+        # Check if 'meta.company' tag is present and its value is not null
+        $currentPropValue = $Device.customproperties.value[$Device.customProperties.name.IndexOf('meta.company')]
         $isEDCEventPropValue = $Device.inheritedProperties.value[$Device.inheritedProperties.name.IndexOf('isEDCEvent')]
 
         # Check if the custom property exists and the link is not already set
-        if ($currentPropValue -and $Device.customProperties.name.IndexOf('ntt.ci.sys_id') -ne -1) {
+        if ($currentPropValue -and $Device.customProperties.name.IndexOf('meta.ci.sys_id') -ne -1) {
             $currentLink = (Get-LMDevice -displayname $Device.displayName).Link
             if (-not $currentLink) {
                 $Updated++
@@ -734,7 +734,7 @@ function Show-MissingCompany {
             }
         } else {
             $NotUpdated++
-            Write-Host "ERROR: The property of ntt.ci.sys_id is NOT SET on:" $Device.displayname -ForegroundColor RED
+            Write-Host "ERROR: The property of meta.ci.sys_id is NOT SET on:" $Device.displayname -ForegroundColor RED
             $NoIdDevices += $Device.displayname
         }
     }
@@ -934,7 +934,7 @@ function Set-DeviceMonitoringState_device {
         Write-Host "Example usage: Set-DeviceMonitoringState_device 'displayname'" -ForegroundColor Yellow
         return
     }
-    Get-LMDevice -displayname $displayname | Set-LMDevice -Properties @{'ntt.monitoring.status' = 'Active'}
+    Get-LMDevice -displayname $displayname | Set-LMDevice -Properties @{'meta.monitoring.status' = 'Active'}
     }
 
 #RUN: Set-DeviceMonitoringState_device -displayname ss-core
@@ -949,7 +949,7 @@ function Set-DeviceMonitoringState_Group {
     }
     $devices = Get-LMDeviceGroupDevices -id $GroupId
     foreach ($device in $devices.id) {
-        Set-LMDevice -Id $device -Properties @{'ntt.monitoring.status' = 'Active'}
+        Set-LMDevice -Id $device -Properties @{'meta.monitoring.status' = 'Active'}
     }
 }
 #RUN: Set-DeviceMonitoringState_Group -GroupId 6700
@@ -1019,8 +1019,8 @@ function Show_LMServices {
         $systemProperties = $item | Select-Object -ExpandProperty SystemProperties
         $customProperties = $item | Select-Object -ExpandProperty CustomProperties
         $groups = ($systemProperties | Where-Object { $_.Name -eq 'system.groups' }).Value
-        $banner = ($customProperties | Where-Object { $_.Name -eq 'ntt.wow.banner' }).Value
-        $siteid = ($customProperties | Where-Object { $_.Name -eq 'ntt.site.id' }).Value
+        $banner = ($customProperties | Where-Object { $_.Name -eq 'meta.wow.banner' }).Value
+        $siteid = ($customProperties | Where-Object { $_.Name -eq 'meta.site.id' }).Value
         $state = ($customProperties | Where-Object { $_.Name -eq 'location.state' }).Value
         if ($item.Name -like "*Availability*") {
             $results += [PSCustomObject]@{
@@ -1038,7 +1038,7 @@ function Show_LMServices {
 
 #RUN: Show_LMServices
 # To set a Service location
-# Get-LMDevice -id 30841 |Set-LMDevice -Properties @{'ntt.location.state'="NSW"}
+# Get-LMDevice -id 30841 |Set-LMDevice -Properties @{'meta.location.state'="NSW"}
 
 #------------------------
 function Show_LMServices_2_csv {
@@ -1048,8 +1048,8 @@ function Show_LMServices_2_csv {
         $systemProperties = $item              | Select-Object -ExpandProperty SystemProperties
         $customProperties = $item              | Select-Object -ExpandProperty CustomProperties
         $groups           = ($systemProperties | Where-Object { $_.Name -eq 'system.groups' }).Value
-        $banner           = ($customProperties | Where-Object { $_.Name -eq 'ntt.wow.banner' }).Value
-        $siteid           = ($customProperties | Where-Object { $_.Name -eq 'ntt.site.id' }).Value
+        $banner           = ($customProperties | Where-Object { $_.Name -eq 'meta.wow.banner' }).Value
+        $siteid           = ($customProperties | Where-Object { $_.Name -eq 'meta.site.id' }).Value
         $state            = ($customProperties | Where-Object { $_.Name -eq 'location.state' }).Value
         $Locn             = ($customProperties | Where-Object { $_.Name -eq 'location' }).Value
         if ($item.Name -like "*Availability*") {
@@ -1363,7 +1363,7 @@ function Show-ClassRouterInTree {
         $devices = Get-LMDeviceGroupDevices -Id $group.Id
         foreach ($device in $devices) {
             # Get the custom property value
-            $customProperty = $device.CustomProperties | Where-Object { $_.Name -eq 'ntt.class' }
+            $customProperty = $device.CustomProperties | Where-Object { $_.Name -eq 'meta.class' }
             if ($customProperty.Value -eq "ip router") {
                 $GroupList += [PSCustomObject]@{
                     Name           = "    $($device.DisplayName)"
@@ -1479,8 +1479,8 @@ function Show-GroupDeviceCounts {
                 $Count_of_dataSourceName = ($DataSources | group dataSourceName).Count
                 $Count_of_instanceNumber = ($DataSources | measure instanceNumber -Sum).Sum
                 
-                # Capture the ntt.class value from customProperties
-                $nttClass = $device.CustomProperties | Where-Object { $_.Name -eq 'ntt.class' }
+                # Capture the meta.class value from customProperties
+                $nttClass = $device.CustomProperties | Where-Object { $_.Name -eq 'meta.class' }
                 
                 
                 # Create a custom object to store the results
@@ -1536,7 +1536,7 @@ function Show-DeviceData {
         $Count_of_dataSourceName = ($DataSources | group dataSourceName).Count
         $Count_of_instanceNumber = ($DataSources | measure instanceNumber -Sum).Sum
 
-        $nttClass                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'ntt.class' }
+        $nttClass                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'meta.class' }
         $CustomWMI                 = $device.CustomProperties    | Where-Object { $_.Name -eq 'wmi.user' }
         $Categories                = $device.CustomProperties    | Where-Object { $_.Name -eq 'system.categories' }
         $inheritedProp_wmi         = $device.inheritedProperties | Where-Object { $_.Name -eq 'wmi.user' }
@@ -1762,14 +1762,14 @@ function Export-LMDeviceAudit {
         $sysoid        = ($systemProperties | Where-Object { $_.Name -eq 'system.sysoid' }).Value
         $sysinfo       = ($systemProperties | Where-Object { $_.Name -eq 'system.sysinfo' }).Value
         $hoststatus    = ($systemProperties | Where-Object { $_.Name -eq 'system.hoststatus' }).Value
-        $wmiResp       = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.wmi.responding' }).Value
-        $wmiExc        = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.wmi.exception' }).Value
-        $snmpOperExc   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.snmp.exception' }).Value
-        $NTTsnmpRes    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.snmp.responding' }).Value
-        $MonLevel      = ($customProperties | Where-Object { $_.Name -eq 'ntt.monitoring.level' }).Value
-        $nttclass      = ($customProperties | Where-Object { $_.Name -eq 'ntt.class' }).Value
-        $nttcompany    = ($customProperties | Where-Object { $_.Name -eq 'ntt.company' }).Value
-        $nttasatypeapp = ($customProperties | Where-Object { $_.Name -eq 'ntt.asa.type.app' }).Value
+        $wmiResp       = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.wmi.responding' }).Value
+        $wmiExc        = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.wmi.exception' }).Value
+        $snmpOperExc   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.snmp.exception' }).Value
+        $NTTsnmpRes    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.meta.snmp.responding' }).Value
+        $MonLevel      = ($customProperties | Where-Object { $_.Name -eq 'meta.monitoring.level' }).Value
+        $nttclass      = ($customProperties | Where-Object { $_.Name -eq 'meta.class' }).Value
+        $nttcompany    = ($customProperties | Where-Object { $_.Name -eq 'meta.company' }).Value
+        $nttasatypeapp = ($customProperties | Where-Object { $_.Name -eq 'meta.asa.type.app' }).Value
         $wmiuser       = ($customProperties | Where-Object { $_.Name -eq 'wmi.user' }).Value
         $snmpuser      = ($customProperties | Where-Object { $_.Name -eq 'snmp.security' }).Value
         $location      = ($customProperties | Where-Object { $_.Name -eq 'location' }).Value
@@ -1782,9 +1782,9 @@ function Export-LMDeviceAudit {
         )
 
         $deviceData = @{
-            'ntt.class'            = $nttclass
-            'ntt.company'          = $nttcompany
-            'ntt.asa.type.app'     = $nttasatypeapp
+            'meta.class'            = $nttclass
+            'meta.company'          = $nttcompany
+            'meta.asa.type.app'     = $nttasatypeapp
             'Location'             = $location
             'State '               = $locationState
             'sysoid'               = $sysoid
@@ -1805,9 +1805,9 @@ function Export-LMDeviceAudit {
     }
 
     $propertyOrder = @(
-        'ntt.class',
-        'ntt.company',
-        'ntt.asa.type.app',
+        'meta.class',
+        'meta.company',
+        'meta.asa.type.app',
         'Location',
         'State ',
         'sysoid',
@@ -2179,7 +2179,7 @@ if ([string]::IsNullOrEmpty($siteId)) {
     Write-Host "Usage: Show_device_by_siteid -siteId <siteId>" -ForegroundColor Yellow
     return
 } 
-$filter = "customProperties -eq $($('{"name":"ntt.site.id","value":"' + $siteId + '"}' | ConvertTo-Json))"
+$filter = "customProperties -eq $($('{"name":"meta.site.id","value":"' + $siteId + '"}' | ConvertTo-Json))"
 }
 #RUN: Show_device_by_siteid -siteId '5740'
 
@@ -2218,9 +2218,9 @@ function Export-DeviceGroupAudit {
             'wmi.operational'    = ($autoProperties   | Where-Object { $_.Name -eq 'auto.wmi.operational' }).Value
             'snmp.operational'   = ($autoProperties   | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }).Value
             'PredefResourceType' = ($autoProperties   | Where-Object { $_.Name -eq 'predef.externalResourceType' }).Value
-            'ntt.class'          = ($customProperties | Where-Object { $_.Name -eq 'ntt.class' }).Value
-            'ntt.class.report'   = ($customProperties | Where-Object { $_.Name -eq 'ntt.class.report' }).Value
-            'monitoring.level'   = ($customProperties | Where-Object { $_.Name -eq 'ntt.monitoring.level' }).Value
+            'meta.class'          = ($customProperties | Where-Object { $_.Name -eq 'meta.class' }).Value
+            'meta.class.report'   = ($customProperties | Where-Object { $_.Name -eq 'meta.class.report' }).Value
+            'monitoring.level'   = ($customProperties | Where-Object { $_.Name -eq 'meta.monitoring.level' }).Value
             'system.categories'  = ($customProperties | Where-Object { $_.Name -eq 'system.categories' }).Value
         }
 
@@ -2538,7 +2538,7 @@ $menu = @(
 	
     [PSCustomObject]@{Name = "__"; Overview = "__";Example="__" }, # Blank line
     [pscustomobject]@{Name="Show_BackupConfig"; Overview="Show backup configs"; Example="Show_BackupConfig -displayname 'displayname'"},
-    [pscustomobject]@{Name="Show-Dead"; Overview="Show dead devices after entering the company (ntt.company value)"; Example="Show-Dead 'CHED'"},
+    [pscustomobject]@{Name="Show-Dead"; Overview="Show dead devices after entering the company (meta.company value)"; Example="Show-Dead 'CHED'"},
     [pscustomobject]@{Name="Show-Devices"; Overview="Show devices on a company"; Example="Show-Devices 'CHED'"},
     [pscustomobject]@{Name="Show-DeadCollectors"; Overview="Show Dead Collectors on a company"; Example="Show-DeadCollectors"},
     [pscustomobject]@{Name="Show-Collectors"; Overview="Show Collectors on a company"; Example="Show-Collectors"},
@@ -2561,7 +2561,7 @@ $menu = @(
     [pscustomobject]@{Name="Show-Dead_On_Collector"; Overview="Show Dead devices On a Collector"; Example="Show-Dead_On_Collector '333'"},
     [pscustomobject]@{Name="Show-DisabledAlertsOnCollector"; Overview="Show Disabled Alerts On Resources on a Collector"; Example="Show-DisabledAlertsOnCollector '333'"},
     [pscustomobject]@{Name="Show-MissingSSID"; Overview="Show CI wil Missing SSID"; Example="Show-MissingSSID -id 'YourGroupID'"},
-    [pscustomobject]@{Name="Show-MissingCompany"; Overview="Show CI wil Missing ntt.company"; Example="Show-MissingCompany -id 'YourGroupID'"},
+    [pscustomobject]@{Name="Show-MissingCompany"; Overview="Show CI wil Missing meta.company"; Example="Show-MissingCompany -id 'YourGroupID'"},
     [pscustomobject]@{Name="Show_Stale_Devices"; Overview="Show Stale Devices as a filter on lastDataTime"; Example="Show_Stale_Devices -days '30'"},
     [pscustomobject]@{Name="Show_LMServices"; Overview="Show Service Devices"; Example="Show_LMServices"},
     [pscustomobject]@{Name="Show_LMServices_2_csv"; Overview="Show Service Devices and dump to a csv in current dir."; Example="Show_LMServices_2_csv"},
@@ -2594,8 +2594,8 @@ $menu = @(
     [pscustomobject]@{Name="Get-SwaggerDetails"; Overview="Get-SwaggerDetails off LM portal"; Example="Get-SwaggerDetails"},
     [PSCustomObject]@{Name = "__"; Overview = "__";Example="__" }, # Blank line    
 
-    [pscustomobject]@{Name="Set-DeviceMonitoringState_device"; Overview="Change NTT.Monitoring.State to Active"; Example="Set-DeviceMonitoringState_device -displayname 'ss-core'"},
-    [pscustomobject]@{Name="Set-DeviceMonitoringState_group"; Overview="Change NTT.Monitoring.State to Active"; Example="Set-DeviceMonitoringState_device -groupid 'id'"},
+    [pscustomobject]@{Name="Set-DeviceMonitoringState_device"; Overview="Change meta.Monitoring.State to Active"; Example="Set-DeviceMonitoringState_device -displayname 'ss-core'"},
+    [pscustomobject]@{Name="Set-DeviceMonitoringState_group"; Overview="Change meta.Monitoring.State to Active"; Example="Set-DeviceMonitoringState_device -groupid 'id'"},
     [pscustomobject]@{Name="Start-Autodiscovery"; Overview="Start-Autodiscovery of devices in a group"; Example="Start-Autodiscovery 'id'"},
     [pscustomobject]@{Name="Get-PortalInfo"; Overview="Get-PortalInfo"; Example="Get-PortalInfo"},
     
@@ -2612,4 +2612,5 @@ Write-Host "Or using quoted key words: Show-Menu -data `$menu -filter `'Collecto
 
 
 # EOF
+
 
