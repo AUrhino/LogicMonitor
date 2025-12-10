@@ -2255,7 +2255,7 @@ function Export-DeviceGroupAudit {
 function Show-AP_Instances_on_WLC {
     param (
         [string]$DeviceNameFilter = "*virtual*",
-        [string]$OutputPath = $("Woolies_AP_" + (Get-Date -Format "ddMMyyyy") + ".csv")
+        [string]$OutputPath = $("Wool_AP_" + (Get-Date -Format "ddMMyyyy") + ".csv")
     )
 
     $Devices = Get-LMDevice -DisplayName $DeviceNameFilter
@@ -2592,6 +2592,7 @@ Write-Host "Or using quoted key words: Show-Menu -data `$menu -filter `'Collecto
 
 
 # EOF
+
 
 
 
