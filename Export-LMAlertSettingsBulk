@@ -1,4 +1,4 @@
-# Get the alerts set on the folder ESV for DatasourceName: SNMP_Network_Interfaces with dataPointName InUtilizationPercent or OutUtilizationPercent
+# Get the alerts set on the folder Gtoup123 for DatasourceName: SNMP_Network_Interfaces with dataPointName InUtilizationPercent or OutUtilizationPercent
 function Export-LMAlertSettings {
 <#
 .SYNOPSIS
@@ -34,7 +34,7 @@ function Export-LMAlertSettings {
     The following will export Datasource: SNMP_Network_Interfaces 
     for specific DataPoints: InUtilizationPercent\OutUtilizationPercent
 
-    Export-LMAlertSettings -FolderName "ESV" -DatasourceName "SNMP_Network_Interfaces" `
+    Export-LMAlertSettings -FolderName "Group123" -DatasourceName "SNMP_Network_Interfaces" `
         -DataPointNames @("InUtilizationPercent","OutUtilizationPercent") `
         -OutputPath "Output.csv"
 
@@ -42,7 +42,7 @@ function Export-LMAlertSettings {
     The following will export Datasource: SNMP_Network_Interfaces for specific DataPoints: ALL
     This will only show the listed items to the export.
 
-    Export-LMAlertSettings -FolderName "ESV" -DatasourceName "SNMP_Network_Interfaces" `
+    Export-LMAlertSettings -FolderName "Group123" -DatasourceName "SNMP_Network_Interfaces" `
         -DataPointNames @("ALL") `
         -ExportItem @("disableAlerting","alertExpr","dataPointName","globalAlertExpr",
                       "collectionInterval","alertTransitionInterval","alertClearTransitionInterval",
@@ -50,7 +50,7 @@ function Export-LMAlertSettings {
         -OutputPath "Output.csv"
 
 .EXAMPLE
-    Export-LMAlertSettingsBulk -FolderName "ESV" `
+    Export-LMAlertSettingsBulk -FolderName "Group123" `
         -DatasourceNames @("HostStatus","BGP-","Cisco_CPU_SNMP") `
         -DataPointNames @("ALL") `
         -OutputDirectory "C:\Reports" `
@@ -78,7 +78,7 @@ function Export-LMAlertSettings {
     # If no parameters provided, show examples and exit
     if (-not $FolderName -or -not $DatasourceName -or -not $DataPointNames) {
         Write-Host "Example usage:" -ForegroundColor Yellow
-        Write-Host 'Export-LMAlertSettings -FolderName "ESV" -DatasourceName "SNMP_Network_Interfaces" -DataPointNames @("InUtilizationPercent","OutUtilizationPercent") -OutputPath "Output.csv"' -ForegroundColor Yellow
+        Write-Host 'Export-LMAlertSettings -FolderName "Group123" -DatasourceName "SNMP_Network_Interfaces" -DataPointNames @("InUtilizationPercent","OutUtilizationPercent") -OutputPath "Output.csv"' -ForegroundColor Yellow
         Write-Host 'Run the following for more details: Get-Help Get-Process -Examples' -ForegroundColor Yellow
         Write-Host 'Get-Help Export-LMAlertSettings -Examples' -ForegroundColor Yellow
         return
