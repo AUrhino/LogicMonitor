@@ -5,7 +5,7 @@
 .DESCRIPTION
     This file a collection of LogicMonitor functions that will speed up processes used regularly
     Add an import to your LM connection script.
-    . "C:\Users\rgillan\OneDrive - NTT\Documents\LogicMonitor\lm-functions.ps1"
+    . "C:\Users\rgillan\Documents\LogicMonitor\lm-functions.ps1"
      You can also ass this to your PROFILE.  ie  code $PROFILE
 
 
@@ -2624,5 +2624,6 @@ $menu = @(
 Show-Menu -data $menu -filter . # show all
 Write-Host "You can filter this menu via: Show-Menu -data `$menu -filter ." -ForegroundColor Yellow
 Write-Host "Or using quoted key words: Show-Menu -data `$menu -filter `'Collector'" -ForegroundColor Yellow
+
 
 # EOF
