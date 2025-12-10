@@ -16,23 +16,8 @@
     Version 1.7
 
 .LINK
-    https://github.com/ryan-gillan_nttltd/LM-snippets/blob/main/lm-functions.ps1
+	https://github.com/AUrhino/LogicMonitor/blob/main/lm-functions.ps1
 #>
-
-
-#Ideas:
-# Get a list of Companys under NTT-AU (return the ntt.company)
-# Get an IPAM. eg IP list and instance list
-#  get-lmdevice -displayname ss-core | select name,system.ips
-#  get-lmdevice -displayname ss-core | select -expand systemProperties | where { $_.Name -eq "system.ips" }
-#  get-lmdevice -displayname ss-core | select -expand autoProperties | where { $_.Name -eq "auto.network.address" }
-#  get  list from ccdp and lldp
-
-
-#chatGPT
-#In Powershell
-#Using Powershell module "Logic.Monitor"
-#Assume already connected via api.
 
 
 #------------------------
@@ -62,9 +47,9 @@ function Show-Dead {
         Write-Host "Example usage: Show-Dead CHED" -ForegroundColor Yellow
         return
     }
-    Write-Host "Checking for dead devices on: ntt.company = $Company"
-    $TotalCI = Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) "
-    $Dead    = Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) -and systemProperties -eq $($('{"name":"system.hoststatus","value":"dead"}' | ConvertTo-Json))"
+    Write-Host "Checking for dead devices on: meta.company = $Company"
+    $TotalCI = Get-LMDevice -Filter "customProperties -eq $($('{"name":"meta.company","value":"' + $Company + '"}' | ConvertTo-Json)) "
+    $Dead    = Get-LMDevice -Filter "customProperties -eq $($('{"name":"meta.company","value":"' + $Company + '"}' | ConvertTo-Json)) -and systemProperties -eq $($('{"name":"system.hoststatus","value":"dead"}' | ConvertTo-Json))"
 	Write-Host "Total: $($TotalCI.count) Dead: $($Dead.count)" -ForegroundColor Red
 	$Dead
 }
@@ -78,8 +63,8 @@ function Show-Devices {
         Write-Host "Example usage: Show-Devices CHED" -ForegroundColor Yellow
         return
     }
-    Write-Host "Show devices on: ntt.company = $Company"
-    Get-LMDevice -Filter "customProperties -eq $($('{"name":"ntt.company","value":"' + $Company + '"}' | ConvertTo-Json)) "
+    Write-Host "Show devices on: meta.company = $Company"
+    Get-LMDevice -Filter "customProperties -eq $($('{"name":"meta.company","value":"' + $Company + '"}' | ConvertTo-Json)) "
 }
 #RUN: Show-Devices CHED
 #------------------------#------------------------
@@ -2627,3 +2612,4 @@ Write-Host "Or using quoted key words: Show-Menu -data `$menu -filter `'Collecto
 
 
 # EOF
+
