@@ -17,7 +17,7 @@
     https://github.com/AUrhino/LogicMonitor/blob/main/Capture_Resources_and_Components.ps1
 #>
 
-$devices = Get-LMDevice -Filter 'customProperties -eq "{\"name\":\"ntt.monitoring.level\",\"value\":\"Full monitoring\"}"'
+$devices = Get-LMDevice -Filter 'customProperties -eq "{\"name\":\"monitoring.level\",\"value\":\"Full monitoring\"}"'
 Write-Host "Devices found: $($devices.Count)"
 $deviceDetails = @()
 $total = $devices.Count
@@ -34,14 +34,13 @@ foreach ($device in $devices) {
 
         $activedatasources = $autoProperties   | Where-Object { $_.Name -eq 'auto.activedatasources' }
         $ResourceType      = $autoProperties   | Where-Object { $_.Name -eq 'predef.externalResourceType' }
-        $snmpoperational   = $autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.snmp.responding' }
-        $wmioperational    = $autoProperties   | Where-Object { $_.Name -eq 'auto.ntt.wmi.responding' }
+        $snmpoperational   = $autoProperties   | Where-Object { $_.Name -eq 'auto.snmp.responding' }
+        $wmioperational    = $autoProperties   | Where-Object { $_.Name -eq 'auto.wmi.responding' }
         $wmiUser           = $customProperties | Where-Object { $_.Name -eq 'wmi.user' }
         $snmpUser          = $customProperties | Where-Object { $_.Name -eq 'snmp.security' }
         $systemsysinfo     = $systemProperties | Where-Object { $_.Name -eq 'system.sysinfo' }
         $systemmodel       = $systemProperties | Where-Object { $_.Name -eq 'system.model' }
         $systemsysoid      = $systemProperties | Where-Object { $_.Name -eq 'system.sysoid' }
-        $asatypeapp        = $customProperties | Where-Object { $_.Name -eq 'ntt.asa.type.app' }
 
         $datasources = $activedatasources.value -join ','
 
@@ -65,7 +64,6 @@ foreach ($device in $devices) {
         $filesystemStatus = if ($fileDatasources)   { 'True' } else { 'False' }
         $InterfaceStatus  = if ($interfaceDatasources) { 'True' } else { 'False' }
         $WMIStatus        = if ($datasources -match 'WMI|WinOS')       { 'True' } else { 'False' }
-        $SNMPStatus       = if ($datasources -match 'NTT_SNMP_Status') { 'True' } else { 'False' }
         $httpsStatus      = if ($datasources -match 'HTTPS|Services')  { 'True' } else { 'False' }
 
         $deviceDetails += [PSCustomObject]@{
