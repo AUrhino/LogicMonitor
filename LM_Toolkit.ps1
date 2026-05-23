@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    A Collection of LogicMonitor tools and snipets to assist with using the product
+    A Collection of LogicMonitor tools and snippets to assist with using the product
 
 .DESCRIPTION
     A collection of tools to assist with using the product. 
@@ -16,18 +16,47 @@
     Show-Menu -data $menu -filter "Show" # To limit the menu to words with Show or show.
 
 .NOTES
-    Created by Ryan Gillan Oct 2025.
-.NOTES
-    Requires "Logic.Monitor" PowerShell module and appropriate API credentials.
+    Created by Ryan Gillan May 2026.
+
 .NOTES
     Requires PowerShell 7 (pwsh) to run.
+
 .NOTES
-    Requires the folowing module: https://pwshspectreconsole.com/guides/install/
+    Requires the Logic.Monitor PowerShell module and appropriate API credentials.
+
+.NOTES
+    Requires the PwshSpectreConsole module:
+    https://pwshspectreconsole.com/guides/install/
 
 .LINK
     https://github.com/AUrhino/LogicMonitor/blob/main/LM_Toolkit.ps1
-
 #>
+
+#Requires -Version 7.0
+#Requires -Modules Logic.Monitor
+#Requires -Modules PwshSpectreConsole
+
+# Check if Spectre.Console module is imported
+if (-not (Get-Module -ListAvailable -Name PwshSpectreConsole)) {
+    try {
+        Write-Host "PwshSpectreConsole module not found. Attempting to install..."
+        Install-Module -Name PwshSpectreConsole -Scope CurrentUser -Force
+    } catch {
+        Write-Error "Failed to install PwshSpectreConsole module. Please install it manually.`nInstallation method:`nInstall-Module -Name PwshSpectreConsole -Scope CurrentUser -Force"
+        exit
+    }
+}
+
+# Check if Logic.Monitor module is imported
+if (-not (Get-Module -ListAvailable -Name Logic.Monitor)) {
+    try {
+        Write-Host "Logic.Monitor module not found. Attempting to install..."
+        Install-Module -Name Logic.Monitor -Scope CurrentUser -Force
+    } catch {
+        Write-Error "Failed to install Logic.Monitor module. Please install it manually.`nInstallation method:`nInstall-Module -Name Logic.Monitor -Scope CurrentUser -Force"
+        exit
+    }
+}
 
 # Check if Spectre.Console module is imported
 if (-not (Get-Module -ListAvailable -Name PwshSpectreConsole)) {
@@ -408,12 +437,12 @@ function Show-UserGroups {
       It checks for existing users before creation and formats input values.
 
 .EXAMPLE
-    Create_LMUser -Username "michael.ceola@global.ntt" `
-                  -FirstName "Michael" `
-                  -LastName "Ceola" `
-                  -Email "michael.ceola@global.ntt" `
+    Create_LMUser -Username "firstname.lastname@email.com" `
+                  -FirstName "First" `
+                  -LastName "Lastname" `
+                  -Email "firstname.lastname@email.com" `
                   -RoleName "administrator" `
-                  -GroupName "NTT DATA View Operator" `
+                  -GroupName "Operator" `
                   -Mobile "0411123123" `
                   -Ticket "SVR12345"
 #>
@@ -651,7 +680,7 @@ function Get-VSphereGuests {
     if (-not $DeviceName) {
         Write-Host "`n[!] Please provide a device name." -ForegroundColor Red
         Write-Host "Example usage:" -ForegroundColor Yellow
-        Write-Host "    Get-VSphereGuests -DeviceName 'cbf-vmw-vc-n-01'" -ForegroundColor Yellow
+        Write-Host "    Get-VSphereGuests -DeviceName 'my-vcenter'" -ForegroundColor Yellow
         return
     }
 
@@ -709,7 +738,7 @@ function Get-VSphereGuests {
     Write-Host "Export complete: $filename" -ForegroundColor Green
 }
 # Run via:
-# Get-VSphereGuests -DeviceName "cbf-vmw-vc-n-01"
+# Get-VSphereGuests -DeviceName "my-vcenter"
 
 # EOF
 <# ---------------------------------------------------------------------------- #>
@@ -805,7 +834,7 @@ function Set-Properties {
     Set-Properties -groupID 123 -Properties @{'snmp.priv'='snmppriv';'snmp.privToken'='snmpprivToken';'snmp.auth'='snmpauth';'snmp.authToken'='snmpauthToken';}
 
 .EXAMPLE
-    Set-Properties -groupID 123 -Properties @{'ntt.company'='DEMO';}
+    Set-Properties -groupID 123 -Properties @{'company'='DEMO';}
 	
 .EXAMPLE
     Set-Properties -groupID 123 -Properties @{'location'='123 Smith St, NSW, Australia';}
@@ -928,13 +957,13 @@ function Show-DeviceData {
         $Count_of_dataSourceName = ($DataSources | group dataSourceName).Count
         $Count_of_instanceNumber = ($DataSources | measure instanceNumber -Sum).Sum
 
-        $nttClass                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'ntt.class' }
+        $Class                  = $device.CustomProperties    | Where-Object { $_.Name -eq 'class' }
         $CustomWMI                 = $device.CustomProperties    | Where-Object { $_.Name -eq 'wmi.user' }
         $Categories                = $device.CustomProperties    | Where-Object { $_.Name -eq 'system.categories' }
         $inheritedProp_wmi         = $device.inheritedProperties | Where-Object { $_.Name -eq 'wmi.user' }
         $autoProperties_wmi_state  = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.wmi.operational' }
         $inheritedProp_snmp        = $device.inheritedProperties | Where-Object { $_.Name -eq 'snmp.community' }
-        $autoProperties_snmp_state = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.snmp.operational.ntt' }
+        $autoProperties_snmp_state = $device.autoProperties      | Where-Object { $_.Name -eq 'auto.snmp.operational' }
 
         $inheritedProperty_wmi = if ($inheritedProp_wmi) { "TRUE" } else { "N/A" }
         $inheritedProperty_snmp = if ($inheritedProp_snmp) { "TRUE" } else { "N/A" }
@@ -958,7 +987,7 @@ function Show-DeviceData {
             DeviceID                         = $device.id
             DataSourceCount                  = $Count_of_dataSourceName
             InstanceNumberSum                = $Count_of_instanceNumber
-            NTTClass                         = $nttClass.Value
+            Class                            = $Class.Value
             CustomWMI                        = $CustomWMI.Value
             inheritedProperty_wmi            = $inheritedProperty_wmi
             inheritedProp_wmi                = $inheritedProp_wmi.Value
@@ -1265,7 +1294,7 @@ $menu = @(
     [pscustomobject]@{Name="Show-DeviceData_group"; Overview="Show Device DataSource and Instance Count for a group."; Example="Show-DeviceData_group -groupId 2122 -csvFileName 'DeviceData.csv'"},
     [pscustomobject]@{Name="Show-BackupConfig"; Overview="Show backup configs on a Resource"; Example="Show-BackupConfig -displayname 'displayname'"},
     [pscustomobject]@{Name="Show-Devices_in_group"; Overview="Show Devices in group"; Example="Show-Devices_in_group -groupID 123"},
-    [pscustomobject]@{Name="Show-Data"; Overview="Show-Data"; Example="Show-Data 'ss-core' 'NTT_SNMP_Status'"},
+    [pscustomobject]@{Name="Show-Data"; Overview="Show-Data"; Example="Show-Data 'switch1' 'SNMP_Status'"},
     [pscustomobject]@{Name="Show-Resoures_in_SDT"; Overview="Show Resoures in an SDT"; Example="Show-Resoures_in_SDT"},
     [pscustomobject]@{Name="Show-Netflow"; Overview="Show Resoures with Netflow option enabled"; Example="Show-Netflow"},
     [pscustomobject]@{Name="Show-LMServices"; Overview="Show Services Resoures"; Example="Show-LMServices"},
@@ -1283,7 +1312,7 @@ $menu = @(
     [PSCustomObject]@{Name = "`n "; Overview = " ";Example=" " }, # Blank line
     [pscustomobject]@{Name="Show-Collectors"; Overview="Show Collectors"; Example="Show-Collectors"},
     [pscustomobject]@{Name="Show-DeadCollectors"; Overview="Show DeadCollectors"; Example="Show-DeadCollectors"},
-    [pscustomobject]@{Name="Show-ABCG"; Overview="Show ABCG"; Example="Show-ABCG or Show-ABCG -filter 'KPMG'"},
+    [pscustomobject]@{Name="Show-ABCG"; Overview="Show ABCG"; Example="Show-ABCG or Show-ABCG -filter 'Client'"},
 	[pscustomobject]@{Name="Set-LMDevicesToABCG"; Overview="Report and/or fix ABCG."; Example="Set-ABCG_on_Resources -CollectorGroupName 'DC Fyshwick' -Report $true -Fix $false"},
 	[pscustomobject]@{Name="Set-New_Collector"; Overview="Change the Collectors for devices in a group"; Example="Set-New_Collector -CollectorGroupName -groupid 123 -PreferredCollectorId 456"},
 
