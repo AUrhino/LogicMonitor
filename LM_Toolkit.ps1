@@ -815,6 +815,24 @@ function Find-Report {
     }
 }
 
+#------------------------
+function Start-Autodiscovery {
+    [String]$groupid = $args[0]
+    # checks for variable else shows example.
+    if (-not $groupid['']) {
+        Write-Host "Example usage: Start-Autodiscovery <id>" -ForegroundColor Yellow
+        return
+    }
+
+    $devices = Get-LMDeviceGroupDevices -Id $groupid
+    foreach ($item in  $devices.id) {
+        Write-Host "$item"
+        Get-LMDevice -displayName $item | Foreach-Object {Invoke-LMActiveDiscovery -id $_.id}
+    }
+}
+#RUN: Start-Autodiscovery <id>
+
+
 <# ---------------------------------------------------------------------------- #>
 function Set-Properties {
 <#
@@ -1307,6 +1325,7 @@ $menu = @(
     [pscustomobject]@{Name="Remove-Properties"; Overview="For devices in a group, removes properties eg set wmi or snmp creds."; Example="Remove-Properties -groupID 123 -Properties @{'wmi.user';'wmi.pass'}"},
     [pscustomobject]@{Name="Find-Service"; Overview="Find LogicMonitor services"; Example="Find-Service -searchTerm 'API'"},
     [pscustomobject]@{Name="Find-Report"; Overview="Find a Report"; Example="Find-Report -Name 'CPU|whatever'"},
+    [pscustomobject]@{Name="Start-Autodiscovery"; Overview="Start-Autodiscovery of devices in a group"; Example="Start-Autodiscovery 'id'"},
 
 # Collector section:
     [PSCustomObject]@{Name = "`n "; Overview = " ";Example=" " }, # Blank line
